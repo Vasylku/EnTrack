@@ -1,13 +1,40 @@
 import logo from './logo.svg';
 import './App.css';
+import {  useState,useEffect } from 'react';
 
+
+function MyList(){
+  const[getStations, setStations] = useState([]);
+  useEffect(()=>{
+    fetch('api/stations')
+    .then((x) => x.json())
+    .then((x) => {
+    setStations(x)
+  }); 
+  },[]);
+  console.log(getStations);
+  return (
+   
+  
+  <ul>     
+    {getStations.map((x) => (
+      <li key= {x.id}> {x.name}{""}
+      </li>
+    ))}
+   </ul>
+ 
+ 
+  );
+}
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+       
         <p>
           Edit <code>src/App.js</code> and save to reload.
+        
         </p>
         <a
           className="App-link"
@@ -18,6 +45,9 @@ function App() {
           Learn React
         </a>
       </header>
+    
+     
+      
     </div>
   );
 }
