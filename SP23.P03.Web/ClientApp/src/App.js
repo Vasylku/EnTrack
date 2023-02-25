@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import {  useState,useEffect } from 'react';
+/*import {  useState,useEffect } from 'react';
 
 
 function MyList(){
@@ -25,7 +25,7 @@ function MyList(){
  
  
   );
-}
+}*/
 function App() {
   return (
     <div className="App">
