@@ -1,7 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
-/*import {  useState,useEffect } from 'react';
 
+import React from 'react';
+import { BrowserRouter, BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Footer from './components/footer/Footer';
+import Navbar from './components/navbar/Navbar';
+import Welcome from './components/home/Welcome';
+import Dest from './components/destinations/dest';
+import PaymentForm from './components/payment/PaymentForm';
+import LoginPage from './components/authentication/Login';
+import Service from './components/service_card/services';
+import NotFound from './components/not_found/NotFound';
+
+/*import {  useState,useEffect } from 'react';
 
 function MyList(){
   const[getStations, setStations] = useState([]);
@@ -26,30 +35,31 @@ function MyList(){
  
   );
 }*/
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-       
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    
-     
-      
-    </div>
-  );
+ 
+
+return (
+            <div className="min-h-screen">
+                <div className="gradient-bg-welcome">
+                    <Navbar/>
+<BrowserRouter>
+    <Routes>
+        <Route path="/" element={<Welcome/>} />
+        <Route path="/destinations" element={<Dest/>} />
+        <Route path="/payment" element={ <PaymentForm/>} />
+        <Route path="/login" element={<LoginPage/>}/>
+        <Route path="*" element ={<NotFound/>}/>
+     </Routes>
+
+</BrowserRouter>
+           <Service/>
+    <Footer/>
+            </div>
+
+            </div>
+          
+    );
 }
 
 export default App;
