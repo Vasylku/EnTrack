@@ -9,10 +9,6 @@ namespace SP23.P03.Web.Features.Trains
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty; //Name of the train
-        public int startStation_Id { get; set; } //Where the station will start its travel (potential removal for schedule Id since it could hold the route with start and end station)
-        public TrainStation startStation { get; set; }
-        public int endStation_Id { get; set; } //Where the station will end its travel (potential removal for schedule Id since it could hold the route with start and end station)
-        public TrainStation endStation { get; set; }
         public int? diner_Carts { get; set; } //Number of optional diner carts attached
         public int coach_Seats { get; set; } //Number of coach seats left
         public int firstClass_Seats { get; set; } //Number of firsClass seats left

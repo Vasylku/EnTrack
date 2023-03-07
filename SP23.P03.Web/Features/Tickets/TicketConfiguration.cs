@@ -13,12 +13,6 @@ namespace SP23.P03.Web.Features.Tickets
             builder.Property(x => x.train_Id)
                 .IsRequired();
 
-            builder.Property(x => x.schedule_Id)
-                .IsRequired();
-
-            builder.Property(x => x.seatType_Id)
-                .IsRequired();
-
             builder.Property(x => x.ticketPrice)
                 .IsRequired();
 

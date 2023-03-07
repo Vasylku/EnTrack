@@ -9,12 +9,6 @@ public class TrainConfiguration : IEntityTypeConfiguration<Train>
     {
         builder.Property(x => x.Name)
             .IsRequired();
-        
-        builder.Property(x => x.startStation_Id)
-            .IsRequired();
-
-        builder.Property(x => x.endStation_Id)
-            .IsRequired();
 
         builder.HasOne(x => x.Manager)
             .WithMany(x => x.ManageTrains)

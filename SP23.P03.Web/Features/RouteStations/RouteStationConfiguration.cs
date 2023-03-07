@@ -18,6 +18,10 @@ namespace SP23.P03.Web.Features.RouteStations
 
             builder.Property(x => x.DepartureTime)
                 .IsRequired();
+
+            builder.HasOne(x => x.Manager)
+                .WithMany(x => x.ManageRouteStations)
+                .HasForeignKey(x => x.ManagerId);
         }
     }
 }

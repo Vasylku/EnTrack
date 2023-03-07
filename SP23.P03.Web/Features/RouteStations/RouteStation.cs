@@ -1,4 +1,5 @@
-﻿using SP23.P03.Web.Features.Routes;
+﻿using SP23.P03.Web.Features.Authorization;
+using SP23.P03.Web.Features.Routes;
 using SP23.P03.Web.Features.TrainStations;
 
 namespace SP23.P03.Web.Features.RouteStations
@@ -12,5 +13,7 @@ namespace SP23.P03.Web.Features.RouteStations
         public TrainStation Station { get; set; }
         public DateTime ArrivalTime { get; set; }
         public DateTime DepartureTime { get; set; }
+        public int? ManagerId { get; set; } //Id for the Manager for RouteStations
+        public virtual User? Manager { get; set; }
     }
 }

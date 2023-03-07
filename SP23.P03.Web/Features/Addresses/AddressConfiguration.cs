@@ -21,6 +21,10 @@ namespace SP23.P03.Web.Features.Addresses
 
             builder.Property(x => x.ZipCode)
                 .IsRequired();
+
+            builder.HasOne(x => x.Manager)
+                .WithMany(x => x.ManageAddresses)
+                .HasForeignKey(x => x.ManagerId);
         }
     }
 }
