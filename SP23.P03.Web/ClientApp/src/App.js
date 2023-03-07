@@ -9,6 +9,8 @@ import PaymentForm from './components/payment/PaymentForm';
 import LoginPage from './components/authentication/Login';
 import Service from './components/service_card/services';
 import NotFound from './components/not_found/NotFound';
+import NewsMediaPage from './components/news_media/MediaNew';
+import BaggagePolicy from './components/baggage/BaggagePolicy';
 
 /*import {  useState,useEffect } from 'react';
 
@@ -42,19 +44,22 @@ function App() {
 return (
             <div className="min-h-screen">
                 <div className="gradient-bg-welcome">
-                    <Navbar/>
+                  
 <BrowserRouter>
+<Navbar/>
     <Routes>
         <Route path="/" element={<Welcome/>} />
         <Route path="/destinations" element={<Dest/>} />
         <Route path="/payment" element={ <PaymentForm/>} />
         <Route path="/login" element={<LoginPage/>}/>
+        <Route path="/news" element={<NewsMediaPage/>}/>
+        <Route path="/baggage" element={<BaggagePolicy/>}/>
         <Route path="*" element ={<NotFound/>}/>
      </Routes>
-
-</BrowserRouter>
-           <Service/>
+     <Service/>
     <Footer/>
+</BrowserRouter>
+          
             </div>
 
             </div>
