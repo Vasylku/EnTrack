@@ -8,10 +8,14 @@ public class TrainConfiguration : IEntityTypeConfiguration<Train>
     public void Configure(EntityTypeBuilder<Train> builder)
     {
         builder.Property(x => x.Name)
+            .HasMaxLength(120)
             .IsRequired();
 
-        builder.HasOne(x => x.Manager)
-            .WithMany(x => x.ManageTrains)
-            .HasForeignKey(x => x.ManagerId);
+        builder.Property(x => x.trainClass)
+            .HasMaxLength(120)
+            .IsRequired();
+
+        builder.Property(x => x.schedule_Id)
+            .IsRequired();
     }
 }

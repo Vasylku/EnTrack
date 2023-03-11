@@ -7,9 +7,6 @@ namespace SP23.P03.Web.Features.Tickets
     {
         public void Configure(EntityTypeBuilder<Ticket> builder)
         {
-            builder.Property(x => x.user_Id)
-                .IsRequired();
-
             builder.Property(x => x.train_Id)
                 .IsRequired();
 
@@ -19,7 +16,8 @@ namespace SP23.P03.Web.Features.Tickets
             builder.Property(x => x.bookingDate)
                 .IsRequired();
 
-            builder.Property(x => x.is_Cancelled)
+            builder.Property(x => x.seatType)
+                .HasMaxLength(120)
                 .IsRequired();
         }
     }

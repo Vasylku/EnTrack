@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace SP23.P03.Web.Features.Routes
+namespace SP23.P03.Web.Features.ScheduledTrains
 {
-    public class RouteConfiguration : IEntityTypeConfiguration<Route_1>
+    public class ScheduledTrainConfiguration : IEntityTypeConfiguration<ScheduledTrain>
     {
-        public void Configure(EntityTypeBuilder<Route_1> builder)
+        public void Configure(EntityTypeBuilder<ScheduledTrain> builder)
         {
             builder.Property(x => x.startStation_Id)
                 .IsRequired();
@@ -19,9 +19,14 @@ namespace SP23.P03.Web.Features.Routes
             builder.Property(x => x.travel_Time)
                 .IsRequired();
 
-            builder.HasOne(x => x.Manager)
-                .WithMany(x => x.ManageRoutes)
-                .HasForeignKey(x => x.ManagerId);
+            builder.Property(x => x.train_Id)
+                .IsRequired();
+
+            builder.Property(x => x.departureDate)
+                .IsRequired();
+
+            builder.Property(x => x.arrivalDate)
+                .IsRequired();
         }
     }
 }
