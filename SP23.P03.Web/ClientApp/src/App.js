@@ -11,6 +11,8 @@ import Service from './components/service_card/services';
 import NotFound from './components/not_found/NotFound';
 import NewsMediaPage from './components/news_media/MediaNew';
 import BaggagePolicy from './components/baggage/BaggagePolicy';
+import Dashboard from './components/dashboard/dashboard';
+import BookingDetails from './components/booking/BookingDetails';
 
 /*import {  useState,useEffect } from 'react';
 
@@ -54,6 +56,8 @@ return (
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/news" element={<NewsMediaPage/>}/>
         <Route path="/baggage" element={<BaggagePolicy/>}/>
+        <Route path='/dashboard' element={<Dashboard/>}/>
+        <Route path="/booking" element ={<BookingDetails/>}/>
         <Route path="*" element ={<NotFound/>}/>
      </Routes>
      <Service/>

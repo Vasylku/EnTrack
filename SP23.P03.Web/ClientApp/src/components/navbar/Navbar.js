@@ -1,8 +1,8 @@
 import { HiMenuAlt4 } from 'react-icons/hi'
 import { AiOutlineClose } from 'react-icons/ai';
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom'
-
+import { useNavigate } from 'react-router-dom';
+import im from "../../images/im.jpg";
 
 const NavBarItem = ({ title, classProps, path, onClick }) => (
 
@@ -22,7 +22,10 @@ const Navbar = () => {
 
     return (
         <div className="w-full flex md:justify-center justify-between items-center p-4">
-            <ul className="text-black md:flex hidden list-none flex-row justify-between items-center flex-initial ">
+            <div className="md:flex-[0.5] flex-initial justify-center items-center">
+        <img src={im} className="w-64 rounded-full opacity-100 hover:opacity-50 cursor-pointer" />
+      </div>
+            <ul className="text-black  md:flex hidden list-none flex-row justify-between items-center flex-auto ">
 
                 {[
                     { title: "Home", path: "/" },

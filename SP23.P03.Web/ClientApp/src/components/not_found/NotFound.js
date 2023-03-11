@@ -25,10 +25,6 @@ return(
       </a>
     </button>
 </div>
-
 )
-
-
-
 }
 export default NotFound;

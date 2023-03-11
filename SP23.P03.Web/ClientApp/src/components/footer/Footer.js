@@ -12,10 +12,10 @@ import { useNavigate } from 'react-router-dom';
                 <div className="flex flex-[0.5] justify-center items-center">
                     <img  alt="" className="w-32" />
                 </div>
-                <div className="flex flex-1 justify-evenly items-center flex-wrap sm:mt-0 mt-5 w-full">
-                    <p className="text-white text-base text-center mx-2 cursor-pointer"onClick={() => navigate('/news')}>News & Media</p>
-                    <p className="text-white text-base text-center mx-2 cursor-pointer"onClick={() => navigate('/baggage')}>Baggage Policy & Service</p>
-                    <p className="text-white text-base text-center mx-2 cursor-pointer"onClick={() => navigate('/experience')}>Unique Experience</p>
+                <div className="flex flex-1 justify-evenly items-center flex-wrap sm:mt-0 mt-5 w-full hover:text-yellow-600">
+                    <p className="text-white text-base text-center mx-2 cursor-pointer  "onClick={() => navigate('/news')}>News & Media</p>
+                    <p className="text-white text-base text-center mx-2 cursor-pointer  "onClick={() => navigate('/baggage')}>Baggage Policy & Service</p>
+                    <p className="text-white text-base text-center mx-2 cursor-pointer  "onClick={() => navigate('/experience')}>Unique Experience</p>
                 </div>
             </div>
 
