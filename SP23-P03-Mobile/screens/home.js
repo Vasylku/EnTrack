@@ -1,8 +1,8 @@
 import { Text, TextInput } from "react-native-paper";
 import React, {useEffect, useState} from 'react';
-import {Alert, BackHandler, StyleSheet} from 'react-native';
+import {Alert, BackHandler, StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-paper';
-import { View } from "react-native";
+
 
 
 
@@ -99,9 +99,7 @@ const styles = StyleSheet.create({
     input1: {
         backgroundColor: "#E9ECEE",
         width: "70%",
-        
-        
-      },
+    },
 
       button: {
         marginLeft: 200,
