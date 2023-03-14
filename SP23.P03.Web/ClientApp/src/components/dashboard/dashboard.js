@@ -1,16 +1,16 @@
-
-
+import Ticket from "../ticket/Ticket";
+import FeedbackForm from "../feedback/FeedbackForm";
 const Dashboard =() => {
 
 
 
     return (
-<div class="antialiased  w-full min-h-screen text-black-300 relative py-4">
+<div class="antialiased w-full min-h-screen text-black-300 relative py-4">
     <div class=" grid-cols-12 gap-6 sm:gap-4 md:gap-6 lg:gap-10 xl:gap-14 w-80 h-96 my-10 px-2 grey-glassmorphism">
         <div id="menu" class="bg-white/10 col-span-3 rounded-lg p-4 ">
             <h1 class="font-bold text-lg lg:text-3xl bg-gradient-to-br from-black via-black/50 to-transparent bg-clip-text text-transparent">Dashboard<span class="text-indigo-400"></span></h1>
           
-            <a href="#" class="flex flex-col space-y-2 md:space-y-0 md:flex-row mb-5 items-center md:space-x-2 hover:bg-black/10 group transition duration-150 ease-linear rounded-lg group w-full py-3 px-2">
+            <a href="/" class="flex flex-col space-y-2 md:space-y-0 md:flex-row mb-5 items-center md:space-x-2 hover:bg-black/10 group transition duration-150 ease-linear rounded-lg group w-full py-3 px-2">
                 <div>
                     <img class="rounded-full w-10 h-10 relative object-cover" src="" alt=""/>
                 </div>
@@ -21,7 +21,7 @@ const Dashboard =() => {
             </a>
             <hr class="my-2 border-slate-700"/>
             <div className="flex flex-col space-y-2 my-5">
-                <a href="#" class="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group">
+                <a href="/" class="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group">
                     <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                         <div>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-hover:text-indigo-400">
@@ -36,7 +36,7 @@ const Dashboard =() => {
                         
                     </div>
                 </a>
-                <a href="#" class="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group">
+                <a href="/" class="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group">
                     <div class="relative flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-hover:text-indigo-400">
@@ -51,7 +51,7 @@ const Dashboard =() => {
                     </div>
                 </a>
             
-                <a href="#" class="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group">
+                <a href="/" class="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group">
                     <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                         <div>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-hover:text-indigo-400">
@@ -71,7 +71,10 @@ Settings</p>
             </div>
             </div>
 
-</div></div>
+</div>
+<Ticket/>
+<FeedbackForm />
+</div>
        
     )
     }

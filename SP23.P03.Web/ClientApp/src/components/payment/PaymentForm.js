@@ -1,5 +1,5 @@
  import React, { useState } from 'react';
-import { FaCcVisa, FaCcMastercard } from 'react-icons/fa';
+import { FaCcVisa} from 'react-icons/fa';
 import { ImPaypal } from 'react-icons/im';
 
 const PaymentForm = () => {
@@ -12,8 +12,8 @@ const PaymentForm = () => {
   };
 
   return (
-    <div className="min-w-screen min-h-screen bg-gray-700 flex items-center justify-center px-5 pb-10 pt-16">
-      <div className="w-96 mx-auto rounded-lg bg-white shadow-lg p-5 text-gray-700 max-w-2xl " style={{ maxWidth: "600px" }}>
+    <div className="min-w-screen min-h-screen  from-neutral-300 to-stone-300 flex items-center justify-center px-5 pb-10 pt-16">
+      <div className="w-96 mx-auto rounded-lg   blue-glassmorphism shadow-lg p-5 text-gray-700 max-w-2xl " style={{ maxWidth: "600px" }}>
         <div className="mb-10">
           <h1 className="text-center font-bold text-xl uppercase">Secure payment info</h1>
         </div>
@@ -100,7 +100,7 @@ const PaymentForm = () => {
         )}
            {selectedPaymentType === 'paypal' && (
     <form onSubmit={handleSubmit}>
-      <div className="mb-3">
+      <div className="mb-3 max-h-max">
         <label className="font-bold text-sm mb-2 ml-1" htmlFor="paypalEmail">PayPal email address</label>
         <div>
           <input

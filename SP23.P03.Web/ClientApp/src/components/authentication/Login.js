@@ -1,8 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-/* import Errors from '../errors/Errors';
-import ErrorBoundary from '../errors/errorBoundary'; */
+import {useAuth} from '../../context/AuthenticationProvider.js';
+
 
 
 
@@ -38,8 +37,6 @@ const validateInputs = (name, password, email, confirmPassword, isRegister) => {
   return errors;
 };
 
-
-
 const LoginPage = () => {
   const [isRegister, setIsRegister] = useState(false);
   const [isForgotPassword, setIsForgotPassword] = useState(false);
@@ -47,9 +44,9 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [err, setErrors] = useState({});
+  const [err, setErrors] = useState([]);
   const navigate = useNavigate();
-
+  const { login,register } = useAuth();
   const handleToggle = () => {
     setIsRegister(!isRegister);
     setIsForgotPassword(false);
@@ -70,20 +67,20 @@ const LoginPage = () => {
     
     const errors = validateInputs(e.name, e.password, e.email, e.confirmPassword, isRegister);
     if (Object.keys(errors).length > 0) {
-      setErrors(errors);
+      setErrors([errors]);
 
     }
     if (isRegister) {
-      const register = {
+      const registerIn = {
         UserName: name,
         Email: email,
         Password: password
       }
       try {
-        await axios.post('api/users', register);
+        await register(registerIn);
         navigate("/dashboard");
       } catch (error) {
-        setErrors(error);
+        setErrors([...err,error]);
       }
     }
     if (!isRegister && !isForgotPassword) {
@@ -93,12 +90,11 @@ const LoginPage = () => {
         password: password
       };
       try {
-        await axios.post('/api/authentication/login', loginData);
-        console.log("Successfully logged in!");
+        await login(loginData);
         navigate('/');
       } catch (error) {
         console.log(error);
-        setErrors(error);
+        setErrors([...errors,error]);
       }
     };
 
@@ -115,8 +111,8 @@ const LoginPage = () => {
 
 
 
-    <main className="mx-auto flex min-h-screen w-full items-center justify-center bg-slate-900 text-white">
-
+    <main className="mx-auto flex min-h-screen w-full items-center justify-center bg-gradient-to-r from-slate-800 to-slate-900 text-white">
+  
       <form onSubmit={handleSubmit} className="flex w-[30rem] flex-col space-y-10 blue-glassmorphism p-12">
         <div className="text-center text-4xl font-medium"> {isRegister ? 'Register' : isForgotPassword ? 'Forgot Password' : 'Log In'}
         </div>

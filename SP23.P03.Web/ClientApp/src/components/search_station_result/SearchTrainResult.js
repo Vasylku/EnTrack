@@ -19,7 +19,7 @@ function SearchTrainsResult(props) {
   return (
     <ul>
       
-    <div className="flex md:flex-row gap-6 flex-col border-black items-center justify-between p-5 mt-4 border rounded-lg">
+    <div className="flex md:flex-row gap-6 flex-col border-black bg-[#f8f7f4] items-center justify-between p-5 mt-4 border rounded-lg">
      
         <div className="font-bold text-lg">{departure}</div>
         <div className="text-gray-600 "><TrainDate date = {departureDate}/></div>
@@ -32,7 +32,7 @@ function SearchTrainsResult(props) {
      
         <div className="font-bold text-lg">{arrival}</div>
         <div className="text-gray-600"><TrainDate date = {arrivalDate}/></div>
-      
+       
    
     </div>
     

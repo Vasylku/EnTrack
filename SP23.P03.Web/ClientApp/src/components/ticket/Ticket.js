@@ -1,34 +1,23 @@
 
   import React from 'react';
-  import { MdPrint } from 'react-icons/md';
+  //  import { MdPrint } from 'react-icons/md';
   import { saveAs } from "file-saver";
-  import { PDFDocument, Page, Text } from "@react-pdf/renderer";
+/*   import PDFDocument,{ PDFDownloadLink,Page, Text, View } from "@react-pdf/renderer"; 
+   */
+  const Ticket = ({ from, to, date,time, seatNumber }) => {
+    const handleDownload = () => {
+   
+       const ticketData = { from, to, date, time, seatNumber }; 
+
   
-  const Ticket = ({ from, to, date, time, seatNumber }) => {
-  /*   const handleDownload = () => {
-      // Create a PDF document with ticket details
-      const ticketData = { from, to, date, time, seatNumber };
-      const TicketData = () => (
-        <Document>
-          <Page>
-            <Text>From: {ticketData.from}</Text>
-            <Text>To: {ticketData.to}</Text>
-            <Text>Date: {ticketData.date}</Text>
-            <Text>Time: {ticketData.time}</Text>
-            <Text>Seat Number: {ticketData.seatNumber}</Text>
-          </Page>
-        </Document>
-      );
-      
-      // Generate the PDF blob
-      const pdfBlob = <TicketData />.toBlob();
+      const pdfBlob = new Blob([ticketData], {type:"text/plain"});
     
-      // Use FileSaver.js to download the PDF
+
       saveAs(pdfBlob, 'train-ticket.pdf');
     
-      // Log the success message
-      console.log('Ticket downloaded!');
-    }; */
+      
+      console.log(pdfBlob);
+    };
   
 /*     const handleSend = async () => {
       const pdfBlob = <Ticket ticketData={ticketData} />.toBlob();
@@ -45,7 +34,8 @@
         alert("Failed to send the ticket.");
       }
     }; */
-  
+
+
   return (
     <div className="max-w-md mx-auto mt-8 bg-white rounded-lg overflow-hidden shadow-lg">
       <div className="px-6 py-4">
@@ -74,14 +64,14 @@
       <div className="flex items-center justify-between px-6 py-4 bg-gray-200">
         <button
           className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300"
-          
+onClick={handleDownload}
         >
-          <MdPrint className="mr-2" />
+         {/* // <MdPrint className="mr-2" /> */}
           Download Ticket
         </button>
         <button
           className="flex items-center justify-center px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
-         // onClick={handleSend}
+      
         >
           Send to Address
         </button>
