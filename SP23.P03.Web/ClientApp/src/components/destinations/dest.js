@@ -1,4 +1,4 @@
-import {React, useEffect, useState} from 'react';
+/* import {React, useEffect, useState} from 'react';
 import DestSearch from "./dest_search.js";
 import DestinationCard from "./destinations";
 
@@ -39,4 +39,4 @@ const Dest = () => {
 
     )
 }
-export default Dest;
+export default Dest; */

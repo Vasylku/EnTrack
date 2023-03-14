@@ -10,13 +10,13 @@
        const ticketData = { from, to, date, time, seatNumber }; 
 
   
-      const pdfBlob = new Blob([ticketData], {type:"text/plain"});
+      const pdfBlob = new Blob([JSON.stringify(ticketData)], {type:"aplication/pdf"});
     
 
       saveAs(pdfBlob, 'train-ticket.pdf');
     
       
-      console.log(pdfBlob);
+     // console.log(pdfBlob);
     };
   
 /*     const handleSend = async () => {

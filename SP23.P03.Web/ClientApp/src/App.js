@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Footer from './components/footer/Footer';
 import Navbar from './components/navbar/Navbar';
 import Welcome from './components/home/Welcome';
-import Dest from './components/destinations/dest';
+// import Dest from './components/destinations/dest';
 import PaymentForm from './components/payment/PaymentForm';
 import LoginPage from './components/authentication/Login';
 import Service from './components/service_card/services';
@@ -55,7 +55,7 @@ return (
 <Navbar/>
     <Routes>
         <Route path="/" element={<Welcome/>} />
-        <Route path="/destinations" element={<Dest/>} />
+        {/* <Route path="/destinations" element={<Dest/>} /> */}
         <Route path="/payment" element={ <PaymentForm/>} />
         <Route path="/login" element={<LoginPage/>}/>
         

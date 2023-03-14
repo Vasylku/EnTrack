@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 
 const DestinationCard = ({ image, stations }) => {
     const tags = image.tags.split(',');
@@ -37,4 +37,4 @@ const DestinationCard = ({ image, stations }) => {
 }
 
 export default DestinationCard;
- 
+  */

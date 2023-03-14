@@ -1,10 +1,13 @@
- import React, { useState } from 'react';
+ import React, { useState  } from 'react';
 import { FaCcVisa} from 'react-icons/fa';
 import { ImPaypal } from 'react-icons/im';
-
+import { useNavigate } from 'react-router-dom';
 const PaymentForm = () => {
   const [selectedPaymentType, setSelectedPaymentType] = useState('credit_card');
-
+ const navigate = useNavigate();
+ const handleNavigate = () => {
+  navigate('/dashboard');
+}
   const handleSubmit = (e) => {
     e.preventDefault();
     // handle form submission based on selectedPaymentType
@@ -92,9 +95,9 @@ const PaymentForm = () => {
 
         </div>
         <div>
-            <button
+         <button onClick={handleNavigate}
                 className="block w-full max-w-xs mx-auto bg-yellow-800 hover:bg-yellow-500 focus:bg-yellow-700 text-white rounded-lg px-3 py-3 font-semibold ">
-                <i className="mdi mdi-lock-outline mr-1"></i> PAY NOW
+                <i className="mdi mdi-lock-outline mr-1"></i>PAY NOW
             </button>
         </div></form>
         )}

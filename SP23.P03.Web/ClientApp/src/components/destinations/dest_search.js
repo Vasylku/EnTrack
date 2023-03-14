@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+/* import React, { useState } from 'react';
 
 const DestSearch = ({ searchText }) => {
     const [text, setText] = useState('');
@@ -22,4 +22,4 @@ const DestSearch = ({ searchText }) => {
     )
 }
 
-export default DestSearch;
+export default DestSearch; */

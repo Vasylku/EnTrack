@@ -77,14 +77,17 @@ public static class SeedHelper
         {
             return;
         }
-
         for (int i = 0; i < 3; i++)
         {
             dataContext.Set<TrainStation>()
                 .Add(new TrainStation
                 {
                     Name = "Hammond",
-                    Address = "1234 Place st"
+                    Street = "1234 Place st",
+                    City = "Hammond",
+                    State = "IN",
+                    Country = "USA",
+                    ZipCode = "46324"
                 });
         }
 
