@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 namespace SP23.P03.Web.Features.Authorization;
 
 public class UserDto
