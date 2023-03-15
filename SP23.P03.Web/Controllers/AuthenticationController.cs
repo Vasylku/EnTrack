@@ -13,6 +13,7 @@ public class AuthenticationController : ControllerBase
 {
     private readonly SignInManager<User> signInManager;
     private readonly UserManager<User> userManager;
+  
 
     public AuthenticationController(
         SignInManager<User> signInManager,
@@ -20,7 +21,8 @@ public class AuthenticationController : ControllerBase
     {
         this.signInManager = signInManager;
         this.userManager = userManager;
-    }
+         
+}
 
     [HttpGet("me")]
     [Authorize]

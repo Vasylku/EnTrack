@@ -13,6 +13,7 @@ builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(build
 builder.Services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<DataContext>();
 
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Events.OnRedirectToLogin = context =>
