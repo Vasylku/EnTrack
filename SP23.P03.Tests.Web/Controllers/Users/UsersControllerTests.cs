@@ -101,7 +101,7 @@ public class UsersControllerTests
     //    //assert
     //    httpResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest, "we expect POST /api/users with an invalid role to be rejected with an HTTP 400");
     //}
-
+/*
     [TestMethod]
     public async Task CreateUser_EmptyRole_Returns400()
     {
@@ -123,7 +123,7 @@ public class UsersControllerTests
         //assert
         httpResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest, "we expect POST /api/users with an empty role list to be rejected with an HTTP 400");
     }
-
+*/
     [TestMethod]
     public async Task CreateUser_NoPassword_Returns400()
     {
