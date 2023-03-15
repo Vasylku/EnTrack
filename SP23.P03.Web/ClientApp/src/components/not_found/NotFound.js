@@ -27,4 +27,4 @@ return(
 </div>
 )
 }
-export default NotFoun
+export default NotFound
