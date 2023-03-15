@@ -12,7 +12,7 @@ return(
 		Page Not Found
 	</div>
 	<button class="mt-5 animate-bounce">
-      <a
+      <div
         class="relative inline-block text-sm font-medium text-[#a9ba9d] group active:text-orange-500 focus:outline-none focus:ring"
       >
         <span
@@ -22,9 +22,9 @@ return(
         <span class="relative block px-8 py-3 bg-[#712608] border border-current">
           <Link to="/">Go Home</Link>
         </span>
-      </a>
+      </div>
     </button>
 </div>
 )
 }
-export default NotFound;
+export default NotFoun
