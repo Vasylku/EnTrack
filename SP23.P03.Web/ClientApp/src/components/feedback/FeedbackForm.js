@@ -27,7 +27,7 @@ const FeedbackForm = () => {
         required
       ></textarea>
       <button
-        className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+        className="px-4 py-2 font-bold text-white bg-blue-700 rounded hover:bg-blue-500"
         type="submit"
       >
         Submit

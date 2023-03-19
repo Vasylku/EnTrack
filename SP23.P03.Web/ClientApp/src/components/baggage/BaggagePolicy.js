@@ -3,14 +3,14 @@ import { FaSuitcase } from 'react-icons/fa';
 
 const BaggagePolicy = () => {
   return (
-    <div className="bg-gradient-to-b from-[#f8f7f4] to-[#04022c] min-h-screen">
-      <div className="container mx-auto py-10">
+    <div className="bg-[#28292a]  min-h-screen">
+      <div className="container mx-auto py-10 text-gradient">
         <div className="flex flex-col max-w-8xl mx-auto w-full">
           <h1 className="text-3xl font-semibold mb-4 text-center ">
-            <FaSuitcase className="inline-block mr-2 mb-1" />
+            <FaSuitcase className="inline-block mr-2 mb-1 text-white" />
             Baggage Policy &amp; Service
           </h1>
-          <div className="bg-white rounded-lg shadow-lg p-6">
+          <div className=" rounded-lg shadow-lg p-6">
             <h2 className="text-lg font-semibold mb-4">Baggage Allowance</h2>
             <p className="text-gray-700 mb-4">
               Our baggage allowance policy is designed to ensure the safety and comfort of all our passengers. Please check

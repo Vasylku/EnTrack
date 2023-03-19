@@ -6,7 +6,7 @@ const NotFound = () =>{
 
 return(
 
-    <div className="h-screen w-full flex flex-col justify-center items-center bg-gradient-to-r from-slate-500 to-slate-800">
+    <div className="h-screen w-full flex flex-col justify-center items-center bg-neutral-800">
 	<h1 className="text-9xl font-extrabold text-white tracking-widest">404</h1>
 	<div class="bg-[#a52a2a] px-2 text-sm rounded rotate-12 absolute">
 		Page Not Found
