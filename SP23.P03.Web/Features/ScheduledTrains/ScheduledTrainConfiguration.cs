@@ -1,32 +1,31 @@
-﻿//using Microsoft.EntityFrameworkCore;
-//using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SP23.P03.Web.Features.ScheduledTrains;
+using SP23.P03.Web.Features.Trains;
+using SP23.P03.Web.Features.TrainStations;
 
-//namespace SP23.P03.Web.Features.ScheduledTrains
-//{
-//    public class ScheduledTrainConfiguration : IEntityTypeConfiguration<ScheduledTrain>
-//    {
-//        public void Configure(EntityTypeBuilder<ScheduledTrain> builder)
-//        {
-//            builder.Property(x => x.startStation_Id)
-//                .IsRequired();
 
-//            builder.Property(x => x.endStation_Id)
-//                .IsRequired();
 
-//            builder.Property(x => x.distance)
-//                .IsRequired();
+public class ScheduledTrainConfiguration : IEntityTypeConfiguration<ScheduledTrain>
+{
+    public void Configure(EntityTypeBuilder<ScheduledTrain> builder)
+    {
+        builder.HasKey(st => st.Id);
 
-//            builder.Property(x => x.travel_Time)
-//                .IsRequired();
 
-//            builder.Property(x => x.train_Id)
-//                .IsRequired();
+        builder.Property(st => st.Distance).IsRequired();
+        builder.Property(st => st.TravelTime).IsRequired();
 
-//            builder.Property(x => x.departureDate)
-//                .IsRequired();
+        builder.HasOne(st => st.StartStation)
+            .WithMany()
+            .HasForeignKey(st => st.StartStationId)
+            .OnDelete(DeleteBehavior.Restrict);
 
-//            builder.Property(x => x.arrivalDate)
-//                .IsRequired();
-//        }
-//    }
-//}
+        builder.HasOne(st => st.EndStation)
+            .WithMany()
+            .HasForeignKey(st => st.EndStationId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+    }
+
+}
