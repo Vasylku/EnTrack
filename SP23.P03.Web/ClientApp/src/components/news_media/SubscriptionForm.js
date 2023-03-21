@@ -18,7 +18,7 @@ const SubscriptionForm = () => {
   return (
     <form onSubmit={handleSubmit} className="max-w-lg mx-auto mt-4">
       <p className="block mb-2 font-bold text-gray-700">Subscribe today to receive flash sales, promotions and special offers by email.</p>
-      <div className="flex items-center border-b-2 border-gray-500 py-2">
+      <div className="flex items-center border-b-2 border-white py-2">
         <input
           className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
           type="email"
@@ -28,7 +28,7 @@ const SubscriptionForm = () => {
           required
         />
         <button
-          className="flex-shrink-0 px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+          className="flex-shrink-0 px-4 py-2 font-bold text-white bg-blue-700 rounded hover:bg-blue-500"
           type="submit"
         >
           Subscribe

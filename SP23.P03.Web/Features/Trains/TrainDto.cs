@@ -1,20 +1,20 @@
 ﻿
-//using SP23.P03.Web.Features.ScheduledTrains;
+using SP23.P03.Web.Features.Schedules;
 
-//namespace SP23.P03.Web.Features.Trains;
+namespace SP23.P03.Web.Features.Trains;
 
-//public class TrainDto
-//{
-//    public int Id { get; set; }
-//    public string Name { get; set; } = string.Empty;
-//    public string trainClass { get; set; } = string.Empty;
-//    public ScheduledTrain ScheduleTrain { get; set; }
-//    public int? availableSeats { get; set; }
-//    public int? diner_Carts { get; set; }
-//    public int? coach_Seats { get; set; }
-//    public int? firstClass_Seats { get; set; }
-//    public int? sleeper_Seats { get; set; }
-//    public int? roomlet_Seats { get; set; }
-//    public int?  maintenance_Id { get; set; }
-//    public int? ManagerId { get; set; }
-//}
+public class TrainDto
+{
+   
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string TrainClass { get; set; } = string.Empty;
+        public int? AvailableSeats { get; set; }
+        public int? DinerCarts { get; set; }
+        public int? CoachSeats { get; set; }
+        public int? FirstClassSeats { get; set; }
+        public int? SleeperSeats { get; set; }
+        public int? RoomletSeats { get; set; }
+        public ICollection<ScheduleDto> Schedules { get; set; }
+    
+}

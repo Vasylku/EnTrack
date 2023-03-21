@@ -52,7 +52,7 @@ public class PaymentsController : ControllerBase
 
         var payment = new Payment
         {
-            cardProvider = dto.cardProvider
+            CardProvider = dto.CardProvider
         };
 
         payments.Add(payment);
@@ -78,18 +78,10 @@ public class PaymentsController : ControllerBase
         if (payment == null)
         {
             return NotFound();
-        }
+        } 
 
-        if (!User.IsInRole(RoleNames.Admin) && User.GetCurrentUserId() != payment.ManagerId)
-        {
-            return Forbid();
-        }
-
-        payment.cardProvider = dto.cardProvider;
-        if (User.IsInRole(RoleNames.Admin))
-        {
-            payment.ManagerId = dto.ManagerId;
-        }
+        payment.CardProvider = dto.CardProvider;
+       
 
         dataContext.SaveChanges();
 
@@ -109,10 +101,6 @@ public class PaymentsController : ControllerBase
             return NotFound();
         }
 
-        if (!User.IsInRole(RoleNames.Admin) && User.GetCurrentUserId() != station.ManagerId)
-        {
-            return Forbid();
-        }
 
         payments.Remove(station);
 
@@ -123,9 +111,9 @@ public class PaymentsController : ControllerBase
 
     private bool IsInvalid(PaymentDto dto)
     {
-        return string.IsNullOrWhiteSpace(dto.cardProvider) ||
-               dto.cardProvider.Length > 120 ||
-               InvalidManagerId(dto.ManagerId);
+        return string.IsNullOrWhiteSpace(dto.CardProvider) ||
+               (dto.CardProvider.Length > 120 );
+        
     }
 
     private bool InvalidManagerId(int? managerId)
@@ -149,9 +137,9 @@ public class PaymentsController : ControllerBase
             .Select(x => new PaymentDto
             {
                 Id = x.Id,
-                user_Id = x.user_Id,
-                cardProvider = x.cardProvider,
-                ManagerId = x.ManagerId,
+                UserId = x.UserId,
+                CardProvider = x.CardProvider,
+              
             });
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SP23.P03.Web.Data;
 
@@ -11,9 +12,11 @@ using SP23.P03.Web.Data;
 namespace SP23.P03.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230320004446_UpdateRelations")]
+    partial class UpdateRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -231,18 +234,26 @@ namespace SP23.P03.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CardProvider")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ManagerId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<string>("cardProvider")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("user_Id")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ManagerId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Payment", (string)null);
+                    b.ToTable("Payment");
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.ScheduledTrains.ScheduledTrain", b =>
@@ -271,16 +282,16 @@ namespace SP23.P03.Web.Migrations
 
                     b.HasIndex("StartStationId");
 
-                    b.ToTable("ScheduledTrain", (string)null);
+                    b.ToTable("ScheduledTrain");
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.Schedules.Schedule", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("TrainsId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<int>("ScheduledTrainId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("ArrivalTime")
                         .HasColumnType("datetime2");
@@ -288,19 +299,16 @@ namespace SP23.P03.Web.Migrations
                     b.Property<DateTime>("DepartureTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ScheduledTrainId")
+                    b.Property<int?>("TrainId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TrainsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
+                    b.HasKey("TrainsId", "ScheduledTrainId");
 
                     b.HasIndex("ScheduledTrainId");
 
-                    b.HasIndex("TrainsId");
+                    b.HasIndex("TrainId");
 
-                    b.ToTable("Schedule", (string)null);
+                    b.ToTable("Schedule");
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.TrainStations.TrainStation", b =>
@@ -348,7 +356,7 @@ namespace SP23.P03.Web.Migrations
 
                     b.HasIndex("ManagerId");
 
-                    b.ToTable("TrainStation", (string)null);
+                    b.ToTable("TrainStation");
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.Trains.Train", b =>
@@ -359,37 +367,37 @@ namespace SP23.P03.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AvailableSeats")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CoachSeats")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DinerCarts")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("FirstClassSeats")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("RoomletSeats")
+                    b.Property<int?>("availableSeats")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SleeperSeats")
+                    b.Property<int?>("coachSeats")
                         .HasColumnType("int");
 
-                    b.Property<string>("TrainClass")
+                    b.Property<int?>("dinerCarts")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("firstClassSeats")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("roomletSeats")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("sleeperSeats")
+                        .HasColumnType("int");
+
+                    b.Property<string>("trainClass")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Train", (string)null);
+                    b.ToTable("Train");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -449,9 +457,15 @@ namespace SP23.P03.Web.Migrations
 
             modelBuilder.Entity("SP23.P03.Web.Features.Payments.Payment", b =>
                 {
+                    b.HasOne("SP23.P03.Web.Features.Authorization.User", "Manager")
+                        .WithMany()
+                        .HasForeignKey("ManagerId");
+
                     b.HasOne("SP23.P03.Web.Features.Authorization.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Manager");
 
                     b.Navigation("User");
                 });
@@ -483,8 +497,12 @@ namespace SP23.P03.Web.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SP23.P03.Web.Features.Trains.Train", "Train")
+                    b.HasOne("SP23.P03.Web.Features.Trains.Train", null)
                         .WithMany("Schedules")
+                        .HasForeignKey("TrainId");
+
+                    b.HasOne("SP23.P03.Web.Features.Trains.Train", "Train")
+                        .WithMany()
                         .HasForeignKey("TrainsId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

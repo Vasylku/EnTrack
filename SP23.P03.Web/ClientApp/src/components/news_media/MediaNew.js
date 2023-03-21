@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const NewsCard = ({ imageUrl, title, description, url }) => {
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+    <div className=" sm:h-auto bg-[#d4d5d5] rounded-lg shadow-lg overflow-hidden">
       <img className="w-full h-64 object-cover" src={imageUrl} alt={title} />
       <div className="p-6">
         <h2 className="text-lg font-bold mb-2">
