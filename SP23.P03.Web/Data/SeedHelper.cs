@@ -4,6 +4,7 @@ using SP23.P03.Web.Features.Authorization;
 using SP23.P03.Web.Features.Trains;
 using SP23.P03.Web.Features.TrainStations;
 using SP23.P03.Web.Features.ScheduledTrains;
+using System.Collections.Generic;
 using SP23.P03.Web.Features.Schedules;
 
 
@@ -21,8 +22,8 @@ public static class SeedHelper
         await AddUsers(serviceProvider);
         await AddTrainStation(dataContext);
         await SeedAllData(dataContext);
-        await TrainsSchedule(dataContext);
-       await SchedulesData(dataContext);
+      //await TrainsSchedule(dataContext);
+    //  await SchedulesData(dataContext);
         // await AddScheduledTrains(dataContext);
         // await AddTrainsAsync(dataContext);
 
@@ -284,104 +285,105 @@ new TrainStation
         }
 
     }
-    private static async Task TrainsSchedule(DataContext dataContext) {
-        var scheduledTrains = dataContext.Set<ScheduledTrain>();
+    //private static async Task TrainsSchedule(DataContext dataContext)
+    //{
+    //    var scheduledTrains = dataContext.Set<ScheduledTrain>();
 
-        if (!await scheduledTrains.AnyAsync())
-        {
-            var schtrains = new List<ScheduledTrain>
-                { 
+    //    if (!await scheduledTrains.AnyAsync())
+    //    {
+    //        var schtrains = new List<ScheduledTrain>
+    //            {
 
-            new ScheduledTrain
-            {
-                StartStationId = 1,
-                EndStationId = 2,
+    //        new ScheduledTrain
+    //        {
+    //            StartStationId = 1,
+    //            EndStationId = 2,
 
-                Distance = 200,
-                TravelTime = new TimeSpan(0, 2, 18),
-            },
-            new ScheduledTrain
-            {
-              StartStationId = 2,
-              EndStationId = 1,
+    //            Distance = 200,
+    //            TravelTime = new TimeSpan(0, 2, 18),
+    //        },
+    //        new ScheduledTrain
+    //        {
+    //          StartStationId = 2,
+    //          EndStationId = 1,
 
-              Distance = 200,
-              TravelTime = new TimeSpan(0, 2, 18),
-      },
-            new ScheduledTrain
-            {
-                StartStationId = 6,
-                EndStationId = 5,
-                Distance = 50,
-                TravelTime= new TimeSpan(0,0,50),
-            },
-            new ScheduledTrain
-            {
-                StartStationId = 3,
-                EndStationId = 4,
-                Distance = 400,
-                TravelTime= new TimeSpan(0,5,50),
-            },
-            new ScheduledTrain {
-                StartStationId =7,
-                EndStationId = 8,
-                Distance= 400,
-                TravelTime = new TimeSpan(0,5,50),
+    //          Distance = 200,
+    //          TravelTime = new TimeSpan(0, 2, 18),
+    //  },
+    //        new ScheduledTrain
+    //        {
+    //            StartStationId = 6,
+    //            EndStationId = 5,
+    //            Distance = 50,
+    //            TravelTime= new TimeSpan(0,0,50),
+    //        },
+    //        new ScheduledTrain
+    //        {
+    //            StartStationId = 3,
+    //            EndStationId = 4,
+    //            Distance = 400,
+    //            TravelTime= new TimeSpan(0,5,50),
+    //        },
+    //        new ScheduledTrain {
+    //            StartStationId =7,
+    //            EndStationId = 8,
+    //            Distance= 400,
+    //            TravelTime = new TimeSpan(0,5,50),
 
-            },
-    };
+    //        },
+    //};
 
-        await dataContext.AddRangeAsync(schtrains);
-        await dataContext.SaveChangesAsync();
-    }
-
-
-
-}
-    private static async Task SchedulesData(DataContext dataContext)
-    {
+    //        await dataContext.AddRangeAsync(schtrains);
+    //        await dataContext.SaveChangesAsync();
+    //    }
 
 
 
+    //}
+    //private static async Task SchedulesData(DataContext dataContext)
+    //{
 
-        var schedules = new List<Schedule>
-    {
-      new Schedule
-      {
 
-        ScheduledTrainId =  1,
-        TrainsId = 1,
-        DepartureTime = DateTime.UtcNow.AddHours(1),
-        ArrivalTime = DateTime.UtcNow.AddHours(3)
-      },
-      new Schedule
-      {
-        ScheduledTrainId = 2,
-        TrainsId = 2,
-        DepartureTime = DateTime.UtcNow.AddHours(4),
-        ArrivalTime = DateTime.UtcNow.AddHours(6)
-      },
-      new Schedule
-      {
-          ScheduledTrainId = 4,
-          TrainsId = 1,
-          DepartureTime = new DateTime(2023, 3, 20, 9,15,0),
-          ArrivalTime = new DateTime(2023,3,21, 2,15,0),
 
-    },   new Schedule
-      {
-          ScheduledTrainId = 5,
-          TrainsId = 2,
-          DepartureTime = new DateTime(2023, 3, 20, 9,15,0),
-          ArrivalTime = new DateTime(2023,3,21, 2,15,0),
 
-    },
+    //    var schedules = new List<Schedule>
+    //{
+    //  new Schedule
+    //  {
 
-    };
+    //    ScheduledTrainId =  1,
+    //    TrainsId = 1,
+    //    DepartureTime = DateTime.UtcNow.AddHours(1),
+    //    ArrivalTime = DateTime.UtcNow.AddHours(3)
+    //  },
+    //  new Schedule
+    //  {
+    //    ScheduledTrainId = 2,
+    //    TrainsId = 2,
+    //    DepartureTime = DateTime.UtcNow.AddHours(4),
+    //    ArrivalTime = DateTime.UtcNow.AddHours(6)
+    //  },
+    //  new Schedule
+    //  {
+    //      ScheduledTrainId = 4,
+    //      TrainsId = 1,
+    //      DepartureTime = new DateTime(2023, 3, 20, 9,15,0),
+    //      ArrivalTime = new DateTime(2023,3,21, 2,15,0),
 
-        await dataContext.AddRangeAsync(schedules);
-        await dataContext.SaveChangesAsync();
-    }
+    //},   new Schedule
+    //  {
+    //      ScheduledTrainId = 5,
+    //      TrainsId = 2,
+    //      DepartureTime = new DateTime(2023, 3, 20, 9,15,0),
+    //      ArrivalTime = new DateTime(2023,3,21, 2,15,0),
+
+    //},
+
+    //};
+
+    //    await dataContext.AddRangeAsync(schedules);
+    //    await dataContext.SaveChangesAsync();
+    //}
 }
 
     

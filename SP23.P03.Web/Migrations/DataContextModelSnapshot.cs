@@ -242,7 +242,7 @@ namespace SP23.P03.Web.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Payment");
+                    b.ToTable("Payment", (string)null);
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.ScheduledTrains.ScheduledTrain", b =>
@@ -271,7 +271,7 @@ namespace SP23.P03.Web.Migrations
 
                     b.HasIndex("StartStationId");
 
-                    b.ToTable("ScheduledTrain");
+                    b.ToTable("ScheduledTrain", (string)null);
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.Schedules.Schedule", b =>
@@ -300,7 +300,7 @@ namespace SP23.P03.Web.Migrations
 
                     b.HasIndex("TrainsId");
 
-                    b.ToTable("Schedule");
+                    b.ToTable("Schedule", (string)null);
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.TrainStations.TrainStation", b =>
@@ -348,7 +348,7 @@ namespace SP23.P03.Web.Migrations
 
                     b.HasIndex("ManagerId");
 
-                    b.ToTable("TrainStation");
+                    b.ToTable("TrainStation", (string)null);
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.Trains.Train", b =>
@@ -389,7 +389,7 @@ namespace SP23.P03.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Train");
+                    b.ToTable("Train", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
