@@ -1,4 +1,10 @@
-﻿//using Microsoft.AspNetCore.Authorization;
+﻿
+
+
+
+
+
+//using Microsoft.AspNetCore.Authorization;
 //using Microsoft.AspNetCore.Mvc;
 //using Microsoft.EntityFrameworkCore;
 //using SP23.P03.Web.Data;
@@ -99,7 +105,7 @@
 //        scheduledtrain.arrivalDate = dto.arrivalDate;
 //        scheduledtrain.distance = dto.distance;
 //        scheduledtrain.travel_Time = dto.travel_Time;
-        
+
 //        if (User.IsInRole(RoleNames.Admin))
 //        {
 //            scheduledtrain.ManagerId = dto.ManagerId;

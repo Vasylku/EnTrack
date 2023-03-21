@@ -6,6 +6,7 @@ using SP23.P03.Web.Features.TrainStations;
 using SP23.P03.Web.Features.ScheduledTrains;
 using System.Collections.Generic;
 using SP23.P03.Web.Features.Schedules;
+using Microsoft.IdentityModel.Tokens;
 
 namespace SP23.P03.Web.Data;
 
@@ -21,6 +22,8 @@ public static class SeedHelper
         await AddUsers(serviceProvider);
         await AddTrainStation(dataContext);
         await SeedAllData(dataContext);
+        await TrainsSchedule(dataContext);
+       await SchedulesData(dataContext);
         // await AddScheduledTrains(dataContext);
         // await AddTrainsAsync(dataContext);
 
@@ -217,11 +220,11 @@ new TrainStation
         {
             var trains = new List<Train>
     {
-    
+
        new Train
                 {
                    Name = "Siemens Charger 11",
-                    trainClass = "Class A",             
+                    trainClass = "Class A",
                     availableSeats = 168,
                     coachSeats = 168,
                 },
@@ -229,7 +232,7 @@ new TrainStation
                 {
                     Name = "Siemens Charger 2.0",
                     trainClass = "Class B",
-                 
+
                     availableSeats = 126,
                     coachSeats = 84,
                     firstClassSeats = 42
@@ -237,7 +240,7 @@ new TrainStation
                 new Train
                 {
                     Name = "Siemens Charger Express",
-                    trainClass = "Class C",             
+                    trainClass = "Class C",
                     availableSeats = 104,
                     coachSeats = 42,
                     firstClassSeats = 62,
@@ -246,12 +249,12 @@ new TrainStation
                 {
                     Name = "Siemens Charger 7",
                     trainClass = "Class D",
-                   
+
                     availableSeats = 98,
                     firstClassSeats = 42,
                     sleeperSeats = 10,
                     roomletSeats = 4
-                }, 
+                },
                 new Train
       {
         Name = "Entrack Charger",
@@ -280,61 +283,107 @@ new TrainStation
             await dataContext.AddRangeAsync(trains);
             await dataContext.SaveChangesAsync();
         }
-    //    var scheduledTrains = dataContext.Set<ScheduledTrain>();
 
-    //    if (!await scheduledTrains.AnyAsync())
-    //    {
-    //        var scheduled = new List<ScheduledTrain>
-    //{
-    //  new ScheduledTrain
-    //  {
-    //    StartStationId = 1,
-    //    EndStationId = 2,
+    }
+    private static async Task TrainsSchedule(DataContext dataContext) {
+        var scheduledTrains = dataContext.Set<ScheduledTrain>();
 
-    //    Distance = 200,
-    //    TravelTime = new TimeSpan(2023, 3, 18, 2, 0, 0),
-    //  },
-    //  new ScheduledTrain
-    //  {
-    //    StartStationId = 2,
-    //    EndStationId = 1,
+        if (!await scheduledTrains.AnyAsync())
+        {
+            var schtrains = new List<ScheduledTrain>
+                { 
 
-    //    Distance = 200,
-    //    TravelTime = new TimeSpan(2023, 3, 18, 2, 0, 0),
-    //  }
-    //};
+            new ScheduledTrain
+            {
+                StartStationId = 1,
+                EndStationId = 2,
 
-    //        await dataContext.AddRangeAsync(scheduledTrains);
-    //        await dataContext.SaveChangesAsync();
-    //    }
-    //    var trainSchedule = dataContext.Set<Schedule>();
-    //    if (!await trainSchedule.AnyAsync())
-    //    {
-    //        var schedules = new List<Schedule>
-    //{
-    //  new Schedule
-    //  {
+                Distance = 200,
+                TravelTime = new TimeSpan(0, 2, 18),
+            },
+            new ScheduledTrain
+            {
+              StartStationId = 2,
+              EndStationId = 1,
 
-    //    ScheduledTrainId = 1,
-    //    TrainsId = 1,
-    //    DepartureTime = DateTime.UtcNow.AddHours(1),
-    //    ArrivalTime = DateTime.UtcNow.AddHours(3)
-    //  },
-    //  new Schedule
-    //  {
-    //    ScheduledTrainId = 2,
-    //    TrainsId = 2,
-    //    DepartureTime = DateTime.UtcNow.AddHours(4),
-    //    ArrivalTime = DateTime.UtcNow.AddHours(6)
-    //  }
-    //};
+              Distance = 200,
+              TravelTime = new TimeSpan(0, 2, 18),
+      },
+            new ScheduledTrain
+            {
+                StartStationId = 6,
+                EndStationId = 5,
+                Distance = 50,
+                TravelTime= new TimeSpan(0,0,50),
+            },
+            new ScheduledTrain
+            {
+                StartStationId = 2,
+                EndStationId = 1,
+                Distance = 400,
+                TravelTime= new TimeSpan(0,5,50),
+            },
+            new ScheduledTrain { 
+                StartStationId = 1,
+                EndStationId = 2,
+                Distance= 400,
+                TravelTime = new TimeSpan(0,5,50),
+            
+            },
+    };
 
-    //        await dataContext.AddRangeAsync(schedules);
-    //        await dataContext.SaveChangesAsync();
-    //    }
+        await dataContext.AddRangeAsync(schtrains);
+        await dataContext.SaveChangesAsync();
     }
 
 
 
-
 }
+    private static async Task SchedulesData(DataContext dataContext)
+    {
+
+
+
+
+        var schedules = new List<Schedule>
+    {
+      new Schedule
+      {
+
+        ScheduledTrainId =  1,
+        TrainsId = 1,
+        DepartureTime = DateTime.UtcNow.AddHours(1),
+        ArrivalTime = DateTime.UtcNow.AddHours(3)
+      },
+      new Schedule
+      {
+        ScheduledTrainId = 2,
+        TrainsId = 2,
+        DepartureTime = DateTime.UtcNow.AddHours(4),
+        ArrivalTime = DateTime.UtcNow.AddHours(6)
+      },
+      new Schedule
+      {
+          ScheduledTrainId = 4,
+          TrainsId = 1,
+          DepartureTime = new DateTime(2023, 3, 20, 9,15,0),
+          ArrivalTime = new DateTime(2023,3,21, 2,15,0),
+
+    },   new Schedule
+      {
+          ScheduledTrainId = 5,
+          TrainsId = 2,
+          DepartureTime = new DateTime(2023, 3, 20, 9,15,0),
+          ArrivalTime = new DateTime(2023,3,21, 2,15,0),
+
+    },
+
+    };
+
+        await dataContext.AddRangeAsync(schedules);
+        await dataContext.SaveChangesAsync();
+    }
+}
+
+    
+
