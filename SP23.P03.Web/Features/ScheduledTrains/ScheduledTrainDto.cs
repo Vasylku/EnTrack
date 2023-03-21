@@ -1,16 +1,15 @@
-﻿using SP23.P03.Web.Features.Trains;
-using SP23.P03.Web.Features.TrainStations;
+﻿using SP23.P03.Web.Features.Schedules;
 
-namespace SP23.P03.Web.Features.Routes
+
+namespace SP23.P03.Web.Features.ScheduledTrains
 {
     public class ScheduledTrainDto
     {
-        public int startStation_Id { get; set; }
-        public int endStation_Id { get; set; }
-     
-        public float distance { get; set; }
-        public DateTime travel_Time { get; set; }
-        
-        public ICollection<Train> train_Id { get; set; }
+        public int Id { get; set; }
+        public int StartStationId { get; set; }
+        public int EndStationId { get; set; }
+        public float Distance { get; set; }
+        public TimeSpan TravelTime { get; set; }
+        public ICollection<ScheduleDto> Schedules { get; set; }
     }
 }

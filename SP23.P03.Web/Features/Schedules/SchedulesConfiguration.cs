@@ -9,14 +9,11 @@ public class SchedulesConfiguration : IEntityTypeConfiguration<Schedule>
 {
     public void Configure(EntityTypeBuilder<Schedule> builder)
     {
-        
 
-        builder
-         .HasKey(s => new { s.TrainsId, s.ScheduledTrainId });
-
+        builder.HasKey(s => s.Id);
         builder
             .HasOne(s => s.Train)
-            .WithMany()
+            .WithMany(st => st.Schedules)
             .HasForeignKey(s => s.TrainsId)
             .OnDelete(DeleteBehavior.Restrict);
 

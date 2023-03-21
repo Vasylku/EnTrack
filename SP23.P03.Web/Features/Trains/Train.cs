@@ -6,13 +6,13 @@ namespace SP23.P03.Web.Features.Trains
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public string trainClass { get; set; } = string.Empty;
-        public int? availableSeats { get; set; }
-        public int? dinerCarts { get; set; }
-        public int? coachSeats { get; set; }
-        public int? firstClassSeats { get; set; }
-        public int? sleeperSeats { get; set; }
-        public int? roomletSeats { get; set; }
+        public string TrainClass { get; set; } = string.Empty;
+        public int? AvailableSeats { get; set; }
+        public int? DinerCarts { get; set; }
+        public int? CoachSeats { get; set; }
+        public int? FirstClassSeats { get; set; }
+        public int? SleeperSeats { get; set; }
+        public int? RoomletSeats { get; set; }
         public virtual ICollection<Schedule> Schedules { get; set; }
     }
 

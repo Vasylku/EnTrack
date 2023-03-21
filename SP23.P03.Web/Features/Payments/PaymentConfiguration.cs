@@ -7,7 +7,7 @@ namespace SP23.P03.Web.Features.Payments
     {
         public void Configure(EntityTypeBuilder<Payment> builder)
         {
-            builder.Property(x => x.cardProvider)
+            builder.Property(x => x.CardProvider)
                 .IsRequired();
         }
     }

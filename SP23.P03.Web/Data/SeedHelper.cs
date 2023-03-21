@@ -4,9 +4,8 @@ using SP23.P03.Web.Features.Authorization;
 using SP23.P03.Web.Features.Trains;
 using SP23.P03.Web.Features.TrainStations;
 using SP23.P03.Web.Features.ScheduledTrains;
-using System.Collections.Generic;
 using SP23.P03.Web.Features.Schedules;
-using Microsoft.IdentityModel.Tokens;
+
 
 namespace SP23.P03.Web.Data;
 
@@ -224,58 +223,58 @@ new TrainStation
        new Train
                 {
                    Name = "Siemens Charger 11",
-                    trainClass = "Class A",
-                    availableSeats = 168,
-                    coachSeats = 168,
+                    TrainClass = "Class A",
+                    AvailableSeats = 168,
+                    CoachSeats = 168,
                 },
                 new Train
                 {
                     Name = "Siemens Charger 2.0",
-                    trainClass = "Class B",
+                    TrainClass = "Class B",
 
-                    availableSeats = 126,
-                    coachSeats = 84,
-                    firstClassSeats = 42
+                    AvailableSeats = 126,
+                    CoachSeats = 84,
+                    FirstClassSeats = 42
                 },
                 new Train
                 {
                     Name = "Siemens Charger Express",
-                    trainClass = "Class C",
-                    availableSeats = 104,
-                    coachSeats = 42,
-                    firstClassSeats = 62,
+                    TrainClass = "Class C",
+                    AvailableSeats = 104,
+                    CoachSeats = 42,
+                    FirstClassSeats = 62,
                 },
                 new Train
                 {
                     Name = "Siemens Charger 7",
-                    trainClass = "Class D",
+                    TrainClass = "Class D",
 
-                    availableSeats = 98,
-                    firstClassSeats = 42,
-                    sleeperSeats = 10,
-                    roomletSeats = 4
+                    AvailableSeats = 98,
+                    FirstClassSeats = 42,
+                    SleeperSeats = 10,
+                    RoomletSeats = 4
                 },
                 new Train
       {
         Name = "Entrack Charger",
-        trainClass = "Class A/2",
-        availableSeats = 150,
-        coachSeats = 100,
-        dinerCarts = 1,
-        firstClassSeats = 20,
-        sleeperSeats = 20,
-        roomletSeats = 10
+        TrainClass = "Class A/2",
+        AvailableSeats = 150,
+        CoachSeats = 100,
+        DinerCarts = 1,
+        FirstClassSeats = 20,
+        SleeperSeats = 20,
+        RoomletSeats = 10
       },
       new Train
       {
         Name = "Entrack charger A/1",
-        trainClass = "Premium",
-        availableSeats = 100,
-        coachSeats = 80,
-        dinerCarts = 2,
-        firstClassSeats = 10,
-        sleeperSeats = 10,
-        roomletSeats = 0
+        TrainClass = "Premium",
+        AvailableSeats = 100,
+        CoachSeats = 80,
+        DinerCarts = 2,
+        FirstClassSeats = 10,
+        SleeperSeats = 10,
+        RoomletSeats = 0
       },
 
         };
@@ -318,17 +317,17 @@ new TrainStation
             },
             new ScheduledTrain
             {
-                StartStationId = 2,
-                EndStationId = 1,
+                StartStationId = 3,
+                EndStationId = 4,
                 Distance = 400,
                 TravelTime= new TimeSpan(0,5,50),
             },
-            new ScheduledTrain { 
-                StartStationId = 1,
-                EndStationId = 2,
+            new ScheduledTrain {
+                StartStationId =7,
+                EndStationId = 8,
                 Distance= 400,
                 TravelTime = new TimeSpan(0,5,50),
-            
+
             },
     };
 
