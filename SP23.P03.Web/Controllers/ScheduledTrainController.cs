@@ -28,7 +28,27 @@ public class ScheduledTrainsController : ControllerBase
     {
         return GetScheduledTrainDtos(scheduledtrains);
     }
+    [HttpGet("scheduled-trains")]
+    public ActionResult<List<ScheduledTrainDto>> GetScheduledTrains(string startStationName, string endStationName, DateTime departureDate)
+    {
+        //var scheduledTrains = dataContext.Set<ScheduledTrain>()
+        //  .Select(st => st.StartStation)
 
+        //  .Include(st => st.EndStation)
+        //  //.Where(st => st.StartStation.Name == startStationName)
+        //  //.Where(s => s.EndStation.Name == endStationName)
+        //  .Include(sc =>sc.Schedules.Any(s => s.DepartureTime.Date == departureDate.Date))
+        //  .Select(st => new ScheduledTrainDto
+        //  {
+        //      Id = st.Id,
+        //      StartStationId = st.StartStation.Id,
+        //      EndStationId = st.EndStation.Id,
+            
+        //  })
+        //  .ToList();
+
+        //return scheduledTrains;
+    }
     [HttpGet]
     [Route("{id}")]
     public ActionResult<ScheduledTrainDto> GetScheduledTrainById(int id)
@@ -81,46 +101,60 @@ public class ScheduledTrainsController : ControllerBase
 
         return CreatedAtAction(nameof(GetScheduledTrainById), new { id = scheduledTrainDto.Id }, scheduledTrainDto);
     }
-    //[HttpPut]
-    //[Route("{id}")]
-    //[Authorize]
-    //public ActionResult<ScheduledTrainDto> UpdateStation(int id, ScheduledTrainDto dto)
-    //{
-    //    if (IsInvalid(dto))
-    //    {
-    //        return BadRequest();
-    //    }
+    [HttpPut]
+    [Route("{id}")]
+    [Authorize]
+    public ActionResult<ScheduledTrainDto> UpdateScheduledTrain(int id, ScheduledTrainCreateDto dto)
+    {
+        if (dto.StartStationId == dto.EndStationId)
+        {
+            return BadRequest("Start and end station cannot be the same.");
+        }
 
-    //    var scheduledtrain = scheduledtrains.FirstOrDefault(x => x.Id == id);
-    //    if (scheduledtrain == null)
-    //    {
-    //        return NotFound();
-    //    }
+        // Check if distance and travel time are positive values
+        if (dto.Distance <= 0 || dto.TravelTime <= TimeSpan.Zero)
+        {
+            return BadRequest("Distance and travel time must be positive values.");
+        }
 
-    //    if (!User.IsInRole(RoleNames.Admin) && User.GetCurrentUserId() != scheduledtrain.ManagerId)
-    //    {
-    //        return Forbid();
-    //    }
+        var scheduledTrain = scheduledtrains.FirstOrDefault(x => x.Id == id);
+        if (scheduledTrain == null)
+        {
+            return NotFound();
+        }
 
-    //    scheduledtrain.train_Id = dto.train_Id;
-    //    scheduledtrain.startStation_Id = dto.startStation_Id;
-    //    scheduledtrain.endStation_Id = dto.endStation_Id;
-    //    scheduledtrain.departureDate = dto.departureDate;
-    //    scheduledtrain.arrivalDate = dto.arrivalDate;
-    //    scheduledtrain.distance = dto.distance;
-    //    scheduledtrain.travel_Time = dto.travel_Time;
+        if (!User.IsInRole(RoleNames.Admin))
+        {
+            return Forbid();
+        }
 
-    //    if (User.IsInRole(RoleNames.Admin))
-    //    {
-    //        scheduledtrain.ManagerId = dto.ManagerId;
-    //    }
+        scheduledTrain.StartStationId = dto.StartStationId;
+        scheduledTrain.EndStationId = dto.EndStationId;
+        scheduledTrain.Distance = dto.Distance;
+        scheduledTrain.TravelTime = dto.TravelTime;
 
-    //    dataContext.SaveChanges();
+       
 
-    //    dto.Id = scheduledtrain.Id;
+        dataContext.SaveChanges();
 
-    //    return Ok(dto);
-    //}
+        var scheduledTrainDto = new ScheduledTrainDto
+        {
+            Id = scheduledTrain.Id,
+            StartStationId = scheduledTrain.StartStationId,
+            EndStationId = scheduledTrain.EndStationId,
+            Distance = scheduledTrain.Distance,
+            TravelTime = scheduledTrain.TravelTime,
+            Schedules = scheduledTrain.Schedules.Select(s => new ScheduleDto
+            {
+                ScheduledTrainId = s.ScheduledTrainId,
+                TrainsId = s.TrainsId,
+                ArrivalTime = s.ArrivalTime,
+                DepartureTime = s.DepartureTime
+            }).ToList()
+        };
+
+        return Ok(scheduledTrainDto);
+    }
 
     [HttpDelete]
     [Route("{id}")]
@@ -167,11 +201,11 @@ public class ScheduledTrainsController : ControllerBase
             .Select(x => new ScheduledTrainDto
             {
                 Id = x.Id,
-                StartStationId = x.StartStationId,
+                StartStationId =x.StartStationId,
                 EndStationId = x.EndStationId,
                 Distance = x.Distance,
                 TravelTime = x.TravelTime,
-                Schedules =x.Schedules.Select(s => new ScheduleDto
+                Schedules = x.Schedules.Select(s => new ScheduleDto
                 {
                     ScheduledTrainId = s.ScheduledTrainId,
                     TrainsId = s.TrainsId,
