@@ -223,6 +223,86 @@ namespace SP23.P03.Web.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
+            modelBuilder.Entity("SP23.P03.Web.Features.Payments.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CardProvider")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Payment", (string)null);
+                });
+
+            modelBuilder.Entity("SP23.P03.Web.Features.ScheduledTrains.ScheduledTrain", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<float>("Distance")
+                        .HasColumnType("real");
+
+                    b.Property<int>("EndStationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StartStationId")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("TravelTime")
+                        .HasColumnType("time");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EndStationId");
+
+                    b.HasIndex("StartStationId");
+
+                    b.ToTable("ScheduledTrain", (string)null);
+                });
+
+            modelBuilder.Entity("SP23.P03.Web.Features.Schedules.Schedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ArrivalTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DepartureTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ScheduledTrainId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TrainsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ScheduledTrainId");
+
+                    b.HasIndex("TrainsId");
+
+                    b.ToTable("Schedule", (string)null);
+                });
+
             modelBuilder.Entity("SP23.P03.Web.Features.TrainStations.TrainStation", b =>
                 {
                     b.Property<int>("Id")
@@ -231,9 +311,15 @@ namespace SP23.P03.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Address")
+                    b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
 
                     b.Property<int?>("ManagerId")
                         .HasColumnType("int");
@@ -243,11 +329,67 @@ namespace SP23.P03.Web.Migrations
                         .HasMaxLength(120)
                         .HasColumnType("nvarchar(120)");
 
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ManagerId");
 
-                    b.ToTable("TrainStation");
+                    b.ToTable("TrainStation", (string)null);
+                });
+
+            modelBuilder.Entity("SP23.P03.Web.Features.Trains.Train", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AvailableSeats")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CoachSeats")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DinerCarts")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FirstClassSeats")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int?>("RoomletSeats")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SleeperSeats")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TrainClass")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Train", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -305,6 +447,53 @@ namespace SP23.P03.Web.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("SP23.P03.Web.Features.Payments.Payment", b =>
+                {
+                    b.HasOne("SP23.P03.Web.Features.Authorization.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SP23.P03.Web.Features.ScheduledTrains.ScheduledTrain", b =>
+                {
+                    b.HasOne("SP23.P03.Web.Features.TrainStations.TrainStation", "EndStation")
+                        .WithMany()
+                        .HasForeignKey("EndStationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SP23.P03.Web.Features.TrainStations.TrainStation", "StartStation")
+                        .WithMany()
+                        .HasForeignKey("StartStationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("EndStation");
+
+                    b.Navigation("StartStation");
+                });
+
+            modelBuilder.Entity("SP23.P03.Web.Features.Schedules.Schedule", b =>
+                {
+                    b.HasOne("SP23.P03.Web.Features.ScheduledTrains.ScheduledTrain", "ScheduledTrain")
+                        .WithMany("Schedules")
+                        .HasForeignKey("ScheduledTrainId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SP23.P03.Web.Features.Trains.Train", "Train")
+                        .WithMany("Schedules")
+                        .HasForeignKey("TrainsId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ScheduledTrain");
+
+                    b.Navigation("Train");
+                });
+
             modelBuilder.Entity("SP23.P03.Web.Features.TrainStations.TrainStation", b =>
                 {
                     b.HasOne("SP23.P03.Web.Features.Authorization.User", "Manager")
@@ -324,6 +513,16 @@ namespace SP23.P03.Web.Migrations
                     b.Navigation("ManageStations");
 
                     b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("SP23.P03.Web.Features.ScheduledTrains.ScheduledTrain", b =>
+                {
+                    b.Navigation("Schedules");
+                });
+
+            modelBuilder.Entity("SP23.P03.Web.Features.Trains.Train", b =>
+                {
+                    b.Navigation("Schedules");
                 });
 #pragma warning restore 612, 618
         }

@@ -18,7 +18,6 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = RoleNames.Admin)]
     public async Task<ActionResult<UserDto>> Create(CreateUserDto dto)
     {
         using var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
@@ -26,24 +25,34 @@ public class UsersController : ControllerBase
         var newUser = new User
         {
             UserName = dto.UserName,
+            Email = dto.Email
         };
         var createResult = await userManager.CreateAsync(newUser, dto.Password);
         if (!createResult.Succeeded)
         {
-            return BadRequest();
+            foreach (var error in createResult.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+            return BadRequest(ModelState);
         }
 
         try
         {
-            var roleResult = await userManager.AddToRolesAsync(newUser, dto.Roles);
+            var roleResult = await userManager.AddToRolesAsync(newUser, new List<string> { "user" });
             if (!roleResult.Succeeded)
             {
-                return BadRequest();
+                foreach (var error in roleResult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                return BadRequest(ModelState);
             }
         }
-        catch (InvalidOperationException e) when(e.Message.StartsWith("Role") && e.Message.EndsWith("does not exist."))
+        catch (InvalidOperationException e) when (e.Message.StartsWith("Role") && e.Message.EndsWith("does not exist."))
         {
-            return BadRequest();
+            ModelState.AddModelError(string.Empty, e.Message);
+            return BadRequest(ModelState);
         }
 
         transaction.Complete();
@@ -53,6 +62,16 @@ public class UsersController : ControllerBase
             Id = newUser.Id,
             Roles = dto.Roles,
             UserName = newUser.UserName,
+            Email = newUser.Email,
         });
     }
+
 }
+            // Uncomment the following lines if you want to automatically sign the user in after registration
+            //var signInResult = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+            //if (signInResult.Succeeded)
+            //{
+            //    return Ok();
+            //}
+
+           
