@@ -352,19 +352,19 @@ new TrainStation
     private static async Task SchedulesData(DataContext dataContext)
     {
 
-        var schedultr1 = await dataContext.Set<ScheduledTrain>().FirstOrDefaultAsync(e => e.Id == 1);
+        var schedultr1 = dataContext.Set<ScheduledTrain>().First(e => e.Id == 1);
 
-        var schedultr2 =await dataContext.Set<ScheduledTrain>().FirstOrDefaultAsync(e => e.Id == 2);
+        var schedultr2 = dataContext.Set<ScheduledTrain>().First(e => e.Id == 2);
 
-        var schedultr3 =await dataContext.Set<ScheduledTrain>().FirstOrDefaultAsync(e => e.Id == 3);
+        var schedultr3 =dataContext.Set<ScheduledTrain>().First(e => e.Id == 3);
 
-        var schedultr4 =await dataContext.Set<ScheduledTrain>().FirstOrDefaultAsync(e => e.Id == 4);
+        var schedultr4 = dataContext.Set<ScheduledTrain>().First(e => e.Id == 4);
 
-        var tr1 =await dataContext.Set<Train>().FirstOrDefaultAsync(e => e.Id == 1);
+        var tr1 =dataContext.Set<Train>().First(e => e.Id == 1);
 
-        var tr2 =await dataContext.Set<Train>().FirstOrDefaultAsync(e => e.Id == 2);
-        var tr3 =await dataContext.Set<Train>().FirstOrDefaultAsync(e => e.Id == 3);
-        var tr4 = await dataContext.Set<Train>().FirstOrDefaultAsync(e => e.Id == 4);
+        var tr2 = dataContext.Set<Train>().First(e => e.Id == 2);
+        var tr3 =dataContext.Set<Train>().First(e => e.Id == 3);
+        var tr4 = dataContext.Set<Train>().First(e => e.Id == 4);
 
         //var schedultr1 = await dataContext.Set<ScheduledTrain>().SingleAsync(e => e.Id == 1);
         //var schedultr2 = await dataContext.Set<ScheduledTrain>().SingleAsync(e => e.Id == 2);
