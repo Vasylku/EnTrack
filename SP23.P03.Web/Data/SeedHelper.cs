@@ -22,8 +22,8 @@ public static class SeedHelper
         await AddUsers(serviceProvider);
         await AddTrainStation(dataContext);
         await SeedAllData(dataContext);
-      //await TrainsSchedule(dataContext);
-    //  await SchedulesData(dataContext);
+        await TrainsSchedule(dataContext);
+        await SchedulesData(dataContext);
         // await AddScheduledTrains(dataContext);
         // await AddTrainsAsync(dataContext);
 
@@ -285,105 +285,142 @@ new TrainStation
         }
 
     }
-    //private static async Task TrainsSchedule(DataContext dataContext)
-    //{
-    //    var scheduledTrains = dataContext.Set<ScheduledTrain>();
+    private static async Task TrainsSchedule(DataContext dataContext)
+    {
+        var scheduledTrains = dataContext.Set<ScheduledTrain>();
 
-    //    if (!await scheduledTrains.AnyAsync())
-    //    {
-    //        var schtrains = new List<ScheduledTrain>
-    //            {
+        var trainst1 = dataContext.Set<TrainStation>().First(e => e.Id == 1);
 
-    //        new ScheduledTrain
-    //        {
-    //            StartStationId = 1,
-    //            EndStationId = 2,
+        var trainst2 = dataContext.Set<TrainStation>().First(e => e.Id == 2);
 
-    //            Distance = 200,
-    //            TravelTime = new TimeSpan(0, 2, 18),
-    //        },
-    //        new ScheduledTrain
-    //        {
-    //          StartStationId = 2,
-    //          EndStationId = 1,
+        var trainst3 = dataContext.Set<TrainStation>().First(e => e.Id == 3);
 
-    //          Distance = 200,
-    //          TravelTime = new TimeSpan(0, 2, 18),
-    //  },
-    //        new ScheduledTrain
-    //        {
-    //            StartStationId = 6,
-    //            EndStationId = 5,
-    //            Distance = 50,
-    //            TravelTime= new TimeSpan(0,0,50),
-    //        },
-    //        new ScheduledTrain
-    //        {
-    //            StartStationId = 3,
-    //            EndStationId = 4,
-    //            Distance = 400,
-    //            TravelTime= new TimeSpan(0,5,50),
-    //        },
-    //        new ScheduledTrain {
-    //            StartStationId =7,
-    //            EndStationId = 8,
-    //            Distance= 400,
-    //            TravelTime = new TimeSpan(0,5,50),
+        var trainst4 = dataContext.Set<TrainStation>().First(e => e.Id == 4);
 
-    //        },
-    //};
+        var trainst5 = dataContext.Set<TrainStation>().First(e => e.Id == 5);
+        if (!await scheduledTrains.AnyAsync())
+        {
+            var schtrains = new List<ScheduledTrain>
+                {
 
-    //        await dataContext.AddRangeAsync(schtrains);
-    //        await dataContext.SaveChangesAsync();
-    //    }
+            new ScheduledTrain
+            {
+                StartStationId = trainst1.Id,
+                EndStationId = trainst2.Id,
+
+                Distance = 200,
+                TravelTime = new TimeSpan(0, 2, 18),
+            },
+            new ScheduledTrain
+            {
+              StartStationId = trainst2.Id,
+              EndStationId = trainst1.Id,
+
+              Distance = 200,
+              TravelTime = new TimeSpan(0, 2, 18),
+      },
+            new ScheduledTrain
+            {
+                StartStationId = trainst2.Id,
+                EndStationId = trainst5.Id,
+                Distance = 50,
+                TravelTime= new TimeSpan(0,0,50),
+            },
+            new ScheduledTrain
+            {
+                StartStationId = trainst3.Id,
+                EndStationId = trainst4.Id,
+                Distance = 400,
+                TravelTime= new TimeSpan(0,5,50),
+            },
+            new ScheduledTrain {
+                StartStationId =trainst5.Id,
+                EndStationId = trainst1.Id,
+                Distance= 400,
+                TravelTime = new TimeSpan(0,5,50),
+
+            },
+    };
+
+            await dataContext.AddRangeAsync(schtrains);
+            await dataContext.SaveChangesAsync();
+        }
 
 
 
-    //}
-    //private static async Task SchedulesData(DataContext dataContext)
-    //{
+    }
+    private static async Task SchedulesData(DataContext dataContext)
+    {
+
+        var schedultr1 = await dataContext.Set<ScheduledTrain>().FirstOrDefaultAsync(e => e.Id == 1);
+
+        var schedultr2 =await dataContext.Set<ScheduledTrain>().FirstOrDefaultAsync(e => e.Id == 2);
+
+        var schedultr3 =await dataContext.Set<ScheduledTrain>().FirstOrDefaultAsync(e => e.Id == 3);
+
+        var schedultr4 =await dataContext.Set<ScheduledTrain>().FirstOrDefaultAsync(e => e.Id == 4);
+
+        var tr1 =await dataContext.Set<Train>().FirstOrDefaultAsync(e => e.Id == 1);
+
+        var tr2 =await dataContext.Set<Train>().FirstOrDefaultAsync(e => e.Id == 2);
+        var tr3 =await dataContext.Set<Train>().FirstOrDefaultAsync(e => e.Id == 3);
+        var tr4 = await dataContext.Set<Train>().FirstOrDefaultAsync(e => e.Id == 4);
+
+        //var schedultr1 = await dataContext.Set<ScheduledTrain>().SingleAsync(e => e.Id == 1);
+        //var schedultr2 = await dataContext.Set<ScheduledTrain>().SingleAsync(e => e.Id == 2);
+        //var schedultr3 = await dataContext.Set<ScheduledTrain>().SingleAsync(e => e.Id == 3);
+        //var schedultr4 = await dataContext.Set<ScheduledTrain>().SingleAsync(e => e.Id == 4);
+        //var tr1 = await dataContext.Set<Train>().SingleAsync(e => e.Id == 1);
+        //var tr2 = await dataContext.Set<Train>().SingleAsync(e => e.Id == 2);
+        //var tr3 = await dataContext.Set<Train>().SingleAsync(e => e.Id == 3);
+        //var tr4 = await dataContext.Set<Train>().SingleAsync(e => e.Id == 4);
 
 
 
 
-    //    var schedules = new List<Schedule>
-    //{
-    //  new Schedule
-    //  {
 
-    //    ScheduledTrainId =  1,
-    //    TrainsId = 1,
-    //    DepartureTime = DateTime.UtcNow.AddHours(1),
-    //    ArrivalTime = DateTime.UtcNow.AddHours(3)
-    //  },
-    //  new Schedule
-    //  {
-    //    ScheduledTrainId = 2,
-    //    TrainsId = 2,
-    //    DepartureTime = DateTime.UtcNow.AddHours(4),
-    //    ArrivalTime = DateTime.UtcNow.AddHours(6)
-    //  },
-    //  new Schedule
-    //  {
-    //      ScheduledTrainId = 4,
-    //      TrainsId = 1,
-    //      DepartureTime = new DateTime(2023, 3, 20, 9,15,0),
-    //      ArrivalTime = new DateTime(2023,3,21, 2,15,0),
+        var schedulesData =  dataContext.Set<Schedule>();
+        if (!await schedulesData.AnyAsync())
+        {
+            var schedules = new List<Schedule>
+    {
+      new Schedule
+      {
 
-    //},   new Schedule
-    //  {
-    //      ScheduledTrainId = 5,
-    //      TrainsId = 2,
-    //      DepartureTime = new DateTime(2023, 3, 20, 9,15,0),
-    //      ArrivalTime = new DateTime(2023,3,21, 2,15,0),
+        ScheduledTrainId =  schedultr1.Id,
+        TrainsId = tr1.Id,
+        DepartureTime = new DateTime(2023, 3, 20, 9,15,0),
+        ArrivalTime =new DateTime(2023, 7, 20, 9,15,0),
+      },
+      new Schedule
+      {
+        ScheduledTrainId = schedultr2.Id,
+        TrainsId = tr2.Id,
+        DepartureTime = new DateTime(2023, 3, 12, 9,15,0),
+        ArrivalTime = new DateTime(2023, 3, 15, 9,15,0),
+      },
+      new Schedule
+      {
+          ScheduledTrainId = schedultr4.Id,
+          TrainsId = tr3.Id,
+          DepartureTime = new DateTime(2023, 3, 20, 9,15,0),
+          ArrivalTime = new DateTime(2023,3,21, 2,15,0),
 
-    //},
+    },   new Schedule
+      {
+          ScheduledTrainId = schedultr3.Id,
+          TrainsId = tr4.Id,
+          DepartureTime = new DateTime(2023, 3, 20, 9,15,0),
+          ArrivalTime = new DateTime(2023,3,21, 2,15,0),
 
-    //};
+    },
 
-    //    await dataContext.AddRangeAsync(schedules);
-    //    await dataContext.SaveChangesAsync();
-    //}
+    };
+
+              await dataContext.AddRangeAsync(schedules);
+              await dataContext.SaveChangesAsync();
+        }
+    }
 }
 
     

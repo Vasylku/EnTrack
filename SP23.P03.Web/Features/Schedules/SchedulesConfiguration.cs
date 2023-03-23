@@ -11,6 +11,7 @@ public class SchedulesConfiguration : IEntityTypeConfiguration<Schedule>
     {
 
         builder.HasKey(s => s.Id);
+
         builder
             .HasOne(s => s.Train)
             .WithMany(st => st.Schedules)
