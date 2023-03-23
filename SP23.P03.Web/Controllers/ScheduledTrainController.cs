@@ -7,6 +7,7 @@ using SP23.P03.Web.Features.Authorization;
 using SP23.P03.Web.Features.Schedules;
 using SP23.P03.Web.Features.ScheduledTrains;
 using SP23.P03.Web.Features.TrainStations;
+using SP23.P03.Web.Features.Trains;
 
 namespace SP23.P03.Web.Controllers;
 
@@ -28,26 +29,63 @@ public class ScheduledTrainsController : ControllerBase
     {
         return GetScheduledTrainDtos(scheduledtrains);
     }
+
     [HttpGet("scheduled-trains")]
     public ActionResult<List<ScheduledTrainDto>> GetScheduledTrains(string startStationName, string endStationName, DateTime departureDate)
     {
-        //var scheduledTrains = dataContext.Set<ScheduledTrain>()
-        //  .Select(st => st.StartStation)
+        var scheduledTrains = dataContext.Set<ScheduledTrain>()
+            .Where(st => st.StartStation.Name == startStationName && st.EndStation.Name == endStationName)
+            .Select(st => new ScheduledTrainDto
+            {
+                Id = st.Id,
+                StartStationId = st.StartStation.Id,
+                StartStation = new TrainStationDto
+                {
+                    Id = st.StartStation.Id,
+                    Name = st.StartStation.Name,
+                    Street = st.StartStation.Street,
+                    City = st.StartStation.City,
+                    State = st.StartStation.State,
+                    Country = st.StartStation.Country,
+                    ZipCode = st.StartStation.ZipCode
+                },
+                EndStationId = st.EndStation.Id,
+                EndStation = new TrainStationDto
+                {
+                    Id = st.EndStation.Id,
+                    Name = st.EndStation.Name,
+                    Street = st.EndStation.Street,
+                    City = st.EndStation.City,
+                    State = st.EndStation.State,
+                    Country = st.EndStation.Country,
+                    ZipCode = st.EndStation.ZipCode
+                },
+                Distance = st.Distance,
+                TravelTime = st.TravelTime,
+                Schedules = st.Schedules.Where(s => s.DepartureTime == departureDate)
+                   .Select(s => new ScheduleDto
+                   {
+                       Id = s.Id,
+                       ScheduledTrainId = s.ScheduledTrain.Id,
+                       TrainsId = s.Train.Id,
+                       DepartureTime = s.DepartureTime,
+                       ArrivalTime = s.ArrivalTime,
+                       Train = new TrainDto
+                       {
+                           Id = s.TrainsId,
+                           Name = s.Train.Name,
+                           TrainClass = s.Train.TrainClass,
+                           AvailableSeats = s.Train.AvailableSeats,
+                           DinerCarts = s.Train.DinerCarts,
+                           CoachSeats = s.Train.CoachSeats,
+                           FirstClassSeats = s.Train.FirstClassSeats,
+                           SleeperSeats = s.Train.SleeperSeats,
+                           RoomletSeats = s.Train.RoomletSeats,
+                       }
+                   }).ToList()
+            }).ToList();
 
-        //  .Include(st => st.EndStation)
-        //  //.Where(st => st.StartStation.Name == startStationName)
-        //  //.Where(s => s.EndStation.Name == endStationName)
-        //  .Include(sc =>sc.Schedules.Any(s => s.DepartureTime.Date == departureDate.Date))
-        //  .Select(st => new ScheduledTrainDto
-        //  {
-        //      Id = st.Id,
-        //      StartStationId = st.StartStation.Id,
-        //      EndStationId = st.EndStation.Id,
-            
-        //  })
-        //  .ToList();
-
-        //return scheduledTrains;
+        return scheduledTrains;
     }
     [HttpGet]
     [Route("{id}")]
