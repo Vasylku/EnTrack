@@ -1,59 +1,71 @@
-import { StyleSheet, View } from "react-native";
-import React, {useEffect, useState} from 'react';
-import { Text, TextInput, Button } from "react-native-paper";
-
+import { StyleSheet, View, Alert } from "react-native";
+import React, {useState} from 'react';
+import { TextInput, Button } from "react-native-paper";
+import { BaseUrl } from "../configuration";
+import axios from "axios";
 export default function SignUp( {navigation} ) {
 
-    const [text, setText] = useState("");
+    const [userName, setuserName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setconfirmPassword] = useState("");
+
+    function handleSignUp() {
+        if (password != confirmPassword) {
+                Alert.alert("Passwords must match!")
+                return;
+        }
+        axios.post(BaseUrl + "/api/users", {
+        userName: userName,
+        password: password,
+        email: email,
+      })
+      .then(function (response) {
+        console.log(response.data);
+        navigation.goBack();
+      })
+      .catch(function (error) {
+        console.log(error);
+        Alert.alert("Invalid Username or Password.");
+      });
+    }
     return (
 
     <View style={styles.container}>
         <TextInput
                 style={styles.input1}
                 mode="outlined"
-                label="First Name"
-                value={text}
-                onChangeText={text => setText(text)}
+                label="Name"
+                value={userName}
+                onChangeText={setuserName}
          ></TextInput>
 
-        <TextInput
-                style={styles.input1}
-                mode="outlined"
-                label="Last Name"
-                value={text}
-                onChangeText={text => setText(text)}
-        ></TextInput>
+        
 
         <TextInput
                 style={styles.input1}
                 mode="outlined"
-                label="Email Address"
-                value={text}
-                onChangeText={text => setText(text)}
+                label="Email"
+                value={email}
+                onChangeText={setEmail}
         ></TextInput>
 
-        <TextInput
-                style={styles.input1}
-                mode="outlined"
-                label="Confirm Email"
-                value={text}
-                onChangeText={text => setText(text)}
-        ></TextInput>
+        
 
         <TextInput
                 style={styles.input1}
                 mode="outlined"
                 label="Password"
-                value={text}
-                onChangeText={text => setText(text)}
+                value={password}
+                onChangeText={setPassword}
         ></TextInput>
 
         <TextInput
                 style={styles.input1}
                 mode="outlined"
                 label="Confirm Password"
-                value={text}
-                onChangeText={text => setText(text)}
+                value={confirmPassword}
+                onChangeText={setconfirmPassword}
         ></TextInput>
 
         <Button
@@ -61,6 +73,7 @@ export default function SignUp( {navigation} ) {
             mode="contained"
             buttonColor="deepskyblue"
             textColor="black"
+            onPress={handleSignUp}
             >Sign Up</Button>
     </View>
     
