@@ -12,7 +12,7 @@ namespace SP23.P03.Web.Features.ScheduledTrains
         public TrainStationDto EndStation { get; set; }
         public float Distance { get; set; }
         public TimeSpan TravelTime { get; set; }
-        public ICollection<ScheduleDto> Schedules { get; set; }
+        public ICollection<ScheduleDto>? Schedules { get; set; }
     }
     public class ScheduledTrainCreateDto
     {
