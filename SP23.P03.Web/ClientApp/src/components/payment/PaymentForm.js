@@ -6,7 +6,8 @@ const PaymentForm = () => {
   const [selectedPaymentType, setSelectedPaymentType] = useState('credit_card');
  const navigate = useNavigate();
  const handleNavigate = () => {
-  navigate('/dashboard');
+  navigate('/ticket');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
   const handleSubmit = (e) => {
     e.preventDefault();
