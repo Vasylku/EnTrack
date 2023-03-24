@@ -16,4 +16,14 @@ namespace SP23.P03.Web.Features.Schedules
             public DateTime ArrivalTime { get; set; }
         
     }
+    public class ScheduleSearchDto
+    {
+
+        public int Id { get; set; }
+        public int TrainsId { get; set; }
+        public TrainDto Train { get; set; }
+        public DateTime DepartureTime { get; set; }
+        public DateTime ArrivalTime { get; set; }
+
+    }
 }
