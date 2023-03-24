@@ -8,6 +8,7 @@ using SP23.P03.Web.Features.Schedules;
 using SP23.P03.Web.Features.ScheduledTrains;
 using SP23.P03.Web.Features.TrainStations;
 using SP23.P03.Web.Features.Trains;
+using System.Diagnostics;
 
 namespace SP23.P03.Web.Controllers;
 
@@ -31,11 +32,11 @@ public class ScheduledTrainsController : ControllerBase
     }
 
     [HttpGet("scheduled-trains")]
-    public ActionResult<List<ScheduledTrainDto>> GetScheduledTrains(string startStationName, string endStationName, DateTime departureDate)
+    public ActionResult<List<ScheduledTrainSearchDto>> GetScheduledTrains(string? startStationName, string? endStationName)
     {
         var scheduledTrains = dataContext.Set<ScheduledTrain>()
             .Where(st => st.StartStation.Name == startStationName && st.EndStation.Name == endStationName)
-            .Select(st => new ScheduledTrainDto
+            .Select(st => new ScheduledTrainSearchDto
             {
                 Id = st.Id,
                 StartStationId = st.StartStation.Id,
@@ -62,11 +63,10 @@ public class ScheduledTrainsController : ControllerBase
                 },
                 Distance = st.Distance,
                 TravelTime = st.TravelTime,
-                Schedules = st.Schedules.Where(s => s.DepartureTime == departureDate)
-                   .Select(s => new ScheduleDto
+                Schedules = st.Schedules//.Where(s => s.DepartureTime == departureDate)
+                   .Select(s => new ScheduleSearchDto
                    {
-                       Id = s.Id,
-                       ScheduledTrainId = s.ScheduledTrain.Id,
+                       Id = s.Id,                   
                        TrainsId = s.Train.Id,
                        DepartureTime = s.DepartureTime,
                        ArrivalTime = s.ArrivalTime,
@@ -84,7 +84,7 @@ public class ScheduledTrainsController : ControllerBase
                        }
                    }).ToList()
             }).ToList();
-
+     
         return scheduledTrains;
     }
     [HttpGet]
@@ -245,6 +245,7 @@ public class ScheduledTrainsController : ControllerBase
                 TravelTime = x.TravelTime,
                 Schedules = x.Schedules.Select(s => new ScheduleDto
                 {
+                    Id = s.Id,
                     ScheduledTrainId = s.ScheduledTrainId,
                     TrainsId = s.TrainsId,
                     ArrivalTime = s.ArrivalTime,
