@@ -32,7 +32,7 @@ public class ScheduledTrainsController : ControllerBase
     }
 
     [HttpGet("scheduled-trains")]
-    public ActionResult<List<ScheduledTrainSearchDto>> GetScheduledTrains(string? startStationName, string? endStationName)
+    public ActionResult<List<ScheduledTrainSearchDto>> GetScheduledTrains(string? startStationName, string? endStationName, DateTime? departureDate)
     {
         var scheduledTrains = dataContext.Set<ScheduledTrain>()
             .Where(st => st.StartStation.Name == startStationName && st.EndStation.Name == endStationName)
@@ -63,7 +63,7 @@ public class ScheduledTrainsController : ControllerBase
                 },
                 Distance = st.Distance,
                 TravelTime = st.TravelTime,
-                Schedules = st.Schedules//.Where(s => s.DepartureTime == departureDate)
+                Schedules = st.Schedules.Where(s => s.DepartureTime == departureDate)
                    .Select(s => new ScheduleSearchDto
                    {
                        Id = s.Id,                   

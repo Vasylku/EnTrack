@@ -24,13 +24,13 @@ public static class SeedHelper
         await SeedAllData(dataContext);
         await TrainsSchedule(dataContext);
         await SchedulesData(dataContext);
-        // await AddScheduledTrains(dataContext);
-        // await AddTrainsAsync(dataContext);
+        /*await AddScheduledTrains(dataContext);
+        await AddTrainsAsync(dataContext);
 
-        // await AddScheduledTrains(dataContext);
-        // await SeedtrainsSchedule(dataContext);
+        await AddScheduledTrains(dataContext);
+        await SeedtrainsSchedule(dataContext);*/
 
-        //   await dataContext.SaveChangesAsync();
+        await dataContext.SaveChangesAsync();
 
     }
 
@@ -366,14 +366,14 @@ new TrainStation
         var tr3 =dataContext.Set<Train>().First(e => e.Id == 3);
         var tr4 = dataContext.Set<Train>().First(e => e.Id == 4);
 
-        //var schedultr1 = await dataContext.Set<ScheduledTrain>().SingleAsync(e => e.Id == 1);
-        //var schedultr2 = await dataContext.Set<ScheduledTrain>().SingleAsync(e => e.Id == 2);
-        //var schedultr3 = await dataContext.Set<ScheduledTrain>().SingleAsync(e => e.Id == 3);
-        //var schedultr4 = await dataContext.Set<ScheduledTrain>().SingleAsync(e => e.Id == 4);
-        //var tr1 = await dataContext.Set<Train>().SingleAsync(e => e.Id == 1);
-        //var tr2 = await dataContext.Set<Train>().SingleAsync(e => e.Id == 2);
-        //var tr3 = await dataContext.Set<Train>().SingleAsync(e => e.Id == 3);
-        //var tr4 = await dataContext.Set<Train>().SingleAsync(e => e.Id == 4);
+        /*var schedultr1 = await dataContext.Set<ScheduledTrain>().SingleAsync(e => e.Id == 1);
+        var schedultr2 = await dataContext.Set<ScheduledTrain>().SingleAsync(e => e.Id == 2);
+        var schedultr3 = await dataContext.Set<ScheduledTrain>().SingleAsync(e => e.Id == 3);
+        var schedultr4 = await dataContext.Set<ScheduledTrain>().SingleAsync(e => e.Id == 4);
+        var tr1 = await dataContext.Set<Train>().SingleAsync(e => e.Id == 1);
+        var tr2 = await dataContext.Set<Train>().SingleAsync(e => e.Id == 2);
+        var tr3 = await dataContext.Set<Train>().SingleAsync(e => e.Id == 3);
+        var tr4 = await dataContext.Set<Train>().SingleAsync(e => e.Id == 4);*/
 
 
 
