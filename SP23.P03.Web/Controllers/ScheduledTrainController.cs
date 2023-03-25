@@ -63,7 +63,7 @@ public class ScheduledTrainsController : ControllerBase
                 },
                 Distance = st.Distance,
                 TravelTime = st.TravelTime,
-                Schedules = st.Schedules.Where(s => s.DepartureTime == departureDate)
+                Schedules = st.Schedules.Where(s => s.DepartureTime.Date == departureDate.Value.Date) // This should be changed
                    .Select(s => new ScheduleSearchDto
                    {
                        Id = s.Id,                   
