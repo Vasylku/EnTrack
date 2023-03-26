@@ -298,6 +298,7 @@ new TrainStation
         var trainst4 = dataContext.Set<TrainStation>().First(e => e.Id == 4);
 
         var trainst5 = dataContext.Set<TrainStation>().First(e => e.Id == 5);
+        var trainst6 = dataContext.Set<TrainStation>().First(e => e.Id == 6);
         if (!await scheduledTrains.AnyAsync())
         {
             var schtrains = new List<ScheduledTrain>
@@ -324,7 +325,7 @@ new TrainStation
                 StartStationId = trainst2.Id,
                 EndStationId = trainst5.Id,
                 Distance = 50,
-                TravelTime= new TimeSpan(0,0,50),
+                TravelTime= new TimeSpan(0,50,0),
             },
             new ScheduledTrain
             {
@@ -338,6 +339,34 @@ new TrainStation
                 EndStationId = trainst1.Id,
                 Distance= 400,
                 TravelTime = new TimeSpan(0,5,50),
+
+            },
+               new ScheduledTrain {
+                StartStationId =trainst2.Id,
+                EndStationId = trainst6.Id,
+                Distance= 400,
+                TravelTime = new TimeSpan(0,50,0),
+
+            },
+                  new ScheduledTrain {
+                StartStationId =trainst5.Id,
+                EndStationId = trainst2.Id,
+                Distance= 400,
+                TravelTime = new TimeSpan(0,50, 0),
+
+            },
+                     new ScheduledTrain {
+                StartStationId =trainst6.Id,
+                EndStationId = trainst2.Id,
+                Distance= 400,
+                TravelTime = new TimeSpan(0,5,50),
+
+            },
+                        new ScheduledTrain {
+                StartStationId =trainst2.Id,
+                EndStationId = trainst3.Id,
+                Distance= 400,
+                TravelTime = new TimeSpan(2,0,0),
 
             },
     };
@@ -359,6 +388,11 @@ new TrainStation
         var schedultr3 =dataContext.Set<ScheduledTrain>().First(e => e.Id == 3);
 
         var schedultr4 = dataContext.Set<ScheduledTrain>().First(e => e.Id == 4);
+        var schedultr5 = dataContext.Set<ScheduledTrain>().First(e => e.Id == 5);
+        var schedultr6 = dataContext.Set<ScheduledTrain>().First(e => e.Id == 6);
+        var schedultr7 = dataContext.Set<ScheduledTrain>().First(e => e.Id == 7);
+        var schedultr8 = dataContext.Set<ScheduledTrain>().First(e => e.Id == 8);
+        var schedultr9 = dataContext.Set<ScheduledTrain>().First(e => e.Id == 9);
 
         var tr1 =dataContext.Set<Train>().First(e => e.Id == 1);
 
@@ -406,12 +440,43 @@ new TrainStation
           DepartureTime = new DateTime(2023, 3, 20, 9,15,0),
           ArrivalTime = new DateTime(2023,3,21, 2,15,0),
 
-    },   new Schedule
+    },
+      new Schedule
+      {
+          ScheduledTrainId = schedultr3.Id,
+          TrainsId = tr1.Id,
+          DepartureTime = new DateTime(2023, 4, 20, 2,15,0),
+          ArrivalTime = new DateTime(2023,4,20, 4,15,0),
+
+    },
+         new Schedule
       {
           ScheduledTrainId = schedultr3.Id,
           TrainsId = tr4.Id,
-          DepartureTime = new DateTime(2023, 3, 20, 9,15,0),
-          ArrivalTime = new DateTime(2023,3,21, 2,15,0),
+          DepartureTime = new DateTime(2023, 4, 20, 9,15,0),
+          ArrivalTime = new DateTime(2023,4,20, 11,15,0),
+
+    },new Schedule
+      {
+          ScheduledTrainId = schedultr6.Id,
+          TrainsId = tr1.Id,
+          DepartureTime = new DateTime(2023, 4, 20, 9,15,0),
+          ArrivalTime = new DateTime(2023,4,20, 11,15,0),
+
+    },new Schedule
+      {
+          ScheduledTrainId = schedultr8.Id,
+          TrainsId = tr1.Id,
+          DepartureTime = new DateTime(2023, 4, 20, 2,15,0),
+          ArrivalTime = new DateTime(2023,4,20, 4,15,0),
+
+    },
+      new Schedule
+      {
+          ScheduledTrainId = schedultr9.Id,
+          TrainsId = tr3.Id,
+          DepartureTime = new DateTime(2023, 4, 21, 12,15,0),
+          ArrivalTime = new DateTime(2023,4,21, 1,15,0),
 
     },
 
