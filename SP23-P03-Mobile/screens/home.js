@@ -35,18 +35,31 @@ export default function Home( {navigation} ) {
       
       
     return (
-        <View style={styles.container}>
-          
+        <View style={styles.backgroundColor}>
+          <View style={styles.loginButton}>
             <Button
-            style={styles.button}
+            
+            mode="contained"
+            buttonColor="orange"
+            textColor="black"
+            onPress={() => navigation.navigate("Login")}
+            >Login</Button>
+          </View>
+
+          <View style={styles.signUpButton}>
+            <Button
+            
             mode="contained"
             buttonColor="orange"
             textColor="black"
             onPress={() => navigation.navigate("SignUp")}
             >Sign Up</Button>
+          </View>
+            
 
             <Text style={styles.heading}>Plan Your Journey</Text>
             
+            <View style={styles.inputs}>
             <TextInput
                 style={styles.input1}
                 mode="outlined"
@@ -62,9 +75,10 @@ export default function Home( {navigation} ) {
                 value={text}
                 onChangeText={text => setText(text)}
             ></TextInput>
+            </View>
 
             <Button
-            style={styles.button2}
+            style={styles.enterButton}
             mode="contained"
             buttonColor="deepskyblue"
             textColor="black"
@@ -74,6 +88,11 @@ export default function Home( {navigation} ) {
 }
 
 const styles = StyleSheet.create({
+
+    backgroundColor: {
+      backgroundColor: "gray",
+      height: 1200
+    },
 
     container: {
      alignItems: 'center',
@@ -88,26 +107,42 @@ const styles = StyleSheet.create({
      backgroundColor:  'lightgrey', 
      borderWidth:  2, 
      justifyContent:  'center',
-     borderRadius: 10
+     borderRadius: 10,
+     
     },
 
     heading: {
-      fontSize: 30,
-      marginTop: 80
+      fontSize: 40,
+      marginTop: 50,
+      textAlign: "center",
+      color: "white"
     },
 
     input1: {
         backgroundColor: "#E9ECEE",
         width: "70%",
+        
     },
 
-      button: {
-        marginLeft: 200,
-        marginTop: 20
+    inputs: {
+      alignItems: "center"
+    },
+
+      signUpButton: {
+        width: 120,
+        marginTop: -40,
+        marginLeft: 270
       },
 
-      button2: {
-        marginLeft: 200,
-        marginTop: 20
+      enterButton: {
+        marginLeft: 250,
+        marginTop: 20,
+        width: 100
+      },
+
+      loginButton: {
+        marginTop: 20,
+        width: 100,
+        marginLeft: 20
       }
 })

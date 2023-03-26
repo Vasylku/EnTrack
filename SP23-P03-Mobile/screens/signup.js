@@ -57,6 +57,7 @@ export default function SignUp( {navigation} ) {
                 mode="outlined"
                 label="Password"
                 value={password}
+                secureTextEntry
                 onChangeText={setPassword}
         ></TextInput>
 
@@ -65,11 +66,12 @@ export default function SignUp( {navigation} ) {
                 mode="outlined"
                 label="Confirm Password"
                 value={confirmPassword}
+                secureTextEntry
                 onChangeText={setconfirmPassword}
         ></TextInput>
 
         <Button
-            style={styles.button2}
+            style={styles.signUpButton}
             mode="contained"
             buttonColor="deepskyblue"
             textColor="black"
@@ -113,7 +115,7 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
 
-    button2: {
+    signUpButton: {
         marginLeft: 200,
         marginTop: 20
       }
