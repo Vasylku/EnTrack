@@ -1,14 +1,30 @@
-import { StyleSheet, View} from "react-native";
-import React, {useState} from 'react';
+import { StyleSheet, View, Alert} from "react-native";
+import React, {useState, useContext, useEffect} from 'react';
 import { TextInput, Button } from "react-native-paper";
 import { BaseUrl } from "../configuration";
 import axios from "axios";
+import authCookieContext from "../components/AuthCookieProvider";
 
 export default function Login( {navigation} ) {
     const [userName, setuserName] = useState("");
     const [password, setPassword] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const { authCookie, saveAuthCookie } = useContext(authCookieContext);
 
+    async function getMeTest() {
+        axios({
+          method: "get",
+          url: BaseUrl + "/api/authentication/me",
+          // headers: { Cookie: authCookie.cookie },
+        })
+          .then(function (response) {
+            setIsLoggedIn(true);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    
     function handleLogin() {
         axios.post(BaseUrl + '/api/authentication/login', {
             userName: userName,
@@ -16,13 +32,24 @@ export default function Login( {navigation} ) {
         })
         .then(function (response){
             setIsLoggedIn(true)
-            navigation.navigate("Dashboard");
+            var cookie = response.headers["set-cookie"][0].split(";")[0];
+            var item = { roles: response.data.roles, cookie: cookie };
+           async function temp() {
+            await saveAuthCookie(item);           
+                navigation.navigate("Dashboard");
+            
+           }
+            temp();
         })
         .catch(function (error) {
             console.log(error)
+            Alert.alert("Invalid Username or Password!");
         });
     }
 
+    useEffect(() => {
+        getMeTest();
+      }, []);
 
     return(
         <View style={styles.container}>
