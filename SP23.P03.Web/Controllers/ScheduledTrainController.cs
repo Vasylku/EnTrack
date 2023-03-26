@@ -31,6 +31,63 @@ public class ScheduledTrainsController : ControllerBase
         return GetScheduledTrainDtos(scheduledtrains);
     }
 
+    [HttpGet("scheduled-trains_1station")]
+    public ActionResult<List<ScheduledTrainSearchDto>> GetScheduledTrain(string? startStationName)
+    {
+        var scheduledTrains = dataContext.Set<ScheduledTrain>()
+            .Where(st => st.StartStation.Name == startStationName)
+            .Select(st => new ScheduledTrainSearchDto
+            {
+                Id = st.Id,
+                StartStationId = st.StartStation.Id,
+                StartStation = new TrainStationDto
+                {
+                    Id = st.StartStation.Id,
+                    Name = st.StartStation.Name,
+                    Street = st.StartStation.Street,
+                    City = st.StartStation.City,
+                    State = st.StartStation.State,
+                    Country = st.StartStation.Country,
+                    ZipCode = st.StartStation.ZipCode
+                },
+                EndStationId = st.EndStation.Id,
+                EndStation = new TrainStationDto
+                {
+                    Id = st.EndStation.Id,
+                    Name = st.EndStation.Name,
+                    Street = st.EndStation.Street,
+                    City = st.EndStation.City,
+                    State = st.EndStation.State,
+                    Country = st.EndStation.Country,
+                    ZipCode = st.EndStation.ZipCode
+                },
+                Distance = st.Distance,
+                TravelTime = st.TravelTime,
+                Schedules = st.Schedules
+                   .Select(s => new ScheduleSearchDto
+                   {
+                       Id = s.Id,
+                       TrainsId = s.Train.Id,
+                       DepartureTime = s.DepartureTime,
+                       ArrivalTime = s.ArrivalTime,
+                       Train = new TrainDto
+                       {
+                           Id = s.TrainsId,
+                           Name = s.Train.Name,
+                           TrainClass = s.Train.TrainClass,
+                           AvailableSeats = s.Train.AvailableSeats,
+                           DinerCarts = s.Train.DinerCarts,
+                           CoachSeats = s.Train.CoachSeats,
+                           FirstClassSeats = s.Train.FirstClassSeats,
+                           SleeperSeats = s.Train.SleeperSeats,
+                           RoomletSeats = s.Train.RoomletSeats,
+                       }
+                   }).ToList()
+            }).ToList();
+
+        return scheduledTrains;
+    }
+
     [HttpGet("scheduled-trains")]
     public ActionResult<List<ScheduledTrainSearchDto>> GetScheduledTrains(string? startStationName, string? endStationName, DateTime? departureDate)
     {
@@ -87,6 +144,7 @@ public class ScheduledTrainsController : ControllerBase
      
         return scheduledTrains;
     }
+
     [HttpGet]
     [Route("{id}")]
     public ActionResult<ScheduledTrainDto> GetScheduledTrainById(int id)
