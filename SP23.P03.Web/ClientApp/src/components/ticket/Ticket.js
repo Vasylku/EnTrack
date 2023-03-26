@@ -3,28 +3,25 @@
   import { MdPrint, MdSend } from 'react-icons/md';
  import { saveAs } from "file-saver";
   import photo from "../../images/photo.jpg";
+  const handleDownload = () => {
+    //window.print();
+      // const ticketData = { from, to, date, time, seatNumber }; 
+
+       const ticketData = 
+        <Ticket/>
+       ;
+     const pdfBlob = new Blob([ticketData]);
+   
+
+     saveAs(pdfBlob, 'train-ticket.pdf');
+     
+    
+     
+     console.log(pdfBlob);
+   };
 
   const Ticket = ({ from, to, date,time, seatNumber }) => {
-    const handleDownload = () => {
-     //window.print();
-       // const ticketData = { from, to, date, time, seatNumber }; 
 
-        const ticketData = {
-          from: "New York",
-          to: "Los Angeles",
-          date: "2023-04-01",
-          time: "10:30 AM",
-          seatNumber: "A12"
-        };
-      const pdfBlob = new Blob((ticketData));
-    
-
-      saveAs(pdfBlob, 'train-ticket.pdf');
-      
-     
-      
-      console.log(pdfBlob);
-    };
   
 /*     const handleSend = async () => {
       const pdfBlob = <Ticket ticketData={ticketData} />.toBlob();
