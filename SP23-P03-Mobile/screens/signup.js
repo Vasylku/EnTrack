@@ -47,6 +47,7 @@ export default function SignUp( {navigation} ) {
                 mode="outlined"
                 label="Email"
                 value={email}
+                autoCapitalize="none"
                 onChangeText={setEmail}
         ></TextInput>
 
@@ -58,6 +59,7 @@ export default function SignUp( {navigation} ) {
                 label="Password"
                 value={password}
                 secureTextEntry
+                autoCapitalize="none"
                 onChangeText={setPassword}
         ></TextInput>
 
@@ -67,6 +69,7 @@ export default function SignUp( {navigation} ) {
                 label="Confirm Password"
                 value={confirmPassword}
                 secureTextEntry
+                autoCapitalize="none"
                 onChangeText={setconfirmPassword}
         ></TextInput>
 

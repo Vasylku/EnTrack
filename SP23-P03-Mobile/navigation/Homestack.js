@@ -4,6 +4,7 @@ import React from "react";
 import Home from "../screens/home";
 import SignUp from "../screens/signup";
 import Login from "../screens/login";
+import Dashboard from "../screens/dashboard";
 const Stack = createNativeStackNavigator();
 
 
@@ -13,6 +14,7 @@ export default function Navigator() {
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="SignUp" component={SignUp}/>
             <Stack.Screen name="Login"  component={Login}/>
+            <Stack.Screen name ="Dashboard" component={Dashboard}/>
         </Stack.Navigator>
     )
 }

@@ -1,10 +1,10 @@
-import { StyleSheet, View, Alert } from "react-native";
+import { StyleSheet, View} from "react-native";
 import React, {useState} from 'react';
 import { TextInput, Button } from "react-native-paper";
 import { BaseUrl } from "../configuration";
 import axios from "axios";
 
-export default function Login( navigation ) {
+export default function Login( {navigation} ) {
     const [userName, setuserName] = useState("");
     const [password, setPassword] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,7 +16,7 @@ export default function Login( navigation ) {
         })
         .then(function (response){
             setIsLoggedIn(true)
-            navigation.goBack();
+            navigation.navigate("Dashboard");
         })
         .catch(function (error) {
             console.log(error)
@@ -40,6 +40,7 @@ export default function Login( navigation ) {
             mode="outlined"
             secureTextEntry
             value={password}
+            autoCapitalize="none"
             onChangeText ={setPassword}
             ></TextInput>
 
