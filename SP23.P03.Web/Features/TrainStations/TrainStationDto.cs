@@ -1,4 +1,6 @@
-﻿namespace SP23.P03.Web.Features.TrainStations;
+﻿using SP23.P03.Web.Features.Authorization;
+
+namespace SP23.P03.Web.Features.TrainStations;
 
 public class TrainStationDto
 {
@@ -10,4 +12,5 @@ public class TrainStationDto
     public string Country { get; set; } = string.Empty;
     public string ZipCode { get; set; } = string.Empty;
     public int? ManagerId { get; set; }
+    public virtual UserDto? Manager { get; set; }
 }
