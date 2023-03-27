@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import { StyleSheet } from 'react-native';
 import React from 'react';
 import Navigator from './navigation/Homestack';
