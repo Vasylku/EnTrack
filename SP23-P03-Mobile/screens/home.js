@@ -31,8 +31,8 @@ export default function Home( {navigation} ) {
       }, []);
 
       // handle stuff
-        const [text, setText] = useState("");
-      
+        const [start, setStart] = useState("");
+        const [dest, setDest] = useState("");
       
     return (
         <View style={styles.backgroundColor}>
@@ -64,16 +64,16 @@ export default function Home( {navigation} ) {
                 style={styles.input1}
                 mode="outlined"
                 label="Starting Location"
-                value={text}
-                onChangeText={text => setText(text)}
+                value={start}
+                onChangeText={setStart}
             ></TextInput>
 
             <TextInput
                 style={styles.input1}
                 mode="outlined"
                 label="Ending Location"
-                value={text}
-                onChangeText={text => setText(text)}
+                value={dest}
+                onChangeText={setDest}
             ></TextInput>
             </View>
 
@@ -90,7 +90,7 @@ export default function Home( {navigation} ) {
 const styles = StyleSheet.create({
 
     backgroundColor: {
-      backgroundColor: "gray",
+      backgroundColor: "white",
       height: 1200
     },
 
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
       fontSize: 40,
       marginTop: 50,
       textAlign: "center",
-      color: "white"
+      color: "black"
     },
 
     input1: {

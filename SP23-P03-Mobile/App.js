@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import React from 'react';
 import Navigator from './navigation/Homestack';
 import { Provider as PaperProvider } from 'react-native-paper';
@@ -12,15 +11,12 @@ export default function App() {
   return (
     <PaperProvider>
       <AuthCookieProvider>
-    <NavigationContainer>
-      <Navigator/>
-    </NavigationContainer>
-    </AuthCookieProvider>
-  </PaperProvider>
-    // <View style={styles.container}>
-    //   <Text>Open up App.js to start working on your app!!!</Text>
-    //   <StatusBar style="auto" />
-    // </View>
+        <NavigationContainer>
+          <Navigator/>
+        </NavigationContainer>
+      </AuthCookieProvider>
+    </PaperProvider>
+    
   );
 }
 
