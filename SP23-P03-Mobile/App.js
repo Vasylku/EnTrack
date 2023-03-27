@@ -1,22 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import React, { useCallback, useEffect, useState } from 'react';
+import { StyleSheet } from 'react-native';
+import React from 'react';
 import Navigator from './navigation/Homestack';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from "@react-navigation/native";
+import { AuthCookieProvider } from "./components/AuthCookieProvider";
+
 export default function App() {
   
   
   return (
     <PaperProvider>
-    <NavigationContainer>
-      <Navigator/>
-    </NavigationContainer>
-  </PaperProvider>
-    // <View style={styles.container}>
-    //   <Text>Open up App.js to start working on your app!!!</Text>
-    //   <StatusBar style="auto" />
-    // </View>
+      <AuthCookieProvider>
+        <NavigationContainer>
+          <Navigator/>
+        </NavigationContainer>
+      </AuthCookieProvider>
+    </PaperProvider>
+    
   );
 }
 
