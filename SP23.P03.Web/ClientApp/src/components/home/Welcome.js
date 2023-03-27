@@ -12,8 +12,9 @@ const Welcome = () => {
         const formData = {
             ...enteredData,
         };
-
+     
         setSearchData([...searchData, formData]);
+        console.log(searchData);
     }
     return (
         <div className="flex w-full justify-center items-center bg-[#202124]">

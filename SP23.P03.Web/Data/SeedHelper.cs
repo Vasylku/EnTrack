@@ -479,6 +479,21 @@ new TrainStation
           ArrivalTime = new DateTime(2023,4,21, 1,15,0),
 
     },
+      new Schedule
+      {
+          ScheduledTrainId = schedultr7.Id,
+          TrainsId = tr4.Id,
+          DepartureTime = new DateTime(2023, 4, 20, 12,15,0),
+          ArrivalTime = new DateTime(2023,4,20, 2,15,0),
+
+    }, new Schedule
+      {
+          ScheduledTrainId = schedultr7.Id,
+          TrainsId = tr4.Id,
+          DepartureTime = new DateTime(2023, 4, 20, 8,15,0),
+          ArrivalTime = new DateTime(2023,4,20,10,15,0),
+
+    },
 
     };
 

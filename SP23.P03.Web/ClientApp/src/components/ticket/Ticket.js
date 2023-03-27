@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { MdPrint, MdSend } from 'react-icons/md';
-import { saveAs } from "file-saver";
+//import { saveAs } from "file-saver";
 import photo from "../../images/photo.jpg";
 import JsPDF from 'jspdf';
 const handleDownload = () => {

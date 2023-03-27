@@ -90,10 +90,25 @@ public class ScheduledTrainsController : ControllerBase
     }
 
     [HttpGet("scheduled-trains")]
-    public ActionResult<List<ScheduledTrainSearchDto>> GetScheduledTrains(string? startStationName, string? endStationName, DateTime? departureDate)
+    public ActionResult<List<ScheduledTrainSearchDto>> GetScheduledTrains(string? startStation, string? endStation, DateTime? departureDate)
     {
+        if (startStation == null)
+        {
+            return BadRequest("startStation is missing");
+        }
+
+        if (endStation == null)
+        {
+            return BadRequest("endStation is missing");
+        }
+
+        if (departureDate == null)
+        {
+            return BadRequest("departureDate is missing");
+        }
+
         var scheduledTrains = dataContext.Set<ScheduledTrain>()
-            .Where(st => st.StartStation.Name == startStationName && st.EndStation.Name == endStationName)
+            .Where(st => st.StartStation.Name == startStation && st.EndStation.Name == endStation)
             .Select(st => new ScheduledTrainSearchDto
             {
                 Id = st.Id,
@@ -299,7 +314,7 @@ public class ScheduledTrainsController : ControllerBase
             .Select(x => new ScheduledTrainDto
             {
                 Id = x.Id,
-                StartStationId =x.StartStationId,
+                StartStationId =x.StartStationId,//add here new traindto { train data}
                 EndStationId = x.EndStationId,
                 Distance = x.Distance,
                 TravelTime = x.TravelTime,
