@@ -16,6 +16,7 @@ import BookingDetails from './components/booking/BookingDetails';
 import ErrorBoundary from './components/errors/errorBoundary';
 import { AuthProvider } from './context/AuthenticationProvider';
 import Ticket from './components/ticket/Ticket';
+//import SeatPicker from './components/seatpicker/SeatPicker';
 /*import {  useState,useEffect } from 'react';
 
 function MyList(){
@@ -58,12 +59,13 @@ return (
         {/* <Route path="/destinations" element={<Dest/>} /> */}
         <Route path="/payment" element={ <PaymentForm/>} />
         <Route path="/login" element={<LoginPage/>}/>
-        
+        {/* <Route path="/destinations" element={<Dest/>}/> */}
         <Route path="/news" element={<NewsMediaPage/>}/>
         <Route path="/baggage" element={<BaggagePolicy/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path="/booking" element ={<BookingDetails/>}/>
         <Route path= "/ticket" element ={<Ticket/>}/>
+    {/*     <Route path="/seatpicker"  element ={<SeatPicker/> }/> */}
         <Route path="*" element ={<NotFound/>}/>
      </Routes>
      </AuthProvider>

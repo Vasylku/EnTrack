@@ -11,7 +11,7 @@ const TrainSearchForm = (props) => {
   const [tripType, setTripType] = useState("oneWay");
   const [errors, setErrors] = useState({ field: "", message: "" });
   const [focusedInput, setFocusedInput] = useState(null);
-
+const[responses, setResponses] = useState([]);
   const validateForm = () => {
 
     let newErrors = {};
@@ -38,18 +38,21 @@ const TrainSearchForm = (props) => {
       setErrors({});
       if (tripType === 'oneWay') {
         try { 
-          const response = await axios.get('/api/scheduledtrains/scheduled-trains', {
+        const response = await axios.get('/api/scheduledtrains/scheduled-trains', {
+          params: searchStationData
+        });
+      //  setResponses(response.data);
+        props.onSaveFormData(response.data);
+      } catch (error) {
+        console.error(error);}
+       /*  try { 
+          await axios.get('/api/scheduledtrains/scheduled-trains', {
             params: searchStationData
-          });
-      
-          if (response.ok) {
-            const data = await response.json();
-            console.log(data);
-            props.onSaveFormData(data);
-          }
+          }).then(res =>setResponses(res.data))
+          
         } catch (error) {
           console.error(error);
-        }
+        } */
       } else if (tripType === 'twoWay') {
         try {
           const outboundData = {
@@ -76,13 +79,11 @@ const TrainSearchForm = (props) => {
             axios.get('/api/scheduledtrains/scheduled-trains', { params: returnData })
           ]);
           
-          if (outboundResponse.ok && returnResponse.ok) {
-            const outboundData = await outboundResponse.json();
-            console.log(outboundData);
-            const returnData = await returnResponse.json();
-            console.log(returnData);
+          if (outboundResponse.status ===200 && returnResponse.status ===200) {
+       
             // Save both outbound and return journey data to props
-            props.onSaveFormData([...outboundData, ...returnData]);
+            setResponses([...outboundResponse.data, ...returnResponse.data])
+           props.onSaveFormData(responses);
           } else {
             throw new Error('Failed to fetch journey data');
           }
@@ -90,13 +91,14 @@ const TrainSearchForm = (props) => {
           console.error(error);
         }
       }
-      // props.onSaveFormData(searchStationData);
+     console.log(responses);
+    //  props.onSaveFormData(responses);
       setStartStation("");
       setEndStation("");
       setDepartureDate("");
       setReturnDate("");
 
-      setTripType("oneWay");
+      setTripType("");
 
 
 
@@ -229,6 +231,7 @@ dateFormat="dd/MM/yyyy"
       <div className="mt-8 flex justify-center">
         <button type="submit" className="transform rounded-full bg-yellow-700 py-2 px-7 mx-auto font-bold text-[#d2e3fc] duration-600 hover:bg-yellow-600">Search</button>
       </div>
+    
     </form>
 
   );

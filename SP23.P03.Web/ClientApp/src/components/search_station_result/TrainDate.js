@@ -1,13 +1,13 @@
 import React from 'react';
 
 
-const TrainDate = (props) => {
+const TrainDate = ({departureTime}) => {
 
-  console.log(props.date);
+  console.log(departureTime);
 
-  const date = new Date(props.date);
+  const date = new Date(departureTime);
 
-  if ((props.date)) {
+  if (!isNaN(date) ){
     const month = date.toLocaleString('en-US', { month: 'long' });
     const day = date.toLocaleString('en-US', { day: '2-digit' });
     // const year = new Date(date).getFullYear();
