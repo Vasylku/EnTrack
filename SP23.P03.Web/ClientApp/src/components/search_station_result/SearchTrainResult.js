@@ -4,35 +4,56 @@ import TrainDate from "./TrainDate";
 /* import { FaTrain } from 'react-icons/fa';
 import { FiUsers } from 'react-icons/fi'; */
 
-function SearchTrainsResult({searchData}) {
- 
-  
+function SearchTrainsResult({ searchData }) {
+
+
 
   return (
-    <ul>
-      
-    <div className="flex md:flex-row gap-6 flex-col border-gray-600  text-gradient items-center justify-between p-5 mt-4 border rounded-lg">
-     
-        <div className="font-bold text-lg">{searchData.startStation.name}</div>
-        <div className=" text-white "><TrainDate date = {searchData.schedules.departureTime}/></div>
-  
-      
-        <div className="font-bold">tripType</div>
-      
-        <div className="font-bold text-lg">{searchData.endStation.name}</div>
-       {/*  <div className=" text-white"><TrainDate date = {arrivalDate}/></div> */}
-        <Link to="/booking">
-      <button className="px-4 py-2 text-gradient bg-blue-500 rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-        Book
-      </button></Link>
-   
-    </div>
-    
-   
-   
-    </ul>
-   
+
+    <>
+      <thead>
+        <tr>
+
+          <th scope="col" className="px-4 py-3">
+
+          </th>
+        </tr>
+
+      </thead>
+      <tr className=" bg-[#343435] hover:bg-[#575858] rounded-lg">
+        <th scope="row" className="px-6 py-4 font-medium text-gradient whitespace-nowrap text-white ">
+          {searchData.startStation.name}
+        </th>
+        <td className="px-6 py-4">
+          {searchData.endStation.name}
+        </td>
+        <td className="px-6 py-4">
+          <TrainDate date={searchData.schedules.departureTime} />
+        </td>
+        <td className="px-6 py-4">
+          <TrainDate date={searchData.schedules.arrivalTime} />
+        </td>
+        <td className="px-6 py-4 text-center">
+        <a href="#top" onClick={(e) => {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}}>
+          <Link to="/booking">
+            <button className="px-4 py-2 text-gradient animate-pulse hover:animate-bounce bg-blue-200 rounded-lg hover:bg-orange-500 ">
+              Book
+            </button></Link></a>
+        </td>
+      </tr>
+
+    </>
+
+
+
+
   );
 }
 
 export default SearchTrainsResult;
+
+
+

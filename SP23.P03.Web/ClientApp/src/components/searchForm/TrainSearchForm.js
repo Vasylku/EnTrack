@@ -2,16 +2,30 @@ import React, { useState } from "react";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
+
+const cities = [
+  'Dallas',
+  'Jackson',
+  'Austin',
+  'Houston',
+  'San Antonio',
+  'New Orleans',
+  'Baton Rouge',
+  'Mobile',
+  'Gulfport'
+];
 const TrainSearchForm = (props) => {
   const [startStation, setStartStation] = useState("");
   const [endStation, setEndStation] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
-
   const [tripType, setTripType] = useState("oneWay");
   const [errors, setErrors] = useState({ field: "", message: "" });
   const [focusedInput, setFocusedInput] = useState(null);
-const[responses, setResponses] = useState([]);
+ // const[responses, setResponses] = useState([]);
+
+ const [suggestions, setSuggestions] = useState([]);
+
   const validateForm = () => {
 
     let newErrors = {};
@@ -41,18 +55,10 @@ const[responses, setResponses] = useState([]);
         const response = await axios.get('/api/scheduledtrains/scheduled-trains', {
           params: searchStationData
         });
-      //  setResponses(response.data);
+        //setResponses(response.data);
         props.onSaveFormData(response.data);
       } catch (error) {
         console.error(error);}
-       /*  try { 
-          await axios.get('/api/scheduledtrains/scheduled-trains', {
-            params: searchStationData
-          }).then(res =>setResponses(res.data))
-          
-        } catch (error) {
-          console.error(error);
-        } */
       } else if (tripType === 'twoWay') {
         try {
           const outboundData = {
@@ -60,15 +66,14 @@ const[responses, setResponses] = useState([]);
             endStation: endStation,
             departureDate: new Date(departureDate),
           };
-          const tempStation = startStation;
+         const tempStation = startStation;
           setStartStation(endStation);
           setEndStation(tempStation);
       
           // Swap departureDate and returnDate
-       
           setDepartureDate(new Date(returnDate));
         
-          const returnData = {
+         const returnData = {
             startStation: endStation,
             endStation: startStation,
             departureDate: new Date(returnDate),
@@ -82,8 +87,8 @@ const[responses, setResponses] = useState([]);
           if (outboundResponse.status ===200 && returnResponse.status ===200) {
        
             // Save both outbound and return journey data to props
-            setResponses([...outboundResponse.data, ...returnResponse.data])
-           props.onSaveFormData(responses);
+         //   setResponses()
+           props.onSaveFormData([...outboundResponse.data, ...returnResponse.data]);
           } else {
             throw new Error('Failed to fetch journey data');
           }
@@ -91,21 +96,32 @@ const[responses, setResponses] = useState([]);
           console.error(error);
         }
       }
-     console.log(responses);
+     //console.log(responses);
     //  props.onSaveFormData(responses);
       setStartStation("");
       setEndStation("");
       setDepartureDate("");
       setReturnDate("");
-
-      setTripType("");
-
-
-
+      setTripType("oneWay");
       setErrors({});
-
     }
+  };
+  const handleQueriesChange = (event) => {
+    const value = event;
+    setStartStation(value);
+ 
+    // filter the cities array based on the user input
+    const filteredSuggestions = cities.filter(city =>
+      city.toLowerCase().startsWith(value.toLowerCase())
+    );
 
+    // update the suggestions array with the filtered results
+    setSuggestions(filteredSuggestions);
+  };
+
+  const handleClick = (event) => {
+    setStartStation(event.target.innerText);
+    setSuggestions([]);
   };
   const handleDatesChange = (dates) => {
     const [start, end] = dates;
@@ -123,11 +139,10 @@ const[responses, setResponses] = useState([]);
   /* const isOutsideRange = (day) => {
     return day.getDay() === 0 || day.getDay() === 6; // disable weekends
   }; */
-
   const isDayBlocked = (day) => {
     return day < new Date(); // disable past dates
   };
-  // const firstError = Object.values(errors).find(error => error !== '');
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col p-8 rounded-lg shadow-lg sm:w-full white-glassmorphism text-center my-10">
       {Object.keys(errors).map((field) => (
@@ -135,10 +150,7 @@ const[responses, setResponses] = useState([]);
           {errors[field]}
         </div>
       ))}
-      {/*  <div className="text-red-500 mb-2">
-    {firstError}</div> */}
       <div className="text-xl bg-white text-gradient font-bold mb-4">Train Search</div>
-
       <div className="flex flex-col items-center justify-center gap-6 font-medium mb-2  ">
         <div className="w-full flex flex-col md:flex-row gap-6 justify-evenly sm:flex-col">
           <div className="flex flex-col">
@@ -148,9 +160,22 @@ const[responses, setResponses] = useState([]);
               <option value="twoWay" >Two-way</option>
             </select>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col ">
             <label className="bg-white text-gradient" >From</label>
-            <input type="text" value={startStation} onChange={(e) => setStartStation(e.target.value)} name="from" placeholder="Enter source station" className={`w-full lg:w-96 border p-2 rounded-lg ${errors.departure ? "border-red-500" : "border-gray-400"}`} />
+            <input type="text"  value={startStation} onChange={(e) => handleQueriesChange(e.target.value)} name="from" placeholder="Enter source station" className={`w-full lg:w-96 border p-2 rounded-lg ${errors.departure ? "border-red-500" : "border-gray-400"}`} />
+            {suggestions.length > 0 && (
+        <ul className="inherit z-50 w-full mt-1 bg-transparent text-gradient bg-white rounded-md shadow-lg">
+          {suggestions.slice(0,3).map((city, index) => (
+            <li
+              key={index}
+              className="px-4 py-2 cursor-pointer hover:outline-zinc-700"
+              onClick={handleClick}
+            >
+              {city}
+            </li>
+          ))}
+        </ul>
+      )}
           </div>
           <div className="flex flex-col">
             <label className="bg-white text-gradient">To</label>

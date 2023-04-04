@@ -8,16 +8,19 @@ const Welcome = () => {
 
     const [searchData, setSearchData] = useState([]);
     useEffect(() => {
-        console.log(searchData);
+      //  console.log(searchData);
+        
       }, [searchData]);
     
     const saveFormData = ( responses) => {
 
         
   
-  setSearchData(responses);
-  
-    }
+        setSearchData(responses);
+        
+          }
+    
+    
   
    
     return (
@@ -37,11 +40,34 @@ const Welcome = () => {
                 <div>
                     <TrainSearchForm onSaveFormData={saveFormData} />
                 </div>
-                <div className="w-full">
-                          
-               {searchData.map((searchData) =>  {return searchData.schedules.map((data) => ( <SearchTrainsResult key={data.id} searchData={searchData} />));})}
+                {searchData ? (
+                <div className="w-full  overflow-x-auto shadow-md sm:rounded-lg">
+                <table className="w-full text-sm text-left text-white dark:text-gray-200 ">
+    <thead className="text-xs text-gradient uppercase bg-gray-100">
+            <tr>
+                <th scope="col" className="px-4 py-3">
+                    Departure Station
+                </th>
+                <th scope="col" className="px-4 py-3">
+                    Arrival Station
+                </th>
+                <th scope="col" className="px-4 py-3">
+                  Departure Date
+                </th>
+                <th scope="col" className="px-4 py-3">
+                  Arrival Date
+                </th>
+            
+            </tr>
+        </thead>
+        <tbody>
+                {searchData.map((searchData) => (
+           searchData.schedules.map((data)=>  <SearchTrainsResult key= {data.id} searchData={searchData} />)))}</tbody>
+           </table>
                 </div>
-               
+           ) : (
+            <p className="text-white">No data available.</p>
+          )}
             </div>
         </div>
     );
