@@ -2,7 +2,7 @@ import { Text, TextInput } from "react-native-paper";
 import React, {useEffect, useState} from 'react';
 import {Alert, BackHandler, StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-paper';
-
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 
@@ -33,6 +33,7 @@ export default function Home( {navigation} ) {
       // handle stuff
         const [start, setStart] = useState("");
         const [dest, setDest] = useState("");
+        const [date, setDate] = useState("04/10/2023")
       
     return (
         <View style={styles.backgroundColor}>
@@ -76,6 +77,11 @@ export default function Home( {navigation} ) {
                 onChangeText={setDest}
             ></TextInput>
             </View>
+
+            <DateTimePicker
+              mode="date"
+              value={new Date()}
+            ></DateTimePicker>
 
             <Button
             style={styles.enterButton}
@@ -144,5 +150,10 @@ const styles = StyleSheet.create({
         marginTop: 20,
         width: 100,
         marginLeft: 20
+      },
+
+      datePicker: {
+        width: 200,
+        marginTop: 20
       }
 })
