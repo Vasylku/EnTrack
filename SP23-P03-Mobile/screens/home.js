@@ -35,23 +35,37 @@ export default function Home( {navigation} ) {
         const [dest, setDest] = useState("");
         const [date, setDate] = useState(new Date());
         const [picker, setPicker] = useState(false);
-        
-        
-        function showDatePicker() {
+        const [mode, setMode] = useState("date");
+        const [text, setText] = useState("");
+
+        const showDatePicker = (currentMode) => {
           setPicker(true);
-        }
-    
-        function onDateSelected(event, value) {
-          setDate(value);
-          setPicker(false);
-          return value;
+          setMode(currentMode);
         }
 
+        const onChange = (even, selectedDate) => {
+          const currentDate = selectedDate || date;
+          setPicker(false);
+          setDate(currentDate);
+
+          let tempDate = new Date(currentDate);
+          let fDate = (tempDate.getMonth() + 1) + '/' +tempDate.getDate() + '/' + tempDate.getFullYear();
+          setText(fDate)
+
+          
+        }
+
+        
+        
+
+        
         
 
         
         return (
-        <View style={styles.backgroundColor}>
+          
+        <View  style={styles.backgroundColor}>
+          
           <View style={styles.loginButton}>
             <Button
             
@@ -93,25 +107,28 @@ export default function Home( {navigation} ) {
             ></TextInput>
             </View>
 
-            {picker && (
-            <DateTimePicker
-              value={date}
-              mode="date"
-              display="default"
-              onChange={onDateSelected}
-            />)}
+            <Text style={{fontWeight: "bold", fontSize: 20}}>{text}</Text>
+            
+              <Button style={styles.datePickerButton}
+            mode="contained"
+            buttonColor="#5F9FCA"
+            textColor="white"
+              title="DatePicker" 
+              onPress={() => showDatePicker("date")}>Find a Train</Button>
+            
 
-            {
-              !picker && (
-                <View style={styles.datePickerButton}>
-                  <Button 
-                  title="Show Date Picker"
-                  textColor="white"
-                  onPress={showDatePicker}
-                  >Pick a Date</Button>
-                </View>
-              )
-            }
+            {picker && (
+              <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode={mode}
+              display="default"
+              onChange={onChange}/>
+            ) }
+
+            
+                
+             
 
             <Button
             style={styles.enterButton}
@@ -119,7 +136,9 @@ export default function Home( {navigation} ) {
             buttonColor="#5F9FCA"
             textColor="white"
             >Search</Button>
+           
         </View>
+        
     )
 }
 
