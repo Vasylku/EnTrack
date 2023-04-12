@@ -33,9 +33,24 @@ export default function Home( {navigation} ) {
       // handle stuff
         const [start, setStart] = useState("");
         const [dest, setDest] = useState("");
-        const [date, setDate] = useState("04/10/2023")
-      
-    return (
+        const [date, setDate] = useState(new Date());
+        const [picker, setPicker] = useState(false);
+        
+        
+        function showDatePicker() {
+          setPicker(true);
+        }
+    
+        function onDateSelected(event, value) {
+          setDate(value);
+          setPicker(false);
+          return value;
+        }
+
+        
+
+        
+        return (
         <View style={styles.backgroundColor}>
           <View style={styles.loginButton}>
             <Button
@@ -58,7 +73,7 @@ export default function Home( {navigation} ) {
           </View>
             
 
-            <Text style={styles.heading}>Plan Your Journey</Text>
+            <Text style={styles.heading}>Find a Train</Text>
             
             <View style={styles.inputs}>
             <TextInput
@@ -78,17 +93,32 @@ export default function Home( {navigation} ) {
             ></TextInput>
             </View>
 
+            {picker && (
             <DateTimePicker
+              value={date}
               mode="date"
-              value={new Date()}
-            ></DateTimePicker>
+              display="default"
+              onChange={onDateSelected}
+            />)}
+
+            {
+              !picker && (
+                <View style={styles.datePickerButton}>
+                  <Button 
+                  title="Show Date Picker"
+                  textColor="white"
+                  onPress={showDatePicker}
+                  >Pick a Date</Button>
+                </View>
+              )
+            }
 
             <Button
             style={styles.enterButton}
             mode="contained"
-            buttonColor="deepskyblue"
-            textColor="black"
-            >Enter</Button>
+            buttonColor="#5F9FCA"
+            textColor="white"
+            >Search</Button>
         </View>
     )
 }
@@ -154,6 +184,14 @@ const styles = StyleSheet.create({
 
       datePicker: {
         width: 200,
+        marginTop: 20
+      },
+
+      datePickerButton: {
+        backgroundColor: "#5F9FCA",
+        width:150,
+        borderRadius:20,
+        marginLeft: 200,
         marginTop: 20
       }
 })
