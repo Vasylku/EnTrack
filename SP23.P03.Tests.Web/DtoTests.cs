@@ -31,7 +31,13 @@ public class DtoTests
     //        Assert.Fail("Swagger should be working");
     //        return;
     //    }
-    //    var violations = apiSpec.Components.Schemas.Where(x => !x.Key.EndsWith("Dto")).Select(x => x.Key).ToList();
+    //    var violations = apiSpec.Components.Schemas
+    //   .Where(x => !x.Key.EndsWith("Dto") && (x.Key.EndsWith("TimeSpan") || x.Key.EndsWith("TimeSpan[]") || x.Key.EndsWith("DtoTimeSpan")))
+    //   .Select(x => x.Key)
+    //   .ToList();
+
+
+
     //    Assert.IsTrue(violations.Count == 0, $"You have entities being sent in your API:\r\n{string.Join("\r\n", violations)}");
     //}
 

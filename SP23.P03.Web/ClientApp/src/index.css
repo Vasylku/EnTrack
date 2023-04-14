@@ -57,7 +57,10 @@ body {
     border-radius: 16px;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);}
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+}
+
     .grey-glassmorphism {
         background: rgb(39, 51, 89, 0.4);
         border-radius: 16px;
