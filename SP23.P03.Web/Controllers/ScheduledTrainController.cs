@@ -139,8 +139,8 @@ public class ScheduledTrainsController : ControllerBase
                 Schedules = st.Schedules.Where(s => s.DepartureTime.Date == departureDate.Value.Date) // This should be changed
                    .Select(s => new ScheduleSearchDto
                    {
-                       Id = s.Id,   
-                       ScheduledTrainId  =s.ScheduledTrainId,
+                       Id = s.Id,
+                       ScheduledTrainId = s.ScheduledTrainId,
                        TrainsId = s.Train.Id,
                        DepartureTime = s.DepartureTime,
                        ArrivalTime = s.ArrivalTime,
@@ -158,7 +158,7 @@ public class ScheduledTrainsController : ControllerBase
                        }
                    }).ToList()
             }).ToList();
-     
+
         return scheduledTrains;
     }
 
@@ -209,7 +209,7 @@ public class ScheduledTrainsController : ControllerBase
             EndStationId = scheduledTrain.EndStationId,
             Distance = scheduledTrain.Distance,
             TravelTime = scheduledTrain.TravelTime,
-       
+
         };
 
         return CreatedAtAction(nameof(GetScheduledTrainById), new { id = scheduledTrainDto.Id }, scheduledTrainDto);
@@ -246,7 +246,7 @@ public class ScheduledTrainsController : ControllerBase
         scheduledTrain.Distance = dto.Distance;
         scheduledTrain.TravelTime = dto.TravelTime;
 
-       
+
 
         dataContext.SaveChanges();
 
@@ -314,7 +314,7 @@ public class ScheduledTrainsController : ControllerBase
             .Select(x => new ScheduledTrainDto
             {
                 Id = x.Id,
-                StartStationId =x.StartStationId,//add here new traindto { train data}
+                StartStationId = x.StartStationId,//add here new traindto { train data}
                 EndStationId = x.EndStationId,
                 Distance = x.Distance,
                 TravelTime = x.TravelTime,
@@ -333,12 +333,12 @@ public class ScheduledTrainsController : ControllerBase
         return scheduledtrains
             .Select(x => new ScheduledTrainCreateDto
             {
-                Id= x.Id,
+                Id = x.Id,
                 StartStationId = x.StartStationId,
                 EndStationId = x.EndStationId,
                 Distance = x.Distance,
                 TravelTime = x.TravelTime,
-            
+
             });
     }
 }

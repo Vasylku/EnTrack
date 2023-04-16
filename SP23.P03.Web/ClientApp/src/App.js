@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
@@ -16,33 +16,17 @@ import ErrorBoundary from "./components/errors/errorBoundary";
 import { AuthProvider } from "./context/AuthenticationProvider";
 import Ticket from "./components/ticket/Ticket";
 import SeatPicker from "./components/seatpicker/SeatPicker";
-/*import {  useState,useEffect } from 'react';
-
-function MyList(){
-  const[getStations, setStations] = useState([]);
-  useEffect(()=>{
-    fetch('api/stations')
-    .then((x) => x.json())
-    .then((x) => {
-    setStations(x)
-  }); 
-  },[]);
-  console.log(getStations);
-  return (
-   
-  
-  <ul>     
-    {getStations.map((x) => (
-      <li key= {x.id}> {x.name}{""}
-      </li>
-    ))}
-   </ul>
- 
- 
-  );
-}*/
 
 function App() {
+	const [bookingData, setBookingData] = useState(null);
+
+	const handleConfirmBooking = (data) => {
+		setBookingData(data);
+	};
+	useEffect(() => {
+		console.log(bookingData);
+	}, [bookingData]);
+
 	return (
 		<div className="min-h-screen">
 			<div className="gradient-bg-welcome">
@@ -59,9 +43,17 @@ function App() {
 								<Route path="/news" element={<NewsMediaPage />} />
 								<Route path="/baggage" element={<BaggagePolicy />} />
 								<Route path="/dashboard" element={<Dashboard />} />
-								<Route path="/booking" element={<BookingDetails />} />
+								<Route
+									path="/booking"
+									element={<BookingDetails bookingData={bookingData} />}
+								/>
 								<Route path="/ticket" element={<Ticket />} />
-								<Route path="/seatpicker/:id1/:id2?" element={<SeatPicker />} />
+								<Route
+									path="/seatpicker/:id1/:id2?"
+									element={
+										<SeatPicker onConfirmBooking={handleConfirmBooking} />
+									}
+								/>
 								<Route path="*" element={<NotFound />} />
 							</Routes>
 						</AuthProvider>

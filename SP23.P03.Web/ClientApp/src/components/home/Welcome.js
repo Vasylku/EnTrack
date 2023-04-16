@@ -43,7 +43,7 @@ const Welcome = () => {
 				<TrainSearchForm onSaveFormData={saveFormData} />
 
 				{searchData.length > 0 ? (
-					<table className="w-full text-sm text-left text-white  dark:text-gray-200 ">
+					<table className="w-full text-sm text-left   dark:text-gray-200 ">
 						<thead className="text-xs text-gradient uppercase bg-gray-100">
 							<tr>
 								<th scope="col" className="px-4 py-3">
@@ -55,12 +55,19 @@ const Welcome = () => {
 								<th scope="col" className="px-4 py-3">
 									Departure Date
 								</th>
-								<th scope="col" className="px-4 py-3">
-									Arrival Date
-								</th>
-								<button onClick={handleBook} className="px-4 py-3 text-lg">
+								<th className="px-4 py-3">Arrival Date</th>
+								<th
+									scope="col"
+									onClick={handleBook}
+									//className="px-4 py-3 text-xs cursor-pointer "
+									className={`px-1 py-3 text-xs cursor-pointer text-center  rounded-full  ${
+										selectedIds.length > 0
+											? "bg-green-900 hover:bg-green-800 custom-class"
+											: null
+									}`}
+								>
 									Book selected
-								</button>
+								</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -71,7 +78,7 @@ const Welcome = () => {
 										scheduledata={data}
 										searchData={searchData}
 										onSelect={handleSelect}
-										selected={selectedIds.includes(data.train.id)}
+										selected={selectedIds.includes(data.id)}
 									/>
 								))
 							)}
