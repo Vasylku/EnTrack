@@ -25,6 +25,7 @@ const Welcome = () => {
 
 	const handleBook = () => {
 		navigate(`/seatpicker/${selectedIds.join("/")}`);
+		window.scrollTo({ top: 0, behavior: "smooth" });
 		console.log(selectedIds);
 	};
 	return (
