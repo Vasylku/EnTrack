@@ -72,7 +72,7 @@ body {
 
 .text-gradient {
     background-color: #e9e3e3;
-    background-image: radial-gradient(at 4% 36%, hsla(0,0%,100%,1) 0, transparent 50%), radial-gradient(at 100% 60%, rgb(131, 128, 128) 0, transparent 50%);
+    background-image: radial-gradient(at 4% 36%, hsla(0,0%,100%,1) 0, transparent 50%), radial-gradient(at 100% 60%, rgb(210, 204, 204) 0, transparent 50%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }

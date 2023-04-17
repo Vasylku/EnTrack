@@ -59,15 +59,69 @@ public class SchedulesController : ControllerBase
                 reservedSeats.Add("r" + (i + 1));
             }
         }
-        // Map updated schedule to DTO
-        var dto = new ScheduleSeatBookDto
+        var scheduled = dataContext.Set<Schedule>()
+            .Where(s => s.Id == id)
+            .Select(s => 
+     new ScheduleSeatBookDto
         {
-            Id = schedule.Id,
-            // ReservedSeats= schedule.ReservedSeats,
-            ReservedCheck = reservedSeats,
-        };
+            Id = s.Id,
+            ScheduledTrainId = s.ScheduledTrain.Id,
+            ScheduledTrain = new ScheduledTrainDto
+            {
+                Id = s.ScheduledTrain.Id,
+                StartStationId = s.ScheduledTrain.StartStationId,
+                StartStation = new TrainStationDto
+                {
+                    Id = s.ScheduledTrain.StartStation.Id,
+                    Name = s.ScheduledTrain.StartStation.Name,
+                    Street = s.ScheduledTrain.StartStation.Street,
+                    City = s.ScheduledTrain.StartStation.City,
+                    State = s.ScheduledTrain.StartStation.State,
+                    Country = s.ScheduledTrain.StartStation.Country,
+                    ZipCode = s.ScheduledTrain.StartStation.ZipCode
+                },
+                EndStationId = s.ScheduledTrain.EndStationId,
+                EndStation = new TrainStationDto
+                {
+                    Id = s.ScheduledTrain.EndStation.Id,
+                    Name = s.ScheduledTrain.EndStation.Name,
+                    Street = s.ScheduledTrain.EndStation.Street,
+                    City = s.ScheduledTrain.EndStation.City,
+                    State = s.ScheduledTrain.EndStation.State,
+                    Country = s.ScheduledTrain.EndStation.Country,
+                    ZipCode = s.ScheduledTrain.EndStation.ZipCode
+                },
+                Distance = s.ScheduledTrain.Distance,
+                TravelTime = s.ScheduledTrain.TravelTime,
 
-        return Ok(dto);
+            },
+            TrainsId = s.Train.Id,
+             Train = new TrainDto
+             { 
+                  Id = s.Id,
+                  Name = s.Train.Name,
+                TrainClass = s.Train.TrainClass,
+                  AvailableSeats = s.Train.AvailableSeats,
+                 DinerCarts = s.Train.DinerCarts,
+                CoachSeats = s.Train.CoachSeats,
+                 FirstClassSeats = s.Train.FirstClassSeats,
+                 SleeperSeats = s.Train.SleeperSeats,
+                 RoomletSeats = s.Train.RoomletSeats,
+         },
+            AvailableSeats = s.AvailableSeats,
+            ReservedCheck = reservedSeats,
+            DepartureTime = s.DepartureTime,
+            ArrivalTime = s.ArrivalTime,
+        }).ToList();
+        // Map updated schedule to DTO
+        //var dto = new ScheduleSeatBookDto
+        //{
+        //    Id = schedule.Id,
+        //    // ReservedSeats= schedule.ReservedSeats,
+        //    ReservedCheck = reservedSeats,
+        //};
+
+        return Ok(scheduled);
     }
     [HttpPut]
     public IActionResult UpdateSchedule(int id, string[] seatNumbers)

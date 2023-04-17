@@ -275,21 +275,46 @@ const TrainSeatSelector = () => {
 
 export default TrainSeatSelector; */
 import React from "react";
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 const TrainSeatSelector = ({ onConfirmBooking }) => {
 	const [selected, setSelected] = useState([]);
 	const [reserved] = useState(["s1", "c2"]);
-
+	const [response1, setResponse1] = useState(null);
+	const [response2, setResponse2] = useState(null);
 	const { id1, id2 } = useParams();
 	const navigate = useNavigate();
 	const coachSeats = 24;
 	const sleeperSeats = 28;
 	const roomletSeats = 20;
 	const firstClassSeats = 12;
-	//console.log(id1, id2);
 
+	//console.log(id1, id2);
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				if (id2) {
+					const res1 = await axios.get(`/api/schedules/${id1}`);
+					//	console.log(res1.data);
+					setResponse1(res1.data);
+					const res2 = await axios.get(`/api/schedules/${id2}`);
+					//console.log(res2.data);
+					setResponse2(res2.data);
+				} else {
+					const res1 = await axios.get(`/api/schedules/${id1}`);
+					//	console.log(res1.data);
+					setResponse1(res1.data);
+				}
+			} catch (error) {
+				// handle error
+				console.error(error);
+			}
+		};
+
+		fetchData();
+	}, [id1, id2]);
 	// Create an array of the seat types and their respective number of seats
 	//read the train configs and populate data for specific schedlues.
 	//read api shcedules booked seat to get seat that are booked
@@ -330,8 +355,10 @@ const TrainSeatSelector = ({ onConfirmBooking }) => {
 
 	const handleConfirmSelection = () => {
 		const bookingData = {
-			id1: id1,
-			id2: id2,
+			responseid1: response1,
+			//responseid2: response2,
+			//id1: id1,
+			//id2: id2,
 			selectedData: selected,
 		};
 

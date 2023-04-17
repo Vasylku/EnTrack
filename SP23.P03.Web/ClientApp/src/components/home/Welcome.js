@@ -44,7 +44,7 @@ const Welcome = () => {
 
 				{searchData.length > 0 ? (
 					<table className="w-full text-sm text-left   dark:text-gray-200 ">
-						<thead className="text-xs text-gradient uppercase bg-gray-100">
+						<thead className="text-sm text-gradient uppercase bg-gray-100">
 							<tr>
 								<th scope="col" className="px-4 py-3">
 									Departure Station
@@ -60,9 +60,9 @@ const Welcome = () => {
 									scope="col"
 									onClick={handleBook}
 									//className="px-4 py-3 text-xs cursor-pointer "
-									className={`px-1 py-3 text-xs cursor-pointer text-center  rounded-full  ${
+									className={`px-1 py-3 text-sm cursor-pointer text-center  rounded-full  ${
 										selectedIds.length > 0
-											? "bg-green-900 hover:bg-green-800 custom-class"
+											? "bg-green-900 hover:bg-green-800 custom-class "
 											: null
 									}`}
 								>
