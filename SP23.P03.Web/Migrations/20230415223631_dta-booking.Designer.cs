@@ -13,7 +13,7 @@ namespace SP23.P03.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
     [Migration("20230415223631_dta-booking")]
-    partial class dtabooking
+    partial class Dtabooking
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
