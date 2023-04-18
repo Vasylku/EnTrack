@@ -1,8 +1,14 @@
 import { Text, TextInput } from "react-native-paper";
 import React, {useEffect, useState} from 'react';
-import {Alert, BackHandler, StyleSheet, View} from 'react-native';
+import {Alert,
+        BackHandler, 
+        StyleSheet, 
+        View, 
+        Pressable,
+        Platform
+        } from 'react-native';
 import {Button} from 'react-native-paper';
-
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 
@@ -33,9 +39,45 @@ export default function Home( {navigation} ) {
       // handle stuff
         const [start, setStart] = useState("");
         const [dest, setDest] = useState("");
-      
-    return (
-        <View style={styles.backgroundColor}>
+        const [date, setDate] = useState(new Date());
+        const [picker, setPicker] = useState(false);
+        const [mode, setMode] = useState("date");
+        const [text, setText] = useState("");
+        const [travelDate, setTravelDate] = useState("");
+        
+
+        const showDatePicker = (currentMode) => {
+          setPicker(true);
+          setMode(currentMode);
+        }
+
+        const togglePicker = () => {
+          setPicker(!picker);
+        }
+
+        const onChange = ({ type }, selectedDate) => {
+          if (type == "set") {
+          const currentDate = selectedDate || date;
+          setPicker(false);
+          setDate(currentDate);
+            if (Platform.OS === "android") {
+              togglePicker();
+              setTravelDate(currentDate.toDateString());
+            }
+
+          } else {
+            togglePicker();
+          }
+
+          let tempDate = new Date(currentDate);
+          let fDate = (tempDate.getMonth() + 1) + '/' +tempDate.getDate() + '/' + tempDate.getFullYear();
+          setText(fDate)
+        }
+        
+        
+
+        return (          
+        <View  style={styles.backgroundColor}>          
           <View style={styles.loginButton}>
             <Button
             
@@ -57,7 +99,7 @@ export default function Home( {navigation} ) {
           </View>
             
 
-            <Text style={styles.heading}>Plan Your Journey</Text>
+            <Text style={styles.heading}>Find a Train</Text>
             
             <View style={styles.inputs}>
             <TextInput
@@ -65,7 +107,7 @@ export default function Home( {navigation} ) {
                 mode="outlined"
                 label="Starting Location"
                 value={start}
-                onChangeText={setStart}
+                onChangeText={(text) => setStart(text)}
             ></TextInput>
 
             <TextInput
@@ -75,15 +117,58 @@ export default function Home( {navigation} ) {
                 value={dest}
                 onChangeText={setDest}
             ></TextInput>
+
+            {!picker && (
+             <Pressable
+                onPress={togglePicker}>
+             <TextInput
+               style={styles.datePicker}
+               mode="outlined"
+               placeholder="Select Travel Date"
+               value={travelDate}
+               onChangeText={setTravelDate}
+               editable={false}/>
+               
+            </Pressable>
+           )}
             </View>
 
+            <Text style={{fontWeight: "bold", fontSize: 20}}>{text}</Text>
+            
+            
+              {/* <Button style={styles.datePickerButton}
+                mode="contained"
+                buttonColor="#5F9FCA"
+                textColor="white"
+                title="DatePicker" 
+                onPress={() => showDatePicker("date")}>Select Date</Button>
+             */}
+           
+
+
+            {picker && (
+              <DateTimePicker
+                value={date}
+                mode={mode}
+                display="default"
+                onChange={onChange}/>
+            ) }
+
             <Button
-            style={styles.enterButton}
-            mode="contained"
-            buttonColor="deepskyblue"
-            textColor="black"
-            >Enter</Button>
+              style={styles.enterButton}
+              mode="contained"
+              buttonColor="#5F9FCA"
+              textColor="white"
+              onPress={() => {
+                setStart();
+                setDest();
+
+                {travelDate}
+              }}
+            >Search</Button>
+           
         </View>
+        
     )
 }
 
@@ -98,7 +183,7 @@ const styles = StyleSheet.create({
      alignItems: 'center',
      flex:  1,
      flexDirection:  'row', 
-    flexWrap:  'wrap', 
+     flexWrap:  'wrap', 
      marginTop:  75,
      width:  375,
      height:  120,
@@ -119,8 +204,8 @@ const styles = StyleSheet.create({
     },
 
     input1: {
-        backgroundColor: "#E9ECEE",
-        width: "70%",
+      backgroundColor: "#E9ECEE",
+      width: "70%",
         
     },
 
@@ -144,5 +229,18 @@ const styles = StyleSheet.create({
         marginTop: 20,
         width: 100,
         marginLeft: 20
+      },
+
+      datePicker: {
+        width: 289,
+        backgroundColor: "#E9ECEE"
+      },
+
+      datePickerButton: {
+        backgroundColor: "#5F9FCA",
+        width:150,
+        borderRadius:20,
+        marginLeft: 200,
+        marginTop: 20
       }
 })
