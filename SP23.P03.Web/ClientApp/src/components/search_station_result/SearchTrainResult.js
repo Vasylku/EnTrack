@@ -1,49 +1,57 @@
 import React from "react";
-import { Link } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import TrainDate from "./TrainDate";
 /* import { FaTrain } from 'react-icons/fa';
 import { FiUsers } from 'react-icons/fi'; */
 
-function SearchTrainsResult(props) {
-    const {
-    departure,
-    arrival,
-    departureDate,
-    arrivalDate,
-    tripType,
-    passengers,
-    
-  } = props.searchData; 
+function SearchTrainsResult({ searchData, scheduledata, onSelect, selected }) {
+	//console.log(scheduledata);
+	//const navigate = useNavigate();
+	// const navToTop = (route) => {
+	// 	navigate(route);
+	// 	window.scrollTo({ top: 0, behavior: "smooth" });
+	// };
 
+	const t = new Date(scheduledata.departureTime);
 
-  return (
-    <ul>
-      
-    <div className="flex md:flex-row gap-6 flex-col border-gray-600  text-gradient items-center justify-between p-5 mt-4 border rounded-lg">
-     
-        <div className="font-bold text-lg">{departure}</div>
-        <div className=" text-white "><TrainDate date = {departureDate}/></div>
-  
-      
-        <div className="font-bold">{tripType}</div>
-        <div className="font-bold">Passengers: { passengers}</div>
-      
-      
-     
-        <div className="font-bold text-lg">{arrival}</div>
-        <div className=" text-white"><TrainDate date = {arrivalDate}/></div>
-        <Link to="/booking">
-      <button className="px-4 py-2 text-gradient bg-blue-500 rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-        Book
-      </button></Link>
-   
-    </div>
-    
-   
-   
-    </ul>
-   
-  );
+	return (
+		<>
+			<tr>
+				<th scope="col" className="px-4 py-3"></th>
+			</tr>
+			<tr className=" bg-[#343435] hover:bg-[#575858]">
+				<th
+					scope="row"
+					className=" rounded-l-xl px-6 py-4 font-medium text-gradient whitespace-nowrap text-white "
+				>
+					{searchData.startStation.name}
+				</th>
+				<td className="px-6 py-4">{searchData.endStation.name}</td>
+				<td className="px-6 py-4">
+					<TrainDate date={t} />
+				</td>
+				<td className="px-6 py-4">
+					<TrainDate date={new Date(scheduledata.arrivalTime)} />
+				</td>
+				<td className="px-6 py-4 text-center text-lg rounded-r-lg">
+					<button
+						onClick={() => onSelect(scheduledata.id)}
+						className={`text-gradient animate-pulse hover:animate-bounce  bg-blue-100 rounded-lg hover:bg-orange-600  ${
+							selected ? " bg-green-500 hover:bg-green-700 " : null
+						}`}
+					>
+						{selected ? "Selected" : "Select  "}
+					</button>
+					{/* <button
+						onClick={() => navToTop("/booking")}
+						className="px-4 py-2 text-gradient animate-pulse hover:animate-bounce bg-blue-100 rounded-lg hover:bg-orange-500 "
+					>
+						Book
+					</button> */}
+				</td>
+			</tr>
+		</>
+	);
 }
 
 export default SearchTrainsResult;

@@ -32,7 +32,7 @@ public class ScheduledTrainsController : ControllerBase
     }
 
     [HttpGet("scheduled-trains_1station")]
-    public ActionResult<List<ScheduledTrainSearchDto>> GetScheduledTrain(string? startStationName)
+    public ActionResult<List<ScheduledTrainSearchDto>> GetAllScheduledTrainsFromStation(string? startStationName)
     {
         var scheduledTrains = dataContext.Set<ScheduledTrain>()
             .Where(st => st.StartStation.Name == startStationName)
@@ -67,6 +67,7 @@ public class ScheduledTrainsController : ControllerBase
                    .Select(s => new ScheduleSearchDto
                    {
                        Id = s.Id,
+                       ScheduledTrainId = s.ScheduledTrainId,
                        TrainsId = s.Train.Id,
                        DepartureTime = s.DepartureTime,
                        ArrivalTime = s.ArrivalTime,
@@ -89,10 +90,25 @@ public class ScheduledTrainsController : ControllerBase
     }
 
     [HttpGet("scheduled-trains")]
-    public ActionResult<List<ScheduledTrainSearchDto>> GetScheduledTrains(string? startStationName, string? endStationName, DateTime? departureDate)
+    public ActionResult<List<ScheduledTrainSearchDto>> GetScheduledTrains(string? startStation, string? endStation, DateTime? departureDate)
     {
+        if (startStation == null)
+        {
+            return BadRequest("startStation is missing");
+        }
+
+        if (endStation == null)
+        {
+            return BadRequest("endStation is missing");
+        }
+
+        if (departureDate == null)
+        {
+            return BadRequest("departureDate is missing");
+        }
+
         var scheduledTrains = dataContext.Set<ScheduledTrain>()
-            .Where(st => st.StartStation.Name == startStationName && st.EndStation.Name == endStationName)
+            .Where(st => st.StartStation.Name == startStation && st.EndStation.Name == endStation)
             .Select(st => new ScheduledTrainSearchDto
             {
                 Id = st.Id,
@@ -123,7 +139,8 @@ public class ScheduledTrainsController : ControllerBase
                 Schedules = st.Schedules.Where(s => s.DepartureTime.Date == departureDate.Value.Date) // This should be changed
                    .Select(s => new ScheduleSearchDto
                    {
-                       Id = s.Id,                   
+                       Id = s.Id,
+                       ScheduledTrainId = s.ScheduledTrainId,
                        TrainsId = s.Train.Id,
                        DepartureTime = s.DepartureTime,
                        ArrivalTime = s.ArrivalTime,
@@ -141,7 +158,7 @@ public class ScheduledTrainsController : ControllerBase
                        }
                    }).ToList()
             }).ToList();
-     
+
         return scheduledTrains;
     }
 
@@ -192,7 +209,7 @@ public class ScheduledTrainsController : ControllerBase
             EndStationId = scheduledTrain.EndStationId,
             Distance = scheduledTrain.Distance,
             TravelTime = scheduledTrain.TravelTime,
-       
+
         };
 
         return CreatedAtAction(nameof(GetScheduledTrainById), new { id = scheduledTrainDto.Id }, scheduledTrainDto);
@@ -229,7 +246,7 @@ public class ScheduledTrainsController : ControllerBase
         scheduledTrain.Distance = dto.Distance;
         scheduledTrain.TravelTime = dto.TravelTime;
 
-       
+
 
         dataContext.SaveChanges();
 
@@ -297,7 +314,7 @@ public class ScheduledTrainsController : ControllerBase
             .Select(x => new ScheduledTrainDto
             {
                 Id = x.Id,
-                StartStationId =x.StartStationId,
+                StartStationId = x.StartStationId,//add here new traindto { train data}
                 EndStationId = x.EndStationId,
                 Distance = x.Distance,
                 TravelTime = x.TravelTime,
@@ -316,12 +333,12 @@ public class ScheduledTrainsController : ControllerBase
         return scheduledtrains
             .Select(x => new ScheduledTrainCreateDto
             {
-                Id= x.Id,
+                Id = x.Id,
                 StartStationId = x.StartStationId,
                 EndStationId = x.EndStationId,
                 Distance = x.Distance,
                 TravelTime = x.TravelTime,
-            
+
             });
     }
 }
