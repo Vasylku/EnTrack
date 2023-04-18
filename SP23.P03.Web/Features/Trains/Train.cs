@@ -13,7 +13,7 @@ namespace SP23.P03.Web.Features.Trains
         public int? FirstClassSeats { get; set; }
         public int? SleeperSeats { get; set; }
         public int? RoomletSeats { get; set; }
-        public virtual ICollection<Schedule> Schedules { get; set; }
+        public virtual ICollection<Schedule>? Schedules { get; set; }
     }
 
 }
