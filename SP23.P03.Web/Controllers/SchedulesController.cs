@@ -65,14 +65,14 @@ public class SchedulesController : ControllerBase
      new ScheduleSeatBookDto
         {
             Id = s.Id,
-            ScheduledTrainId = s.ScheduledTrain.Id,
+            ScheduledTrainId = s.ScheduledTrain!.Id,
             ScheduledTrain = new ScheduledTrainDto
             {
                 Id = s.ScheduledTrain.Id,
                 StartStationId = s.ScheduledTrain.StartStationId,
                 StartStation = new TrainStationDto
                 {
-                    Id = s.ScheduledTrain.StartStation.Id,
+                    Id = s.ScheduledTrain!.StartStation!.Id,
                     Name = s.ScheduledTrain.StartStation.Name,
                     Street = s.ScheduledTrain.StartStation.Street,
                     City = s.ScheduledTrain.StartStation.City,
@@ -83,7 +83,7 @@ public class SchedulesController : ControllerBase
                 EndStationId = s.ScheduledTrain.EndStationId,
                 EndStation = new TrainStationDto
                 {
-                    Id = s.ScheduledTrain.EndStation.Id,
+                    Id = s.ScheduledTrain!.EndStation!.Id,
                     Name = s.ScheduledTrain.EndStation.Name,
                     Street = s.ScheduledTrain.EndStation.Street,
                     City = s.ScheduledTrain.EndStation.City,
@@ -95,7 +95,7 @@ public class SchedulesController : ControllerBase
                 TravelTime = s.ScheduledTrain.TravelTime,
 
             },
-            TrainsId = s.Train.Id,
+            TrainsId = s.Train!.Id,
              Train = new TrainDto
              { 
                   Id = s.Id,
@@ -199,66 +199,3 @@ public class SchedulesController : ControllerBase
     }
 
 }
-//foreach (var seatNumber in seatNumbers)
-//{
-//    int seatIndex = Convert.ToInt32(seatNumber.Substring(1)) - 1; // Subtract 1 since seat numbering starts from 1
-//    char seatTypeN = seatNumber[0];
-//    switch (seatTypeN)
-//    {
-//        case 'c':
-//           schedule.ReservedSeats[seatIndex] = 0x01;
-//            break;
-//        case 's':
-//            schedule.ReservedSeats[seatIndex] = 0x12;
-//            break;
-//        case 'f':
-//            schedule.ReservedSeats[seatIndex] = 0x24;
-//            break;
-//        case 'r':
-//            schedule.ReservedSeats[seatIndex] = 0x32;
-//            break;
-
-//        // Add cases for other coach types if necessary
-//        default:
-//            return BadRequest("Invalid seat type");
-//    }
-//}
-
-// Update schedule with booked seats
-// schedule.ReservedSeats = bookSeats;
-
-//byte[] bytes = new byte[seatNumbers.Length];
-//for (int i = 0; i < seatNumbers.Length; i++)
-//{
-//    bytes[i] = Byte.Parse(seatNumbers[i]);
-//}
-//schedule.ReservedSeats = bytes;
-//dataContext.SaveChanges();
-
-//Convert byte[] to string[]
-//List<string> reservedSeats = new((Encoding.Default.GetString(
-//                 schedule.ReservedSeats,
-//                 0,
-//                 schedule.ReservedSeats.Length - 1)).Split(new string[] { "\r\n", "\r", "\n" },
-//                                             StringSplitOptions.None));
-//List<string> reservedSeats = new();
-//for (int i = 0; i < schedule.ReservedSeats.Length; i++)
-//{
-//    if ((schedule.ReservedSeats[i] & 0x01) != 0)
-//    {
-//        reservedSeats.Add("c" + (i + 1));
-//    }
-//    if ((schedule.ReservedSeats[i] & 0x12) != 0)
-//    {
-//        reservedSeats.Add("s" + (i + 1));
-//    }
-//    if ((schedule.ReservedSeats[i] & 0x24) != 0)
-//    {
-//        reservedSeats.Add("f" + (i + 1));
-//    }
-//    if ((schedule.ReservedSeats[i] & 0x32) != 0)
-//    {
-//        reservedSeats.Add("r" + (i + 1));
-//    }
-
-//}

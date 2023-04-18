@@ -7,9 +7,9 @@ namespace SP23.P03.Web.Features.Schedules
     {
         public int Id { get; set; }
         public int ScheduledTrainId { get; set; }
-        public virtual ScheduledTrain ScheduledTrain { get; set; }
+        public virtual ScheduledTrain? ScheduledTrain { get; set; }
         public int TrainsId { get; set; }
-        public virtual Train Train { get; set; }
+        public virtual Train? Train { get; set; }
         public int AvailableSeats { get; set; }
         public byte[] ReservedSeats { get; set; } = new byte[38];
         public DateTimeOffset DepartureTime { get; set; }  //this define sets of time for departures and arrivals whithin a day, like March 12 9am-11am or March 12 2pm-4pm

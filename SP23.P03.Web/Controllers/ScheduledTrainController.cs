@@ -35,11 +35,11 @@ public class ScheduledTrainsController : ControllerBase
     public ActionResult<List<ScheduledTrainSearchDto>> GetAllScheduledTrainsFromStation(string? startStationName)
     {
         var scheduledTrains = dataContext.Set<ScheduledTrain>()
-            .Where(st => st.StartStation.Name == startStationName)
+            .Where(st => st.StartStation!.Name == startStationName)
             .Select(st => new ScheduledTrainSearchDto
             {
                 Id = st.Id,
-                StartStationId = st.StartStation.Id,
+                StartStationId = st.StartStation!.Id,
                 StartStation = new TrainStationDto
                 {
                     Id = st.StartStation.Id,
@@ -50,7 +50,7 @@ public class ScheduledTrainsController : ControllerBase
                     Country = st.StartStation.Country,
                     ZipCode = st.StartStation.ZipCode
                 },
-                EndStationId = st.EndStation.Id,
+                EndStationId = st.EndStation!.Id,
                 EndStation = new TrainStationDto
                 {
                     Id = st.EndStation.Id,
@@ -68,7 +68,7 @@ public class ScheduledTrainsController : ControllerBase
                    {
                        Id = s.Id,
                        ScheduledTrainId = s.ScheduledTrainId,
-                       TrainsId = s.Train.Id,
+                       TrainsId = s.Train!.Id,
                        DepartureTime = s.DepartureTime,
                        ArrivalTime = s.ArrivalTime,
                        Train = new TrainDto
@@ -108,11 +108,11 @@ public class ScheduledTrainsController : ControllerBase
         }
 
         var scheduledTrains = dataContext.Set<ScheduledTrain>()
-            .Where(st => st.StartStation.Name == startStation && st.EndStation.Name == endStation)
+            .Where(st => st.StartStation!.Name == startStation && st.EndStation!.Name == endStation)
             .Select(st => new ScheduledTrainSearchDto
             {
                 Id = st.Id,
-                StartStationId = st.StartStation.Id,
+                StartStationId = st.StartStation!.Id,
                 StartStation = new TrainStationDto
                 {
                     Id = st.StartStation.Id,
@@ -123,7 +123,7 @@ public class ScheduledTrainsController : ControllerBase
                     Country = st.StartStation.Country,
                     ZipCode = st.StartStation.ZipCode
                 },
-                EndStationId = st.EndStation.Id,
+                EndStationId = st.EndStation!.Id,
                 EndStation = new TrainStationDto
                 {
                     Id = st.EndStation.Id,
@@ -141,7 +141,7 @@ public class ScheduledTrainsController : ControllerBase
                    {
                        Id = s.Id,
                        ScheduledTrainId = s.ScheduledTrainId,
-                       TrainsId = s.Train.Id,
+                       TrainsId = s.Train!.Id,
                        DepartureTime = s.DepartureTime,
                        ArrivalTime = s.ArrivalTime,
                        Train = new TrainDto
