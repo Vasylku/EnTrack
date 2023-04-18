@@ -19,13 +19,29 @@ import SeatPicker from "./components/seatpicker/SeatPicker";
 
 function App() {
 	const [bookingData, setBookingData] = useState(null);
+	const [details, setDetails] = useState(null);
+	const [approve, setApprove] = useState(null);
 
 	const handleConfirmBooking = (data) => {
 		setBookingData(data);
 	};
 	useEffect(() => {
-		console.log(bookingData);
+		//	console.log(bookingData);
 	}, [bookingData]);
+
+	const handleSaveBookingData = (data) => {
+		setDetails(data);
+	};
+	useEffect(() => {
+		//	console.log(details);
+	}, [details]);
+
+	const handleApproveBooking = (data) => {
+		setApprove(data);
+	};
+	useEffect(() => {
+		console.log(approve);
+	}, [approve]);
 
 	return (
 		<div className="min-h-screen">
@@ -37,7 +53,15 @@ function App() {
 							<Routes>
 								<Route path="/" element={<Welcome />} />
 								{/* <Route path="/destinations" element={<Dest/>} /> */}
-								<Route path="/payment" element={<PaymentForm />} />
+								<Route
+									path="/payment"
+									element={
+										<PaymentForm
+											saveBookingData={details}
+											onApproveBooking={handleApproveBooking}
+										/>
+									}
+								/>
 								<Route path="/login" element={<LoginPage />} />
 								{/* <Route path="/destinations" element={<Dest/>}/> */}
 								<Route path="/news" element={<NewsMediaPage />} />
@@ -45,9 +69,14 @@ function App() {
 								<Route path="/dashboard" element={<Dashboard />} />
 								<Route
 									path="/booking"
-									element={<BookingDetails bookingData={bookingData} />}
+									element={
+										<BookingDetails
+											bookingData={bookingData}
+											onSaveBookingData={handleSaveBookingData}
+										/>
+									}
 								/>
-								<Route path="/ticket" element={<Ticket />} />
+								<Route path="/ticket" element={<Ticket data={approve} />} />
 								<Route
 									path="/seatpicker/:id1/:id2?"
 									element={

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SP23.P03.Web.Migrations
 {
     /// <inheritdoc />
-    public partial class dtabooking : Migration
+    public partial class Dtabooking : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
