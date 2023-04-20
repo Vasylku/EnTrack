@@ -76,8 +76,8 @@ export default function SignUp( {navigation} ) {
         <Button
             style={styles.signUpButton}
             mode="contained"
-            buttonColor="deepskyblue"
-            textColor="black"
+            buttonColor="#5F9FCA"
+            textColor="white"
             onPress={handleSignUp}
             >Sign Up</Button>
     </View>
@@ -97,14 +97,14 @@ export default function SignUp( {navigation} ) {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        flex:  1,
-        flexDirection:  'row', 
-       flexWrap:  'wrap', 
+        // flex:  1,
+        // flexDirection:  'row', 
+        // flexWrap:  'wrap', 
         marginTop:  75,
         width:  375,
-        height:  120,
+        height:  350,
         marginLeft:  20,
-        marginBottom:  120, 
+        marginBottom:  200, 
         backgroundColor:  'lightgrey', 
         borderWidth:  2, 
         justifyContent:  'center',

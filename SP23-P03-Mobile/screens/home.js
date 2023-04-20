@@ -1,4 +1,4 @@
-import { Text, TextInput } from "react-native-paper";
+import { Text, TextInput, Button } from "react-native-paper";
 import React, {useEffect, useState} from 'react';
 import {Alert,
         BackHandler, 
@@ -7,7 +7,7 @@ import {Alert,
         Pressable,
         Platform
         } from 'react-native';
-import {Button} from 'react-native-paper';
+
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 
@@ -80,32 +80,34 @@ export default function Home( {navigation} ) {
         <View  style={styles.backgroundColor}>          
           <View style={styles.loginButton}>
             <Button
-            
+            style={styles.button}
             mode="contained"
-            buttonColor="orange"
-            textColor="black"
+            buttonColor="#5F9FCA"
+            textColor="white"
             onPress={() => navigation.navigate("Login")}
             >Login</Button>
           </View>
 
           <View style={styles.signUpButton}>
             <Button
-            
+            style={styles.button}
             mode="contained"
-            buttonColor="orange"
-            textColor="black"
+            buttonColor="#5F9FCA"
+            textColor="white"
             onPress={() => navigation.navigate("SignUp")}
             >Sign Up</Button>
           </View>
             
-
-            <Text style={styles.heading}>Find a Train</Text>
+          
+            {/* <Text style={styles.heading}>Find a Train</Text>
             
             <View style={styles.inputs}>
             <TextInput
                 style={styles.input1}
                 mode="outlined"
-                label="Starting Location"
+                //label="Starting Location"
+                placeholder="Starting Location"
+                placeholderTextColor="black"
                 value={start}
                 onChangeText={(text) => setStart(text)}
             ></TextInput>
@@ -113,7 +115,9 @@ export default function Home( {navigation} ) {
             <TextInput
                 style={styles.input1}
                 mode="outlined"
-                label="Ending Location"
+                //label="Ending Location"
+                placeholder="Ending Location"
+                placeholderTextColor="black"
                 value={dest}
                 onChangeText={setDest}
             ></TextInput>
@@ -125,6 +129,7 @@ export default function Home( {navigation} ) {
                style={styles.datePicker}
                mode="outlined"
                placeholder="Select Travel Date"
+               placeholderTextColor="black"
                value={travelDate}
                onChangeText={setTravelDate}
                editable={false}/>
@@ -134,7 +139,7 @@ export default function Home( {navigation} ) {
             </View>
 
             <Text style={{fontWeight: "bold", fontSize: 20}}>{text}</Text>
-            
+             */}
             
               {/* <Button style={styles.datePickerButton}
                 mode="contained"
@@ -146,7 +151,7 @@ export default function Home( {navigation} ) {
            
 
 
-            {picker && (
+            {/* {picker && (
               <DateTimePicker
                 value={date}
                 mode={mode}
@@ -165,7 +170,7 @@ export default function Home( {navigation} ) {
 
                 {travelDate}
               }}
-            >Search</Button>
+            >Search</Button> */}
            
         </View>
         
@@ -206,6 +211,7 @@ const styles = StyleSheet.create({
     input1: {
       backgroundColor: "#E9ECEE",
       width: "70%",
+      
         
     },
 
@@ -214,9 +220,14 @@ const styles = StyleSheet.create({
     },
 
       signUpButton: {
-        width: 120,
-        marginTop: -40,
-        marginLeft: 270
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 50,
+      },
+
+      button: {
+        width: 300,
+        padding: 10,
       },
 
       enterButton: {
@@ -226,9 +237,9 @@ const styles = StyleSheet.create({
       },
 
       loginButton: {
-        marginTop: 20,
-        width: 100,
-        marginLeft: 20
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 280,
       },
 
       datePicker: {

@@ -10,13 +10,13 @@ import { Menu } from "../screens/drawer";
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
-const Root = () => {
-    return(
-        <Drawer.Navigator drawerContent={(props) => <Menu {...props} />}>
-            <Drawer.Screen name="Home" component={Home}/>
-            </Drawer.Navigator>
-    )
-}
+// const Root = () => {
+//     return(
+//         <Drawer.Navigator drawerContent={(props) => <Menu {...props} />}>
+//             {/* <Drawer.Screen name="Welcome" component={Home}/> */}
+//             </Drawer.Navigator>
+//     )
+// }
 
 export default function Navigator() {
     return (
@@ -29,9 +29,18 @@ export default function Navigator() {
                 headerTintColor: "#eee",
               }}
             >
-            <Stack.Screen 
+            {/* <Stack.Screen 
                 name="Root" 
                 component={Root} 
+                options={{
+                    title: "Entrack",
+                    headerBackVisible: false,
+                    gestureEnabled: false,
+                }}
+                /> */}
+            <Stack.Screen 
+                name="Welcome" 
+                component={Home}
                 options={{
                     title: "Entrack",
                     headerBackVisible: false,
