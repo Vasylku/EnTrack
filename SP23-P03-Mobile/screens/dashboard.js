@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 import React, {useState, useEffect} from 'react';
 import { Text, TextInput, Button } from "react-native-paper";
 import { BaseUrl } from "../configuration";
@@ -20,19 +20,21 @@ export default function Dashboard() {
         .catch((error) => {
             console.log(error);
           });
+          
     }
 
-    
       
-
+    getUserInfo();
     return(
-
+      
     <View style= {styles.container}>
+      <Image style={styles.logo1} source={require('../assets/icon.jpg')} />
+      
         <View style= {styles.text}>
       <Text style= {styles.text}>
-        Name: Jerry {'\n'}
-        Email: jerry@gmail.com
-        
+        {/* Name: Jerry {'\n'}
+        Email: jerry@gmail.com */}
+       
         </Text>
       </View>
       
@@ -51,12 +53,12 @@ export default function Dashboard() {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        flex:  1,
-        flexDirection:  'row', 
-        flexWrap:  'wrap', 
+        // flex:  1,
+        // flexDirection:  'row', 
+        // flexWrap:  'wrap', 
         marginTop:  75,
         width:  375,
-        height:  120,
+        height:  620,
         marginLeft:  20,
         marginBottom:  420, 
         backgroundColor:  'lightgrey', 
@@ -68,6 +70,13 @@ const styles = StyleSheet.create({
 
        text: {
         fontSize: 25
+       },
+
+       logo1: {
+        resizeMode: "contain",
+        width: 75,
+        marginLeft: -275,
+        marginTop: -180
        }
 
 })

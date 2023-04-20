@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, View } from "react-native";
+import { Alert, View, Text } from "react-native";
 import { Drawer } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { StyleSheet } from "react-native";
@@ -40,7 +40,8 @@ return (
                 icon={({color, size}) => (
                     <Icon name="home" color={color} size={size}/>
                 )}
-                label="Home"
+                //label="Home"
+                label={<Text style={{color: 'black'}}>Home</Text>}
                 onPress={() => navigation.navigate("Home")}
             ></Drawer.Item>
         </Drawer.Section>
@@ -50,7 +51,8 @@ return (
             icon={({ color, size }) => (
                 <Icon name="exit-to-app" color={color} size={size} />
               )}
-              label="Log Out"
+              //label="Log Out"
+              label={<Text style={{color: 'black'}}>Log Out</Text>}
               onPress={handleLogout}
             ></Drawer.Item>
         </Drawer.Section>

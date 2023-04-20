@@ -74,8 +74,8 @@ export default function Login( {navigation} ) {
             <Button
             style = {styles.loginButton}
             mode = "contained"
-            buttonColor="deepskyblue"
-            textColor="black"
+            buttonColor="#5F9FCA"
+            textColor="white"
             onPress={handleLogin}
             >Login</Button>
 
@@ -96,14 +96,14 @@ export default function Login( {navigation} ) {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        flex:  1,
-        flexDirection:  'row', 
-       flexWrap:  'wrap', 
-        marginTop:  75,
+        // flex:  1,
+        // flexDirection:  'row', 
+        // flexWrap:  'wrap', 
+        marginTop:  200,
         width:  375,
-        height:  120,
+        height:  220,
         marginLeft:  20,
-        marginBottom:  120, 
+        marginBottom:  330, 
         backgroundColor:  'lightgrey', 
         borderWidth:  2, 
         justifyContent:  'center',
