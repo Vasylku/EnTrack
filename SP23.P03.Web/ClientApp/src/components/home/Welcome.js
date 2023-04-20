@@ -15,7 +15,6 @@ const Welcome = () => {
 
 	const saveFormData = (responses) => {
 		setSearchData(responses);
-		//const y = document.getElementById("idme");
 		window.scrollTo({ top: 600, behavior: "smooth" });
 	};
 	const handleSelect = (id) => {
@@ -63,7 +62,6 @@ const Welcome = () => {
 								<th
 									scope="col"
 									onClick={handleBook}
-									//className="px-4 py-3 text-xs cursor-pointer "
 									className={`px-1 py-3 text-md cursor-pointer text-center  rounded-full  ${
 										selectedIds.length > 0
 											? "bg-green-900 hover:bg-green-800 custom-class "

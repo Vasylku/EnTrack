@@ -1,17 +1,12 @@
 ﻿
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SP23.P03.Web.Data;
-using SP23.P03.Web.Extensions;
-using SP23.P03.Web.Features.Authorization;
 using SP23.P03.Web.Features.Schedules;
 using SP23.P03.Web.Features.ScheduledTrains;
 using SP23.P03.Web.Features.TrainStations;
 using SP23.P03.Web.Features.Trains;
-using System.Text.Json;
-using Microsoft.VisualBasic;
-using System.Text;
+
 
 namespace SP23.P03.Web.Controllers;
 
@@ -112,15 +107,7 @@ public class SchedulesController : ControllerBase
             ReservedCheck = reservedSeats,
             DepartureTime = s.DepartureTime,
             ArrivalTime = s.ArrivalTime,
-        }).ToList();
-        // Map updated schedule to DTO
-        //var dto = new ScheduleSeatBookDto
-        //{
-        //    Id = schedule.Id,
-        //    // ReservedSeats= schedule.ReservedSeats,
-        //    ReservedCheck = reservedSeats,
-        //};
-
+        }).ToList();  
         return Ok(scheduled);
     }
     [HttpPut]
@@ -138,7 +125,7 @@ public class SchedulesController : ControllerBase
         {
             return BadRequest("Seat numbers cannot be null.");
         }
-        // Convert seat numbers to byte array
+        // Convert seats to byte array
 
         byte[] bookedSeats = (byte[])schedule.ReservedSeats.Clone(); 
 
@@ -160,7 +147,7 @@ public class SchedulesController : ControllerBase
                 case 'r':
                     bookedSeats[seatIndex] |= 0x32; //'r'(roomlet seats): 119(38 x 8 x 2 / 8)
                     break;
-                // Add cases for other coach types if necessary
+                // Add cases for other seattypes if necessary
                 default:
                     return BadRequest("Invalid seat type");
             }

@@ -21,7 +21,7 @@ function App() {
 	const [bookingData, setBookingData] = useState(null);
 	const [details, setDetails] = useState(null);
 	const [approve, setApprove] = useState(null);
-
+	const [code, setCode] = useState();
 	const handleConfirmBooking = (data) => {
 		setBookingData(data);
 	};
@@ -42,7 +42,12 @@ function App() {
 	useEffect(() => {
 		console.log(approve);
 	}, [approve]);
-
+	const handleCode = (data) => {
+		setCode(data);
+	};
+	useEffect(() => {
+		console.log(code);
+	}, [code]);
 	return (
 		<div className="min-h-screen">
 			<div className="gradient-bg-welcome">
@@ -52,18 +57,18 @@ function App() {
 							<Navbar />
 							<Routes>
 								<Route path="/" element={<Welcome />} />
-								{/* <Route path="/destinations" element={<Dest/>} /> */}
+
 								<Route
 									path="/payment"
 									element={
 										<PaymentForm
 											saveBookingData={details}
 											onApproveBooking={handleApproveBooking}
+											onCode={handleCode}
 										/>
 									}
 								/>
 								<Route path="/login" element={<LoginPage />} />
-								{/* <Route path="/destinations" element={<Dest/>}/> */}
 								<Route path="/news" element={<NewsMediaPage />} />
 								<Route path="/baggage" element={<BaggagePolicy />} />
 								<Route path="/dashboard" element={<Dashboard />} />
@@ -76,7 +81,10 @@ function App() {
 										/>
 									}
 								/>
-								<Route path="/ticket" element={<Ticket data={approve} />} />
+								<Route
+									path="/ticket"
+									element={<Ticket data={approve} code={code} />}
+								/>
 								<Route
 									path="/seatpicker/:id1/:id2?"
 									element={

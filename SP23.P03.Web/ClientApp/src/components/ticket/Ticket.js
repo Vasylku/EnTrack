@@ -1,24 +1,12 @@
 import React from "react";
 import { MdPrint, MdSend } from "react-icons/md";
-//import { saveAs } from "file-saver";
 import photo from "../../images/photo.jpg";
 import JsPDF from "jspdf";
 import JsBarcode from "jsbarcode";
 import { useEffect, useRef } from "react";
+
 const handleDownload = () => {
 	//window.print();
-	// const ticketData = { from, to, date, time, seatNumber };
-
-	//   const ticketData =
-	//    <Ticket/>
-	//    ;
-	//   const pdfBlob = new Blob([ticketData]);
-	//
-
-	// saveAs(pdfBlob, 'train-ticket.pdf');
-
-	//   console.log(pdfBlob); */
-
 	const ticket = new JsPDF("portrait", "mm", ["520", "694"]);
 	ticket
 		.html(document.querySelector("#ticket"), { margin: [50, 50] })
@@ -27,7 +15,7 @@ const handleDownload = () => {
 		});
 };
 
-const Ticket = ({ data }) => {
+const Ticket = ({ data, code }) => {
 	/*     const handleSend = async () => {
         const pdfBlob = <Ticket ticketData={ticketData} />.toBlob();
         const formData = new FormData();
@@ -55,15 +43,6 @@ const Ticket = ({ data }) => {
 			});
 		}
 	}, [barcodeRef, ticketNumber]);
-	function generateTicketNumber() {
-		let ticketNumber = "";
-		const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-		for (let i = 0; i < 3; i++) {
-			const randomIndex = Math.floor(Math.random() * chars.length);
-			ticketNumber += chars.charAt(randomIndex);
-		}
-		return ticketNumber;
-	}
 	console.log(data);
 	return (
 		<div className="flex  w-full min-h-screen justify-center items-center bg-[#202124]">
@@ -85,7 +64,7 @@ const Ticket = ({ data }) => {
 								<h2 className="font-medium">EnTrack</h2>
 							</div>
 							<div className="ml-auto text-blue-800">
-								{generateTicketNumber()}
+								{/* 	{generateTicketNumber()} */} {code}
 							</div>
 						</div>
 						<div className="border-b border-dashed my-5"></div>
