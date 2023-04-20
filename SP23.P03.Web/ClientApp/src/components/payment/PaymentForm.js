@@ -2,15 +2,47 @@ import React, { useState } from "react";
 import { FaCcVisa } from "react-icons/fa";
 import { ImPaypal } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 const PaymentForm = ({ saveBookingData, onApproveBooking }) => {
 	const [selectedPaymentType, setSelectedPaymentType] = useState("credit_card");
 	const navigate = useNavigate();
 	const handleNavigate = () => {
+		if (saveBookingData.responseid2) {
+			Promise.all([
+				axios.put(
+					`/api/schedules?id=${saveBookingData.responseid2[0].id}`,
+					saveBookingData.selectedData2
+				),
+				axios.put(
+					`/api/schedules?id=${saveBookingData.responseid1[0].id}`,
+					saveBookingData.selectedData
+				),
+			])
+				.then(([res1, res2]) => {
+					console.log(res1.data);
+					console.log(res2.data);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		} else {
+			axios
+				.put(
+					`/api/schedules?id=${saveBookingData.responseid1[0].id}`,
+					saveBookingData.selectedData
+				)
+				.then((res) => {
+					console.log(res.data);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		}
 		navigate("/ticket");
 		onApproveBooking(saveBookingData);
 		window.scrollTo({ top: 0, behavior: "smooth" });
 	};
-	console.log(saveBookingData);
+	//console.log(saveBookingData.responseid2[0].id);
 	const handleSubmit = (e) => {
 		e.preventDefault();
 

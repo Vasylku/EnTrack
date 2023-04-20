@@ -35,6 +35,8 @@ const TrainSearchForm = (props) => {
 			newErrors["startStation"] = "Departure station is required.";
 		if (!endStation)
 			newErrors["endStation"] = "End Station station is required.";
+		if (startStation === endStation)
+			newErrors["startStation"] = "Start station cannot be same as Destination";
 		if (!departureDate)
 			newErrors["departureDate"] = "Departure date is required.";
 		//if (departureDate && new Date(departureDate).getTime() < new Date().getTime()) newErrors["departureDate"] = "Departure date cannot be in the past.";
@@ -205,7 +207,7 @@ const TrainSearchForm = (props) => {
 							}`}
 						>
 							<option value="oneWay">One-way</option>
-							<option value="twoWay">Two-way</option>
+							<option value="twoWay">Round trip</option>
 						</select>
 					</div>
 					<div className="flex flex-col relative ">

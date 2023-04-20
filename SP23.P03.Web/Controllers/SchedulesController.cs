@@ -125,6 +125,7 @@ public class SchedulesController : ControllerBase
     }
     [HttpPut]
     public IActionResult UpdateSchedule(int id, string[] seatNumbers)
+
     {
         var schedule = schedules.FirstOrDefault(s => s.Id == id);
 

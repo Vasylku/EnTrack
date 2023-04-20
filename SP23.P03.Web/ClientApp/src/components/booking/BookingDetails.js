@@ -1,12 +1,41 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 const BookingDetails = ({ bookingData, onSaveBookingData }) => {
 	const navigate = useNavigate();
-
+	const [res1, setRes1] = useState([]);
+	const [res2, setRes2] = useState([]);
 	useEffect(() => {
-		//console.log(bookingData.responseid1);
+		//console.log(bookingData.responseid1[0].scheduledTrain.distance);
+		if (bookingData.selectedData2) {
+			setRes1(bookingData.selectedData);
+			setRes2(bookingData.selectedData2);
+			console.log(bookingData);
+		} else {
+			setRes1(bookingData.selectedData);
+		}
 	}, [bookingData]);
+	const seatTypes = [
+		{ type: "c", price: 17 },
+		{ type: "s", price: 23 },
+		{ type: "r", price: 20 },
+		{ type: "f", price: 30 },
+	];
+
+	let totalPrice = 0;
+	res1.forEach((seat) => {
+		const type = seat[0];
+		const { price } = seatTypes.find(({ type: t }) => t === type);
+		totalPrice += price;
+	});
+	let totalPrice2 = 0;
+
+	res2.forEach((seat) => {
+		const type = seat[0];
+		const { price } = seatTypes.find(({ type: t }) => t === type);
+		totalPrice2 += price;
+	});
+	console.log(seatTypes);
 	const formatDate = (time) => {
 		const date = new Date(time);
 		const month = date.toLocaleString("default", { month: "short" });
@@ -35,8 +64,8 @@ const BookingDetails = ({ bookingData, onSaveBookingData }) => {
 	};
 
 	return (
-		<div className="bg-[#202124] h-screen w-full flex flex-col sm:flex-row items-center justify-center">
-			<div className=" text-gradient text-white flex flex-col text-lg white-glassmorphism rounded-lg shadow-lg p-8 w-[500px] ">
+		<div className="bg-[#202124] w-full flex flex-col sm:flex-row items-center justify-center">
+			<div className=" text-gradient text-white flex flex-col my-10 flex-shrink-5 text-lg white-glassmorphism rounded-lg shadow-lg p-8 w-[500px] ">
 				{bookingData.responseid1.map((item) => (
 					<div key={item.id}>
 						<div className="text-xl font-extrabold mb-4 text-center">
@@ -69,14 +98,9 @@ const BookingDetails = ({ bookingData, onSaveBookingData }) => {
 							<div>{bookingData.selectedData.join(",")}</div>
 						</div>
 						<hr className="my-4" />
-
-						{/* <div className="flex justify-between mb-4">
-							<div className="font-semibold">Seat Type:</div>
-							<div>item.selectedTrain.SeatType</div>
-						</div> */}
 						<div className="flex justify-between mb-4 text-xl font-bold">
 							<div className=" mb-4">Price:</div>
-							<div>item.price</div>
+							<div>${totalPrice}</div>
 						</div>
 					</div>
 				))}
@@ -115,14 +139,9 @@ const BookingDetails = ({ bookingData, onSaveBookingData }) => {
 									<div>{bookingData.selectedData2.join(",")}</div>
 								</div>
 								<hr className="my-4" />
-
-								{/* <div className="flex justify-between mb-4">
-							<div className="font-semibold">Seat Type:</div>
-							<div>item.selectedTrain.SeatType</div>
-						</div> */}
 								<div className="flex justify-between mb-4 text-xl font-bold">
 									<div className=" mb-4">Price:</div>
-									<div>item.price</div>
+									<div>${totalPrice2}</div>
 								</div>
 							</div>
 						))}
