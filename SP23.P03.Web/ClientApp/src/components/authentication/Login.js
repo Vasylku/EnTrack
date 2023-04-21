@@ -36,7 +36,7 @@ const LoginPage = () => {
 			};
 			try {
 				await register(registerIn);
-				navigate("/dashboard");
+				navigate("/login");
 			} catch (error) {
 				setErrors([...err, error]);
 			}
