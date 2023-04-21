@@ -411,97 +411,97 @@ new TrainStation
 
         ScheduledTrainId =  schedultr1.Id,
         TrainsId = tr1.Id,
-        DepartureTime = new DateTime(2023, 4, 27, 8,15,0),
-        ArrivalTime =new DateTime(2023, 4, 27, 10,30,0),
+        DepartureTime = new DateTimeOffset(new DateTime(2023, 4, 27, 7,15,0),new TimeSpan(-5, 0, 0)),
+        ArrivalTime =new DateTimeOffset(new DateTime(2023, 4, 27, 9,30,0),new TimeSpan(-5, 0, 0)),
       },
       new Schedule
       {
         ScheduledTrainId = schedultr2.Id,
         TrainsId = tr2.Id,
-        DepartureTime = new DateTime(2023,4, 27, 16,15,0),
-        ArrivalTime = new DateTime(2023, 4, 27, 18,30,0),
+        DepartureTime = new DateTimeOffset(new DateTime (2023, 4, 27, 16, 15, 0),new TimeSpan(-5, 0, 0)),
+        ArrivalTime = new DateTimeOffset(new DateTime (2023, 4, 27,18, 30, 0),new TimeSpan(-5, 0, 0)),
       },
       new Schedule
       {
           ScheduledTrainId = schedultr3.Id,
           TrainsId = tr1.Id,
-          DepartureTime = new DateTime(2023, 5, 4, 9,15,0),
-          ArrivalTime = new DateTime(2023,5,4, 11,30,0),
+          DepartureTime = new DateTimeOffset( new DateTime(2023, 5, 4, 8,15,0 ),new TimeSpan(-5, 0, 0)),
+          ArrivalTime = new DateTimeOffset(new DateTime (2023, 5, 4, 10, 30, 0),new TimeSpan(-5, 0, 0)),
 
     },
       new Schedule
       {
           ScheduledTrainId = schedultr4.Id,
           TrainsId = tr3.Id,
-          DepartureTime = new DateTime(2023, 5, 4, 17,15,0),
-          ArrivalTime = new DateTime(2023,5,4, 19,30,0),
+          DepartureTime = new DateTimeOffset (new DateTime(2023, 5, 4, 17, 15, 0), new TimeSpan(-5, 0, 0)), 
+          ArrivalTime = new DateTimeOffset (new DateTime(2023, 5, 4, 19, 30, 0), new TimeSpan(-5, 0, 0)),
 
     },
          new Schedule
       {
           ScheduledTrainId = schedultr5.Id,
           TrainsId = tr3.Id,
-          DepartureTime = new DateTime(2023, 4, 30, 17,15,0),
-          ArrivalTime = new DateTime(2023,4,30,19,30,0),
+          DepartureTime = new DateTimeOffset(new DateTime (2023, 4, 30, 19, 15, 0), new TimeSpan(-5, 0, 0)),
+             ArrivalTime = new DateTimeOffset(new DateTime (2023, 4, 30, 21, 30, 0),new TimeSpan(-5, 0, 0)),
 
     },new Schedule
       {
           ScheduledTrainId = schedultr6.Id,
           TrainsId = tr2.Id,
-          DepartureTime = new DateTime(2023, 4, 30, 19,15,0),
-          ArrivalTime = new DateTime(2023,4,30, 21,30,0),
+          DepartureTime = new DateTimeOffset(new DateTime (2023, 4, 30, 17, 15, 0),new TimeSpan(-5, 0, 0)),
+        ArrivalTime = new DateTimeOffset(new DateTime (2023, 4, 30, 19, 30, 0),new TimeSpan(-5, 0, 0)),
 
     },new Schedule
       {
           ScheduledTrainId = schedultr7.Id,
           TrainsId = tr1.Id,
-          DepartureTime = new DateTime(2023,5, 7, 17,15,0),
-          ArrivalTime = new DateTime(2023,5,7,19,30,0),
+          DepartureTime = new DateTimeOffset(new DateTime (2023, 5, 7, 19, 15, 0),new TimeSpan(-5, 0, 0)),
+        ArrivalTime = new DateTimeOffset (new DateTime(2023, 5, 7, 21, 30, 0), new TimeSpan(-5, 0, 0)),
 
     },
       new Schedule
       {
           ScheduledTrainId = schedultr8.Id,
           TrainsId = tr2.Id,
-          DepartureTime = new DateTime(2023, 5, 7, 19,15,0),
-          ArrivalTime = new DateTime(2023,5,7, 21,30,0),
+          DepartureTime = new DateTimeOffset (new DateTime(2023, 5, 7,17, 15, 0), new TimeSpan(-5, 0, 0)), 
+          ArrivalTime = new DateTimeOffset (new DateTime(2023, 5, 7, 19, 30, 0), new TimeSpan(-5, 0, 0)),
 
     },
       new Schedule
       {
           ScheduledTrainId = schedultr9.Id,
           TrainsId = tr3.Id,
-          DepartureTime = new DateTime(2023, 5,4, 7,15,0),
-          ArrivalTime = new DateTime(2023,5,4, 10,45,0),
+          DepartureTime =new DateTimeOffset(new DateTime (2023, 5, 4, 7, 15, 0),new TimeSpan(-5, 0, 0)),
+          ArrivalTime =new DateTimeOffset( new DateTime (2023, 5, 4, 10, 45, 0),new TimeSpan(-5, 0, 0)),
 
     }, new Schedule
       {
           ScheduledTrainId = schedultr10.Id,
           TrainsId = tr1.Id,
-          DepartureTime = new DateTime(2023, 5, 4, 14,15,0),
-          ArrivalTime = new DateTime(2023,5,4,16,15,0),
+          DepartureTime = new DateTimeOffset (new DateTime(2023, 5, 4, 14, 15, 0), new TimeSpan(-5, 0, 0)), 
+        ArrivalTime = new DateTimeOffset (new DateTime(2023, 5, 4, 16, 15, 0), new TimeSpan(-5, 0, 0)),
 
     },
        new Schedule
       {
           ScheduledTrainId = schedultr11.Id,
           TrainsId = tr1.Id,
-          DepartureTime = new DateTime(2023, 4,30, 16,15,0),
-          ArrivalTime = new DateTime(2023,4,30, 19,45,0),
+          DepartureTime = new DateTimeOffset(new DateTime (2023, 5, 5, 18, 15, 0),new TimeSpan(-5, 0, 0)),
+          ArrivalTime = new DateTimeOffset(new DateTime (2023, 5, 5, 21, 45, 0),new TimeSpan(-5, 0, 0)),
 
     }, new Schedule
       {
           ScheduledTrainId = schedultr12.Id,
           TrainsId = tr2.Id,
-          DepartureTime = new DateTime(2023, 5, 5, 14,15,0),
-          ArrivalTime = new DateTime(2023,5,5,16,15,0),
+          DepartureTime = new DateTimeOffset (new DateTime(2023, 5, 6, 18, 30, 0), new TimeSpan(-5, 0, 0)), 
+        ArrivalTime = new DateTimeOffset (new DateTime(2023, 5, 6, 20, 30, 0), new TimeSpan(-5, 0, 0)),
 
     }, new Schedule
       {
           ScheduledTrainId = schedultr13.Id,
           TrainsId = tr2.Id,
-          DepartureTime = new DateTime(2023, 5, 4, 8,0,0),
-          ArrivalTime = new DateTime(2023,5,4,18,15,0),
+          DepartureTime =new DateTimeOffset (new DateTime(2023, 5, 4, 7, 10, 0), new TimeSpan(-5, 0, 0)),
+          ArrivalTime = new DateTimeOffset(new DateTime(23,5,4,19,15,0),new TimeSpan(-5, 0, 0)),
 
     },
   
