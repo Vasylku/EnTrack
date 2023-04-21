@@ -1,16 +1,97 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaCcVisa } from "react-icons/fa";
 import { ImPaypal } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
-const PaymentForm = ({ saveBookingData, onApproveBooking }) => {
+import axios from "axios";
+
+const PaymentForm = ({ saveBookingData, onApproveBooking, onCode }) => {
 	const [selectedPaymentType, setSelectedPaymentType] = useState("credit_card");
+
+	useEffect(() => {}, [saveBookingData]);
+
 	const navigate = useNavigate();
 	const handleNavigate = () => {
+		if (saveBookingData.responseid2) {
+			const checkCode1 = Math.floor(Math.random() * 900) + 100;
+			const checkCode2 = Math.floor(Math.random() * 900) + 100;
+			const data1 = {
+				checkCode: checkCode1,
+				ticketPrice: 22,
+				startStationName:
+					saveBookingData.responseid1[0].scheduledTrain.startStation.name,
+				endStationName:
+					saveBookingData.responseid1[0].scheduledTrain.endStation.name,
+				departureTime: saveBookingData.responseid1[0].departureTime,
+
+				arrivalTime: saveBookingData.responseid1[0].arrivalTime,
+				bookedSeat: saveBookingData.selectedData,
+			};
+			const data2 = {
+				checkCode: checkCode2,
+				ticketPrice: 22,
+				startStationName:
+					saveBookingData.responseid2[0].scheduledTrain.startStation.name,
+				endStationName:
+					saveBookingData.responseid2[0].scheduledTrain.endStation.name,
+				departureTime: saveBookingData.responseid2[0].departureTime,
+
+				arrivalTime: saveBookingData.responseid2[0].arrivalTime,
+				bookedSeat: saveBookingData.selectedData2,
+			};
+			Promise.all([
+				axios.put(
+					`/api/schedules?id=${saveBookingData.responseid2[0].id}`,
+					saveBookingData.selectedData2
+				),
+				axios.post(`/api/tickets`, data2),
+				axios.put(
+					`/api/schedules?id=${saveBookingData.responseid1[0].id}`,
+					saveBookingData.selectedData
+				),
+				axios.post(`/api/tickets`, data1),
+			])
+				.then(([res1, res2]) => {
+					console.log(res1.data);
+					console.log(res2.data);
+					onCode(checkCode1, checkCode2);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		} else {
+			const checkCode1 = Math.floor(Math.random() * 9000) + 100;
+			const data1 = {
+				checkCode: checkCode1,
+				ticketPrice: 22,
+				startStationName:
+					saveBookingData.responseid1[0].scheduledTrain.startStation.name,
+				endStationName:
+					saveBookingData.responseid1[0].scheduledTrain.endStation.name,
+				departureTime: saveBookingData.responseid1[0].departureTime,
+				arrivalTime: saveBookingData.responseid1[0].arrivalTime,
+				bookedSeat: saveBookingData.selectedData,
+			};
+			Promise.all([
+				axios.post(`/api/tickets`, data1),
+				axios.put(
+					`/api/schedules?id=${saveBookingData.responseid1[0].id}`,
+					saveBookingData.selectedData
+				),
+			])
+				.then((results) => {
+					console.log(results[0].data);
+					console.log(results[1].data);
+					onCode(checkCode1);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		}
 		navigate("/ticket");
 		onApproveBooking(saveBookingData);
 		window.scrollTo({ top: 0, behavior: "smooth" });
 	};
-	console.log(saveBookingData);
+	//console.log(saveBookingData.responseid2[0].id);
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
@@ -61,7 +142,7 @@ const PaymentForm = ({ saveBookingData, onApproveBooking }) => {
 				</div>
 
 				{selectedPaymentType === "credit_card" && (
-					<form onSubmit={handleSubmit}>
+					<form onSubmit={handleNavigate}>
 						<div className="mb-3">
 							<label className="font-bold text-sm mb-2 ml-1" htmlFor="cardName">
 								Name on card

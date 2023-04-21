@@ -30,7 +30,6 @@ namespace SP23.P03.Web.Features.Schedules
     public class ScheduleSeatBookDto
     {
         public int Id { get; set; }
-        // public byte[] ReservedSeats { get; set; } = new byte[38];
         public int ScheduledTrainId { get; set; }
         public ScheduledTrainDto? ScheduledTrain { get; set; }
         public int TrainsId { get; set; }

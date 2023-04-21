@@ -1,24 +1,12 @@
 import React from "react";
 import { MdPrint, MdSend } from "react-icons/md";
-//import { saveAs } from "file-saver";
 import photo from "../../images/photo.jpg";
 import JsPDF from "jspdf";
 import JsBarcode from "jsbarcode";
 import { useEffect, useRef } from "react";
+
 const handleDownload = () => {
 	//window.print();
-	// const ticketData = { from, to, date, time, seatNumber };
-
-	//   const ticketData =
-	//    <Ticket/>
-	//    ;
-	//   const pdfBlob = new Blob([ticketData]);
-	//
-
-	// saveAs(pdfBlob, 'train-ticket.pdf');
-
-	//   console.log(pdfBlob); */
-
 	const ticket = new JsPDF("portrait", "mm", ["520", "694"]);
 	ticket
 		.html(document.querySelector("#ticket"), { margin: [50, 50] })
@@ -27,23 +15,7 @@ const handleDownload = () => {
 		});
 };
 
-const Ticket = ({ data }) => {
-	/*     const handleSend = async () => {
-        const pdfBlob = <Ticket ticketData={ticketData} />.toBlob();
-        const formData = new FormData();
-        formData.append("file", pdfBlob, "train-ticket.pdf");
-        formData.append("toEmail", "user@example.com"); // Replace with the actual email address of the user
-        const response = await fetch("https://example.com/send-email", {
-          method: "POST",
-          body: formData,
-        });
-        if (response.ok) {
-          alert("Ticket sent successfully!");
-        } else {
-          alert("Failed to send the ticket.");
-        }
-      }; */
-	// Generate the barcode
+const Ticket = ({ data, code }) => {
 	const barcodeRef = useRef(null);
 	const ticketNumber = "1234567890";
 	useEffect(() => {
@@ -55,22 +27,13 @@ const Ticket = ({ data }) => {
 			});
 		}
 	}, [barcodeRef, ticketNumber]);
-	function generateTicketNumber() {
-		let ticketNumber = "";
-		const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-		for (let i = 0; i < 3; i++) {
-			const randomIndex = Math.floor(Math.random() * chars.length);
-			ticketNumber += chars.charAt(randomIndex);
-		}
-		return ticketNumber;
-	}
 	console.log(data);
 	return (
-		<div className="flex  w-full min-h-screen justify-center items-center bg-[#202124]">
+		<div className="flex flex-col w-full min-h-screen justify-center items-center bg-[#202124]">
 			{data.responseid1.map((item) => (
 				<div
 					key={item.id}
-					className=" max-w-lg rounded-lg overflow-hidden bg-[#dddedf] shadow-xl mx-auto  p-10"
+					className=" max-w-lg rounded-lg overflow-hidden bg-[#dddedf] shadow-xl mx-auto mb-10 p-10"
 				>
 					<div id="ticket">
 						<div className="flex items-center justify-between">
@@ -84,9 +47,7 @@ const Ticket = ({ data }) => {
 								</span>
 								<h2 className="font-medium">EnTrack</h2>
 							</div>
-							<div className="ml-auto text-blue-800">
-								{generateTicketNumber()}
-							</div>
+							<div className="ml-auto text-blue-800">{code}</div>
 						</div>
 						<div className="border-b border-dashed my-5"></div>
 						<div className="flex items-center">

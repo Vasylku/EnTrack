@@ -1,17 +1,12 @@
 ﻿
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SP23.P03.Web.Data;
-using SP23.P03.Web.Extensions;
-using SP23.P03.Web.Features.Authorization;
 using SP23.P03.Web.Features.Schedules;
 using SP23.P03.Web.Features.ScheduledTrains;
 using SP23.P03.Web.Features.TrainStations;
 using SP23.P03.Web.Features.Trains;
-using System.Text.Json;
-using Microsoft.VisualBasic;
-using System.Text;
+
 
 namespace SP23.P03.Web.Controllers;
 
@@ -50,11 +45,11 @@ public class SchedulesController : ControllerBase
             {
                 reservedSeats.Add("s" + (i + 1));
             }
-            if ((bookedSeats[i] & 0x24) != 0)
+            if ((bookedSeats[i] & 0x36) != 0)
             {
                 reservedSeats.Add("f" + (i + 1));
             }
-            if ((bookedSeats[i] & 0x32) != 0)
+            if ((bookedSeats[i] & 0x80) != 0)
             {
                 reservedSeats.Add("r" + (i + 1));
             }
@@ -112,19 +107,12 @@ public class SchedulesController : ControllerBase
             ReservedCheck = reservedSeats,
             DepartureTime = s.DepartureTime,
             ArrivalTime = s.ArrivalTime,
-        }).ToList();
-        // Map updated schedule to DTO
-        //var dto = new ScheduleSeatBookDto
-        //{
-        //    Id = schedule.Id,
-        //    // ReservedSeats= schedule.ReservedSeats,
-        //    ReservedCheck = reservedSeats,
-        //};
-
+        }).ToList();  
         return Ok(scheduled);
     }
     [HttpPut]
     public IActionResult UpdateSchedule(int id, string[] seatNumbers)
+
     {
         var schedule = schedules.FirstOrDefault(s => s.Id == id);
 
@@ -137,7 +125,6 @@ public class SchedulesController : ControllerBase
         {
             return BadRequest("Seat numbers cannot be null.");
         }
-        // Convert seat numbers to byte array
 
         byte[] bookedSeats = (byte[])schedule.ReservedSeats.Clone(); 
 
@@ -148,18 +135,18 @@ public class SchedulesController : ControllerBase
             switch (seatTypeN)
             {
                 case 'c':
-                    bookedSeats[seatIndex] |= 0x01;//'c' (coach seats): 304 (38 x 8 x 1 / 1)
+                    bookedSeats[seatIndex] |= 0x01;
                     break;
                 case 's':
-                    bookedSeats[seatIndex] |= 0x08; //'s'(sleeper seats): 38(38 x 8 x 1 / 8)
+                    bookedSeats[seatIndex] |= 0x08;
                     break;
                 case 'f':
-                    bookedSeats[seatIndex] |= 0x24;//'f' (first class seats): 152 (38 x 8 x 3 / 8)
+                    bookedSeats[seatIndex] |= 0x36;
                     break;
                 case 'r':
-                    bookedSeats[seatIndex] |= 0x32; //'r'(roomlet seats): 119(38 x 8 x 2 / 8)
+                    bookedSeats[seatIndex] |= 0x80; 
                     break;
-                // Add cases for other coach types if necessary
+           
                 default:
                     return BadRequest("Invalid seat type");
             }
@@ -177,17 +164,16 @@ public class SchedulesController : ControllerBase
             {
                 reservedSeats.Add("s" + (i + 1));
             }
-            if ((bookedSeats[i] & 0x24) != 0)
+            if ((bookedSeats[i] & 0x36) != 0)
             {
                 reservedSeats.Add("f" + (i + 1));
             }
-            if ((bookedSeats[i] & 0x32) != 0)
+            if ((bookedSeats[i] & 0x80) != 0)
             {
                 reservedSeats.Add("r" + (i + 1));
             }
         }
      
-        // Map updated schedule to DTO
         var dto = new ScheduleSeatBookDto
         {
             Id = schedule.Id,
