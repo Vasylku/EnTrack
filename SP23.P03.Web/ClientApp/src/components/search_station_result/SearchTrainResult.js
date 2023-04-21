@@ -1,17 +1,7 @@
 import React from "react";
-//import { useNavigate } from "react-router-dom";
 import TrainDate from "./TrainDate";
-/* import { FaTrain } from 'react-icons/fa';
-import { FiUsers } from 'react-icons/fi'; */
 
 function SearchTrainsResult({ searchData, scheduledata, onSelect, selected }) {
-	//console.log(scheduledata);
-	//const navigate = useNavigate();
-	// const navToTop = (route) => {
-	// 	navigate(route);
-	// 	window.scrollTo({ top: 0, behavior: "smooth" });
-	// };
-
 	const t = new Date(scheduledata.departureTime);
 
 	return (
@@ -42,12 +32,6 @@ function SearchTrainsResult({ searchData, scheduledata, onSelect, selected }) {
 					>
 						{selected ? "Selected" : "Select  "}
 					</button>
-					{/* <button
-						onClick={() => navToTop("/booking")}
-						className="px-4 py-2 text-gradient animate-pulse hover:animate-bounce bg-blue-100 rounded-lg hover:bg-orange-500 "
-					>
-						Book
-					</button> */}
 				</td>
 			</tr>
 		</>

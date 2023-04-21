@@ -15,7 +15,6 @@ const ServiceCard = ({ color, title, icon, subtitle }) => (
 		</div>
 	</div>
 );
-
 const Services = () => (
 	<div className="flex print:hidden w-full justify-evenly items-center bg-[#171717]">
 		<div className="flex lg:flex-row flex-col items-center justify-between  py-12 px-4">

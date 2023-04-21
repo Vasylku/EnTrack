@@ -16,22 +16,6 @@ const handleDownload = () => {
 };
 
 const Ticket = ({ data, code }) => {
-	/*     const handleSend = async () => {
-        const pdfBlob = <Ticket ticketData={ticketData} />.toBlob();
-        const formData = new FormData();
-        formData.append("file", pdfBlob, "train-ticket.pdf");
-        formData.append("toEmail", "user@example.com"); // Replace with the actual email address of the user
-        const response = await fetch("https://example.com/send-email", {
-          method: "POST",
-          body: formData,
-        });
-        if (response.ok) {
-          alert("Ticket sent successfully!");
-        } else {
-          alert("Failed to send the ticket.");
-        }
-      }; */
-	// Generate the barcode
 	const barcodeRef = useRef(null);
 	const ticketNumber = "1234567890";
 	useEffect(() => {
@@ -45,11 +29,11 @@ const Ticket = ({ data, code }) => {
 	}, [barcodeRef, ticketNumber]);
 	console.log(data);
 	return (
-		<div className="flex  w-full min-h-screen justify-center items-center bg-[#202124]">
+		<div className="flex flex-col w-full min-h-screen justify-center items-center bg-[#202124]">
 			{data.responseid1.map((item) => (
 				<div
 					key={item.id}
-					className=" max-w-lg rounded-lg overflow-hidden bg-[#dddedf] shadow-xl mx-auto  p-10"
+					className=" max-w-lg rounded-lg overflow-hidden bg-[#dddedf] shadow-xl mx-auto mb-10 p-10"
 				>
 					<div id="ticket">
 						<div className="flex items-center justify-between">
@@ -63,9 +47,7 @@ const Ticket = ({ data, code }) => {
 								</span>
 								<h2 className="font-medium">EnTrack</h2>
 							</div>
-							<div className="ml-auto text-blue-800">
-								{/* 	{generateTicketNumber()} */} {code}
-							</div>
+							<div className="ml-auto text-blue-800">{code}</div>
 						</div>
 						<div className="border-b border-dashed my-5"></div>
 						<div className="flex items-center">

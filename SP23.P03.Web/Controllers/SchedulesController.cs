@@ -45,11 +45,11 @@ public class SchedulesController : ControllerBase
             {
                 reservedSeats.Add("s" + (i + 1));
             }
-            if ((bookedSeats[i] & 0x24) != 0)
+            if ((bookedSeats[i] & 0x36) != 0)
             {
                 reservedSeats.Add("f" + (i + 1));
             }
-            if ((bookedSeats[i] & 0x32) != 0)
+            if ((bookedSeats[i] & 0x80) != 0)
             {
                 reservedSeats.Add("r" + (i + 1));
             }
@@ -125,7 +125,6 @@ public class SchedulesController : ControllerBase
         {
             return BadRequest("Seat numbers cannot be null.");
         }
-        // Convert seats to byte array
 
         byte[] bookedSeats = (byte[])schedule.ReservedSeats.Clone(); 
 
@@ -136,18 +135,18 @@ public class SchedulesController : ControllerBase
             switch (seatTypeN)
             {
                 case 'c':
-                    bookedSeats[seatIndex] |= 0x01;//'c' (coach seats): 304 (38 x 8 x 1 / 1)
+                    bookedSeats[seatIndex] |= 0x01;
                     break;
                 case 's':
-                    bookedSeats[seatIndex] |= 0x08; //'s'(sleeper seats): 38(38 x 8 x 1 / 8)
+                    bookedSeats[seatIndex] |= 0x08;
                     break;
                 case 'f':
-                    bookedSeats[seatIndex] |= 0x24;//'f' (first class seats): 152 (38 x 8 x 3 / 8)
+                    bookedSeats[seatIndex] |= 0x36;
                     break;
                 case 'r':
-                    bookedSeats[seatIndex] |= 0x32; //'r'(roomlet seats): 119(38 x 8 x 2 / 8)
+                    bookedSeats[seatIndex] |= 0x80; 
                     break;
-                // Add cases for other seattypes if necessary
+           
                 default:
                     return BadRequest("Invalid seat type");
             }
@@ -165,17 +164,16 @@ public class SchedulesController : ControllerBase
             {
                 reservedSeats.Add("s" + (i + 1));
             }
-            if ((bookedSeats[i] & 0x24) != 0)
+            if ((bookedSeats[i] & 0x36) != 0)
             {
                 reservedSeats.Add("f" + (i + 1));
             }
-            if ((bookedSeats[i] & 0x32) != 0)
+            if ((bookedSeats[i] & 0x80) != 0)
             {
                 reservedSeats.Add("r" + (i + 1));
             }
         }
      
-        // Map updated schedule to DTO
         var dto = new ScheduleSeatBookDto
         {
             Id = schedule.Id,

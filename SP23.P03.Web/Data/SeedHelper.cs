@@ -24,12 +24,7 @@ public static class SeedHelper
         await SeedAllData(dataContext);
         await TrainsSchedule(dataContext);
         await SchedulesData(dataContext);
-        /*await AddScheduledTrains(dataContext);
-        await AddTrainsAsync(dataContext);
-
-        await AddScheduledTrains(dataContext);
-        await SeedtrainsSchedule(dataContext);*/
-
+  
         await dataContext.SaveChangesAsync();
 
     }
@@ -167,15 +162,7 @@ new TrainStation
   Country = "USA",
   ZipCode = "78701"
 },
-new TrainStation
-{
-  Name = "San Antonio",
-  Street = "707 Alamo St",
-  City = "San Antonio",
-  State = "TX",
-  Country = "USA",
-  ZipCode = "78205"
-},
+
 new TrainStation
 {
   Name = "Houston",
@@ -194,15 +181,6 @@ new TrainStation
   Country = "USA",
   ZipCode = "39530"
 },
-new TrainStation
-{
-  Name = "Hattiesburg",
-  Street = "200 N Front St",
-  City = "Hattiesburg",
-  State = "MS",
-  Country = "USA",
-  ZipCode = "39401"
-}
     };
         foreach (var trainStation in trainsSeedStations)
         {
@@ -225,58 +203,42 @@ new TrainStation
                 {
                    Name = "Siemens Charger 11",
                     TrainClass = "Class A",
-                    AvailableSeats = 168,
-                    CoachSeats = 168,
+                    AvailableSeats = 82,
+                    CoachSeats = 24,
+                    FirstClassSeats=32,
+                    SleeperSeats=14,
+                    RoomletSeats=12,
                 },
                 new Train
                 {
                     Name = "Siemens Charger 2.0",
                     TrainClass = "Class B",
 
-                    AvailableSeats = 126,
-                    CoachSeats = 84,
-                    FirstClassSeats = 42
+                    AvailableSeats = 80,
+                    CoachSeats = 28,
+                    FirstClassSeats=20,
+                    SleeperSeats=12,
+                    RoomletSeats=12,
                 },
                 new Train
                 {
                     Name = "Siemens Charger Express",
                     TrainClass = "Class C",
-                    AvailableSeats = 104,
-                    CoachSeats = 42,
-                    FirstClassSeats = 62,
+                    AvailableSeats = 86,
+                     CoachSeats = 44,
+                    FirstClassSeats=42,
+                  
                 },
                 new Train
                 {
                     Name = "Siemens Charger 7",
                     TrainClass = "Class D",
 
-                    AvailableSeats = 98,
-                    FirstClassSeats = 42,
-                    SleeperSeats = 10,
-                    RoomletSeats = 4
-                },
-                new Train
-      {
-        Name = "Entrack Charger",
-        TrainClass = "Class A/2",
-        AvailableSeats = 150,
-        CoachSeats = 100,
-        DinerCarts = 1,
-        FirstClassSeats = 20,
-        SleeperSeats = 20,
-        RoomletSeats = 10
-      },
-      new Train
-      {
-        Name = "Entrack charger A/1",
-        TrainClass = "Premium",
-        AvailableSeats = 100,
-        CoachSeats = 80,
-        DinerCarts = 2,
-        FirstClassSeats = 10,
-        SleeperSeats = 10,
-        RoomletSeats = 0
-      },
+                    AvailableSeats = 70,
+                      CoachSeats = 24,
+                    FirstClassSeats = 24,
+                    RoomletSeats = 22,
+                }, 
 
         };
 
@@ -306,68 +268,100 @@ new TrainStation
 
             new ScheduledTrain
             {
-                StartStationId = trainst1.Id,
-                EndStationId = trainst2.Id,
+                StartStationId = trainst2.Id,
+                EndStationId = trainst5.Id,
 
-                Distance = 200,
-                TravelTime = new TimeSpan(0, 2, 18),
+                Distance = 58,
+                TravelTime = new TimeSpan(2, 15, 0),
             },
             new ScheduledTrain
             {
               StartStationId = trainst2.Id,
-              EndStationId = trainst1.Id,
+              EndStationId = trainst5.Id,
 
-              Distance = 200,
-              TravelTime = new TimeSpan(0, 2, 18),
+              Distance = 58,
+              TravelTime = new TimeSpan(2, 15, 0),
       },
             new ScheduledTrain
             {
                 StartStationId = trainst2.Id,
                 EndStationId = trainst5.Id,
-                Distance = 50,
-                TravelTime= new TimeSpan(0,50,0),
+                Distance = 58,
+                TravelTime= new TimeSpan(2, 15, 0),
+            },  
+                new ScheduledTrain
+            {
+                StartStationId = trainst2.Id,
+                EndStationId = trainst5.Id,
+
+                Distance = 58,
+                TravelTime = new TimeSpan(2, 15, 0),
+            },
+                 new ScheduledTrain {
+                StartStationId =trainst5.Id,
+                EndStationId = trainst2.Id,
+                Distance= 58,
+                TravelTime = new TimeSpan(2, 15, 0),
+
             },
             new ScheduledTrain
             {
-                StartStationId = trainst3.Id,
-                EndStationId = trainst4.Id,
-                Distance = 400,
-                TravelTime= new TimeSpan(0,5,50),
+                StartStationId = trainst5.Id,
+                EndStationId = trainst2.Id,
+                Distance =58,
+                TravelTime= new TimeSpan(2, 15, 0),
             },
             new ScheduledTrain {
                 StartStationId =trainst5.Id,
-                EndStationId = trainst1.Id,
-                Distance= 400,
-                TravelTime = new TimeSpan(0,5,50),
+                EndStationId = trainst2.Id,
+                Distance= 58,
+                TravelTime = new TimeSpan(2,15, 0),
 
             },
                new ScheduledTrain {
-                StartStationId =trainst2.Id,
-                EndStationId = trainst6.Id,
-                Distance= 400,
-                TravelTime = new TimeSpan(0,50,0),
-
-            },
-                  new ScheduledTrain {
                 StartStationId =trainst5.Id,
                 EndStationId = trainst2.Id,
-                Distance= 400,
-                TravelTime = new TimeSpan(0,50, 0),
+                Distance= 58,
+                TravelTime = new TimeSpan(2,15,0),
 
-            },
-                     new ScheduledTrain {
-                StartStationId =trainst6.Id,
-                EndStationId = trainst2.Id,
-                Distance= 400,
-                TravelTime = new TimeSpan(0,5,50),
-
-            },
-                        new ScheduledTrain {
-                StartStationId =trainst2.Id,
+               },
+              new ScheduledTrain
+            {
+                StartStationId = trainst2.Id,
                 EndStationId = trainst3.Id,
-                Distance= 400,
-                TravelTime = new TimeSpan(2,0,0),
 
+                Distance = 92,
+                TravelTime = new TimeSpan(3, 30, 0),
+            },  new ScheduledTrain
+            {
+                StartStationId = trainst2.Id,
+                EndStationId = trainst6.Id,
+
+                Distance = 42,
+                TravelTime = new TimeSpan(2, 0, 0),
+            },
+              new ScheduledTrain
+            {
+                StartStationId = trainst3.Id,
+                EndStationId = trainst2.Id,
+
+                Distance = 92,
+                TravelTime = new TimeSpan(3, 30, 0),
+            },  new ScheduledTrain
+            {
+                StartStationId = trainst6.Id,
+                EndStationId = trainst2.Id,
+
+                Distance = 42,
+                TravelTime = new TimeSpan(3, 30, 0),
+            },
+              new ScheduledTrain
+            {
+                StartStationId = trainst2.Id,
+                EndStationId = trainst1.Id,
+
+                Distance = 392,
+                TravelTime = new TimeSpan(9,30 , 0),
             },
     };
 
@@ -393,25 +387,19 @@ new TrainStation
         var schedultr7 = dataContext.Set<ScheduledTrain>().First(e => e.Id == 7);
         var schedultr8 = dataContext.Set<ScheduledTrain>().First(e => e.Id == 8);
         var schedultr9 = dataContext.Set<ScheduledTrain>().First(e => e.Id == 9);
+        var schedultr10 = dataContext.Set<ScheduledTrain>().First(e => e.Id == 10);
 
+        var schedultr11 = dataContext.Set<ScheduledTrain>().First(e => e.Id == 11);
+
+        var schedultr12 = dataContext.Set<ScheduledTrain>().First(e => e.Id == 12);
+
+        var schedultr13 = dataContext.Set<ScheduledTrain>().First(e => e.Id == 13);
+      
         var tr1 =dataContext.Set<Train>().First(e => e.Id == 1);
 
         var tr2 = dataContext.Set<Train>().First(e => e.Id == 2);
         var tr3 =dataContext.Set<Train>().First(e => e.Id == 3);
         var tr4 = dataContext.Set<Train>().First(e => e.Id == 4);
-
-        /*var schedultr1 = await dataContext.Set<ScheduledTrain>().SingleAsync(e => e.Id == 1);
-        var schedultr2 = await dataContext.Set<ScheduledTrain>().SingleAsync(e => e.Id == 2);
-        var schedultr3 = await dataContext.Set<ScheduledTrain>().SingleAsync(e => e.Id == 3);
-        var schedultr4 = await dataContext.Set<ScheduledTrain>().SingleAsync(e => e.Id == 4);
-        var tr1 = await dataContext.Set<Train>().SingleAsync(e => e.Id == 1);
-        var tr2 = await dataContext.Set<Train>().SingleAsync(e => e.Id == 2);
-        var tr3 = await dataContext.Set<Train>().SingleAsync(e => e.Id == 3);
-        var tr4 = await dataContext.Set<Train>().SingleAsync(e => e.Id == 4);*/
-
-
-
-
 
         var schedulesData =  dataContext.Set<Schedule>();
         if (!await schedulesData.AnyAsync())
@@ -423,78 +411,100 @@ new TrainStation
 
         ScheduledTrainId =  schedultr1.Id,
         TrainsId = tr1.Id,
-        DepartureTime = new DateTime(2023, 3, 20, 9,15,0),
-        ArrivalTime =new DateTime(2023, 7, 20, 9,15,0),
+        DepartureTime = new DateTime(2023, 4, 27, 8,15,0),
+        ArrivalTime =new DateTime(2023, 4, 27, 10,30,0),
       },
       new Schedule
       {
         ScheduledTrainId = schedultr2.Id,
         TrainsId = tr2.Id,
-        DepartureTime = new DateTime(2023, 3, 12, 9,15,0),
-        ArrivalTime = new DateTime(2023, 3, 15, 9,15,0),
+        DepartureTime = new DateTime(2023,4, 27, 16,15,0),
+        ArrivalTime = new DateTime(2023, 4, 27, 18,30,0),
       },
+      new Schedule
+      {
+          ScheduledTrainId = schedultr3.Id,
+          TrainsId = tr1.Id,
+          DepartureTime = new DateTime(2023, 5, 4, 9,15,0),
+          ArrivalTime = new DateTime(2023,5,4, 11,30,0),
+
+    },
       new Schedule
       {
           ScheduledTrainId = schedultr4.Id,
           TrainsId = tr3.Id,
-          DepartureTime = new DateTime(2023, 3, 20, 9,15,0),
-          ArrivalTime = new DateTime(2023,3,21, 2,15,0),
-
-    },
-      new Schedule
-      {
-          ScheduledTrainId = schedultr3.Id,
-          TrainsId = tr1.Id,
-          DepartureTime = new DateTime(2023, 4, 20, 2,15,0),
-          ArrivalTime = new DateTime(2023,4,20, 4,15,0),
+          DepartureTime = new DateTime(2023, 5, 4, 17,15,0),
+          ArrivalTime = new DateTime(2023,5,4, 19,30,0),
 
     },
          new Schedule
       {
-          ScheduledTrainId = schedultr3.Id,
-          TrainsId = tr4.Id,
-          DepartureTime = new DateTime(2023, 4, 20, 9,15,0),
-          ArrivalTime = new DateTime(2023,4,20, 11,15,0),
+          ScheduledTrainId = schedultr5.Id,
+          TrainsId = tr3.Id,
+          DepartureTime = new DateTime(2023, 4, 30, 17,15,0),
+          ArrivalTime = new DateTime(2023,4,30,19,30,0),
 
     },new Schedule
       {
           ScheduledTrainId = schedultr6.Id,
-          TrainsId = tr1.Id,
-          DepartureTime = new DateTime(2023, 4, 20, 9,15,0),
-          ArrivalTime = new DateTime(2023,4,20, 11,15,0),
+          TrainsId = tr2.Id,
+          DepartureTime = new DateTime(2023, 4, 30, 19,15,0),
+          ArrivalTime = new DateTime(2023,4,30, 21,30,0),
 
     },new Schedule
       {
-          ScheduledTrainId = schedultr8.Id,
+          ScheduledTrainId = schedultr7.Id,
           TrainsId = tr1.Id,
-          DepartureTime = new DateTime(2023, 4, 20, 2,15,0),
-          ArrivalTime = new DateTime(2023,4,20, 4,15,0),
+          DepartureTime = new DateTime(2023,5, 7, 17,15,0),
+          ArrivalTime = new DateTime(2023,5,7,19,30,0),
+
+    },
+      new Schedule
+      {
+          ScheduledTrainId = schedultr8.Id,
+          TrainsId = tr2.Id,
+          DepartureTime = new DateTime(2023, 5, 7, 19,15,0),
+          ArrivalTime = new DateTime(2023,5,7, 21,30,0),
 
     },
       new Schedule
       {
           ScheduledTrainId = schedultr9.Id,
           TrainsId = tr3.Id,
-          DepartureTime = new DateTime(2023, 4, 21, 12,15,0),
-          ArrivalTime = new DateTime(2023,4,21, 1,15,0),
-
-    },
-      new Schedule
-      {
-          ScheduledTrainId = schedultr7.Id,
-          TrainsId = tr4.Id,
-          DepartureTime = new DateTime(2023, 4, 20, 12,15,0),
-          ArrivalTime = new DateTime(2023,4,20, 2,15,0),
+          DepartureTime = new DateTime(2023, 5,4, 7,15,0),
+          ArrivalTime = new DateTime(2023,5,4, 10,45,0),
 
     }, new Schedule
       {
-          ScheduledTrainId = schedultr7.Id,
-          TrainsId = tr4.Id,
-          DepartureTime = new DateTime(2023, 4, 20, 8,15,0),
-          ArrivalTime = new DateTime(2023,4,20,10,15,0),
+          ScheduledTrainId = schedultr10.Id,
+          TrainsId = tr1.Id,
+          DepartureTime = new DateTime(2023, 5, 4, 14,15,0),
+          ArrivalTime = new DateTime(2023,5,4,16,15,0),
 
     },
+       new Schedule
+      {
+          ScheduledTrainId = schedultr11.Id,
+          TrainsId = tr1.Id,
+          DepartureTime = new DateTime(2023, 4,30, 16,15,0),
+          ArrivalTime = new DateTime(2023,4,30, 19,45,0),
 
+    }, new Schedule
+      {
+          ScheduledTrainId = schedultr12.Id,
+          TrainsId = tr2.Id,
+          DepartureTime = new DateTime(2023, 5, 5, 14,15,0),
+          ArrivalTime = new DateTime(2023,5,5,16,15,0),
+
+    }, new Schedule
+      {
+          ScheduledTrainId = schedultr13.Id,
+          TrainsId = tr2.Id,
+          DepartureTime = new DateTime(2023, 5, 4, 8,0,0),
+          ArrivalTime = new DateTime(2023,5,4,18,15,0),
+
+    },
+  
     };
 
               await dataContext.AddRangeAsync(schedules);

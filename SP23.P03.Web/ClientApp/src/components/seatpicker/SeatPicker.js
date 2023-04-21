@@ -14,10 +14,6 @@ const TrainSeatSelector = ({ onConfirmBooking }) => {
 	const [train2, setTrain2] = useState([]);
 	const { id1, id2 } = useParams();
 	const navigate = useNavigate();
-	/* const coachSeats = 24;
-	const sleeperSeats = 28;
-	const roomletSeats = 20; */
-	//const firstClassSeats = 12;
 
 	//console.log(id1, id2);
 
@@ -47,7 +43,6 @@ const TrainSeatSelector = ({ onConfirmBooking }) => {
 					setTrain1(res1.data[0].train);
 				}
 			} catch (error) {
-				// handle error
 				console.error(error);
 			}
 		};
@@ -58,8 +53,6 @@ const TrainSeatSelector = ({ onConfirmBooking }) => {
 	// Create an array of the seat types and their respective number of seats
 	//read the train configs and populate data for specific schedlues.
 	//read api shcedules reservedCheck seats to get seat that are booked
-
-	// Create a map of reserved seats
 	const reservedSeatsMap1 = {};
 
 	reserved.forEach((seatId) => {

@@ -46,7 +46,6 @@ const Footer = () => {
 					www.entrack.com
 				</p>
 			</div>
-
 			<div className="sm:w-[90%] w-full h-[0.25px] bg-gray-400 mt-5 " />
 
 			<div className="sm:w-[90%] w-full flex justify-between items-center mt-3">
@@ -57,33 +56,3 @@ const Footer = () => {
 	);
 };
 export default Footer;
-
-/* import React from "react";
-import "./Footer.css";
-
-const Footer = () => (
-  <div className="footer-container">
-    <div className="footer-content">
-      <div className="logo-container">
-        <img  alt="logo" className="logo" />
-      </div>
-      <div className="nav-links">
-        <p className="nav-link">Home</p>
-        <p className="nav-link">Booking</p>
-        <p className="nav-link">Info</p>
-        <p className="nav-link">Travel</p>
-      </div>
-    </div>
-    <div className="contact-info">
-      <p className="info-text">Easy book and travel expirience</p>
-      <p className="info-email">info@Totrainbook.com</p>
-    </div>
-    <div className="footer-divider"></div>
-    <div className="footer-bottom">
-      <p className="footer-text-left">TrainBook2023</p>
-      <p className="footer-text-right">All rights reserved</p>
-    </div>
-  </div>
-);
-
-export default Footer; */

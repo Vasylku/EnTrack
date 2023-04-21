@@ -23,9 +23,7 @@ const TrainSearchForm = (props) => {
 	const [tripType, setTripType] = useState("oneWay");
 	const [errors, setErrors] = useState({ field: "", message: "" });
 	const [focusedInput, setFocusedInput] = useState(null);
-	// const[responses, setResponses] = useState([]);
 	const [inputType, setInputType] = useState("");
-
 	const [fromSuggestions, setFromSuggestions] = useState([]);
 	const [toSuggestions, setToSuggestions] = useState([]);
 
@@ -39,8 +37,6 @@ const TrainSearchForm = (props) => {
 			newErrors["startStation"] = "Start station cannot be same as Destination";
 		if (!departureDate)
 			newErrors["departureDate"] = "Departure date is required.";
-		//if (departureDate && new Date(departureDate).getTime() < new Date().getTime()) newErrors["departureDate"] = "Departure date cannot be in the past.";
-
 		setErrors({ ...errors, ...newErrors });
 		return Object.keys(newErrors).length === 0;
 	};
@@ -115,7 +111,6 @@ const TrainSearchForm = (props) => {
 				}
 			}
 			//console.log(responses);
-			//  props.onSaveFormData(responses);
 			setStartStation("");
 			setEndStation("");
 			setDepartureDate("");
@@ -174,10 +169,6 @@ const TrainSearchForm = (props) => {
 	const handleFocusChange = (input) => {
 		setFocusedInput(input);
 	};
-
-	/* const isOutsideRange = (day) => {
-    return day.getDay() === 0 || day.getDay() === 6; // disable weekends
-  }; */
 	const isDayBlocked = (day) => {
 		return day < new Date(); // disable past dates
 	};
@@ -275,7 +266,6 @@ const TrainSearchForm = (props) => {
 						{tripType === "oneWay" ? (
 							<DatePicker
 								selected={departureDate}
-								//	monthsShown={2}
 								onChange={handleOneWayChange}
 								onFocusChange={handleFocusChange}
 								minDate={new Date()}
@@ -287,7 +277,6 @@ const TrainSearchForm = (props) => {
 									isDayBlocked(date) ? "text-gray-700" : undefined
 								}
 								disabledKeyboardNavigation
-								//  excludeDates={[new Date()]}
 								calendarClassName=" w-full max-w-xs rounded-lg shadow-lg border-gray-400 p-4 text-gray-700 text-sm"
 							/>
 						) : (
@@ -307,20 +296,10 @@ const TrainSearchForm = (props) => {
 									isDayBlocked(date) ? "text-white" : "text-bold "
 								}
 								disabledKeyboardNavigation
-								//  excludeDates={[new Date()]}
-								// filterDate={isOutsideRange}
 								calendarClassName=" w-full max-w-xs rounded-md shadow-lg border-gray-200 p-4 text-sm"
 							/>
 						)}
-
-						{/* <input type="date" name="departDate" value={departureDate}  onChange={(e) => setDepartureDate(e.target.value)}  className={`w-full p-2 rounded-lg lg:w-96 ${errors.departureDate ? "border-red-500":  "border-gray-400 "}`} /> */}
 					</div>
-
-					{/*  {tripType !== "oneWay" && (
-        <div className="flex flex-col ">
-          <label>Return Date</label>
-          <input type="date" name="returnDate" value= {arrivalDate}  onChange={(e) => setArrivalDate(e.target.value)}  className={`w-full p-2 rounded-lg lg:w-96 ${errors.arrivalDate ? "border-red-500":  "border-gray-400 "}`} />
-        </div>)} */}
 				</div>
 			</div>
 			<div className="mt-8 flex justify-center">
