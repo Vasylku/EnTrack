@@ -7,6 +7,7 @@ import Login from "../screens/login";
 import Dashboard from "../screens/dashboard";
 import { Menu } from "../screens/drawer";
 
+
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -49,6 +50,7 @@ export default function Navigator() {
                 />
             <Stack.Screen name="SignUp" component={SignUp}/>
             <Stack.Screen name="Login"  component={Login}/>
+        
             <Stack.Screen name="Dashboard" component={Dashboard}/>
             </Stack.Group>
         </Stack.Navigator>
