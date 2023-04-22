@@ -37,47 +37,63 @@ export default function Home( {navigation} ) {
         return () => backHandler.remove();
       }, []);
 
-      // handle stuff
-        const [start, setStart] = useState("");
-        const [dest, setDest] = useState("");
-        const [date, setDate] = useState(new Date());
-        const [picker, setPicker] = useState(false);
-        const [mode, setMode] = useState("date");
-        const [text, setText] = useState("");
-        const [travelDate, setTravelDate] = useState("");
+     
+        // const [start, setStart] = useState("");
+        // const [dest, setDest] = useState("");
+        // const [date, setDate] = useState(new Date());
+        // const [picker, setPicker] = useState(false);
+        // const [mode, setMode] = useState("date");
+        // const [text, setText] = useState("");
+        // const [travelDate, setTravelDate] = useState("");
+
+        // place to store ticket info
         const [ticketID, setTicketID] = useState();
+        const [ticket, setTicket] = useState([]);
 
-        function handleTicketID() {
-          axios.get(BaseUrl + "/api/tickets/id")
-        }
+        
 
-        const showDatePicker = (currentMode) => {
-          setPicker(true);
-          setMode(currentMode);
-        }
+        useEffect(() => { 
+          axios.get(BaseUrl + "/api/tickets/?mycode=${inputcode}")
+          //.then((x) => {setTicket(x.data)} )
+          .then((response) => {
+            console.log(response);
+          })
+          .catch(function (error) { 
+            console.log(error)
+            
+        });
+      })
+      
 
-        const togglePicker = () => {
-          setPicker(!picker);
-        }
+        
 
-        const onChange = ({ type }, selectedDate) => {
-          if (type == "set") {
-          const currentDate = selectedDate || date;
-          setPicker(false);
-          setDate(currentDate);
-            if (Platform.OS === "android") {
-              togglePicker();
-              setTravelDate(currentDate.toDateString());
-            }
+        // const showDatePicker = (currentMode) => {
+        //   setPicker(true);
+        //   setMode(currentMode);
+        // }
 
-          } else {
-            togglePicker();
-          }
+        // const togglePicker = () => {
+        //   setPicker(!picker);
+        // }
 
-          let tempDate = new Date(currentDate);
-          let fDate = (tempDate.getMonth() + 1) + '/' +tempDate.getDate() + '/' + tempDate.getFullYear();
-          setText(fDate)
-        }
+        // const onChange = ({ type }, selectedDate) => {
+        //   if (type == "set") {
+        //   const currentDate = selectedDate || date;
+        //   setPicker(false);
+        //   setDate(currentDate);
+        //     if (Platform.OS === "android") {
+        //       togglePicker();
+        //       setTravelDate(currentDate.toDateString());
+        //     }
+
+        //   } else {
+        //     togglePicker();
+        //   }
+
+        //   let tempDate = new Date(currentDate);
+        //   let fDate = (tempDate.getMonth() + 1) + '/' +tempDate.getDate() + '/' + tempDate.getFullYear();
+        //   setText(fDate)
+        // }
         
         
 
@@ -89,6 +105,7 @@ export default function Home( {navigation} ) {
                 style={styles.input1}
                 mode="outlined"
                 placeholder="Enter Ticket ID"
+                placeholderTextColor={"black"}
                 value={ticketID}
                 onChangeText={setTicketID}
                 keyboardType="numeric"
@@ -101,6 +118,7 @@ export default function Home( {navigation} ) {
               buttonColor="#5F9FCA"
               textColor="white"
               onPress={() => navigation.navigate("Dashboard")}
+              //onPress={() => setTicket()}
             >Search</Button>
             </View>
 
