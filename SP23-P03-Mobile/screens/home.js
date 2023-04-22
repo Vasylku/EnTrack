@@ -46,7 +46,7 @@ export default function Home( {navigation} ) {
         // const [text, setText] = useState("");
         // const [travelDate, setTravelDate] = useState("");
 
-        // place to store ticket info
+        
         const [ticketID, setTicketID] = useState(0);
         const [ticket, setTicket] = useState([]);
 
