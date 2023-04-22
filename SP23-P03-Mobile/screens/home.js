@@ -54,9 +54,7 @@ export default function Home( {navigation} ) {
 
         useEffect(() => { 
           axios.get(BaseUrl + `/api/tickets/?mycode=${ticketID}`)
-          //.then((x) => {setTicket(x.data)} )
           .then((response) => { setTicket(response.data)
-            //console.log(ticket);
           })
           .catch(function (error) { 
             console.log(error)
@@ -118,7 +116,7 @@ export default function Home( {navigation} ) {
               buttonColor="#5F9FCA"
               textColor="white"
               onPress={() => navigation.navigate("Dashboard", {ticket} )}
-              //onPress={() => setTicket()}
+             
             >Search</Button>
             </View>
 
@@ -263,7 +261,8 @@ const styles = StyleSheet.create({
     },
 
     inputs: {
-      alignItems: "center"
+      alignItems: "center",
+      color:"black"
     },
 
       signUpButton: {
