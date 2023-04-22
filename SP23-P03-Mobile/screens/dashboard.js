@@ -8,21 +8,28 @@ import axios from "axios";
 
 
 
-export default function Dashboard() {
-    const [ticket, setTicket] = useState("");
+export default function Dashboard({route}) {
+  
+    //const [ticket, setTicket] = useState("");
 
-    useEffect(() => {
-        axios.get(BaseUrl + '/api/tickets/')
-        // .then((response) => {
-        //     const data = response.data.json;
-        //     setTicket(data)
-        // })
-        .then((x) => setTicket(x.data));
-        // .catch((error) => {
-        //     console.log(error);
-        //   });
+    // useEffect(() => {
+    //     axios.get(BaseUrl + '/api/tickets/')
+    //     // .then((response) => {
+    //     //     const data = response.data.json;
+    //     //     setTicket(data)
+    //     // })
+    //     .then((x) => setTicket(x.data));
+    //     // .catch((error) => {
+    //     //     console.log(error);
+    //     //   });
           
-    });
+    // });
+    const ticket = route.params.ticket;
+
+    console.log(ticket[0].departureTime);
+    //const [ticket, setTicket] = useState("");
+    //const { response } = route.params;
+    //console.log(res[0]);
 
       
     
@@ -33,31 +40,35 @@ export default function Dashboard() {
       <Image style={styles.logo1} source={require('../assets/icon.jpg')} />
       
         <View>
-      <Text style={styles.date1}>
-        Apr 20
+      <Text style={styles.date1} >
+        
        </Text>
       </View>
 
       <View>
-        <Text style={styles.text}>HAM</Text>
+        <Text style={styles.text}>{ticket[0].startStationName
+                                        .substring(0, 3)
+                                        .toUpperCase()}</Text>
       </View>
 
       <View>
-        <Text style={styles.text2}>Hammond</Text>
+        <Text style={styles.text2}>{ticket[0].startStationName}</Text>
       </View>
 
       <View>
       <Text style={styles.date2}>
-        Apr 20
+        
        </Text>
       </View>
 
       <View>
-        <Text style={styles.text3}>NEW</Text>
+        <Text style={styles.text3}>{ticket[0].endStationName
+                                        .substring(0, 3)
+                                        .toUpperCase()}</Text>
       </View>
 
       <View>
-        <Text style={styles.text4}>New Orleans</Text>
+        <Text style={styles.text4}>{ticket[0].endStationName}</Text>
       </View>
 
       
@@ -83,7 +94,11 @@ export default function Dashboard() {
       </View>
 
       <View>
-        <Text style={styles.departTime}>4:15am</Text>
+        <Text style={styles.departTime}>{new Date(ticket[0].departureTime).toLocaleTimeString(undefined, {
+                                        hour: "numeric",
+                                        minute: "numeric",
+                                        hour12: true,
+                                    })}</Text>
       </View>
 
       <View>
@@ -91,15 +106,29 @@ export default function Dashboard() {
       </View>
 
       <View>
-        <Text style={styles.arriveTime}>6:15am</Text>
+        <Text style={styles.arriveTime}>{new Date(ticket[0].arrivalTime).toLocaleTimeString(undefined, {
+                                        hour: "numeric",
+                                        minute: "numeric",
+                                        hour12: true,
+                                    })}</Text>
       </View>
+
+      {/* {new Date(item.departureTime).toLocaleDateString(
+                                            undefined,
+                                            { month: "short", day: "numeric" }
+                                        )}
+{new Date(item.departureTime).toLocaleTimeString(undefined, {
+                                        hour: "numeric",
+                                        minute: "numeric",
+                                        hour12: true,
+                                    })} */}
 
       <View>
         <Text style={styles.passengers}>Passengers</Text>
       </View>
 
       <View>
-        <Text style={styles.passengerCount}>1</Text>
+        <Text style={styles.passengerCount}>{ticket[0].bookedSeat.split(",").length}</Text>
       </View>
 
       <View>
@@ -115,7 +144,7 @@ export default function Dashboard() {
       </View>
 
       <View>
-        <Text style={styles.seat2}>c1</Text>
+        <Text style={styles.seat2}>{ticket[0].bookedSeat}</Text>
       </View>
 
       <View>
