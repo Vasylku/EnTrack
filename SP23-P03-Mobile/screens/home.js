@@ -105,7 +105,7 @@ export default function Home( {navigation} ) {
                 style={styles.input1}
                 mode="outlined"
                 placeholder="Enter Ticket ID"
-                placeholderTextColor={"black"}
+                placeholderTextColor="black"
                 value={ticketID}
                 onChangeText={setTicketID}
                 keyboardType="numeric"
@@ -258,8 +258,8 @@ const styles = StyleSheet.create({
     input1: {
       backgroundColor: "#E9ECEE",
       width: "70%",
-      marginTop: 300
-        
+      marginTop: 300,
+      color: "black"  
     },
 
     inputs: {
