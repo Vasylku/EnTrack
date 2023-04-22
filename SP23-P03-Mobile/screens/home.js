@@ -263,7 +263,8 @@ const styles = StyleSheet.create({
     },
 
     inputs: {
-      alignItems: "center"
+      alignItems: "center",
+      color:"black"
     },
 
       signUpButton: {
