@@ -9,25 +9,27 @@ import axios from "axios";
 
 
 export default function Dashboard() {
-    const [userInfo, setuserInfo] = useState("");
+    const [ticket, setTicket] = useState("");
 
-    function getUserInfo() {
-        axios.get(BaseUrl + '/api/authentication/me')
-        .then((response) => {
-            const data = response.data.json;
-            setuserInfo(data)
-        })
-        .catch((error) => {
-            console.log(error);
-          });
+    useEffect(() => {
+        axios.get(BaseUrl + '/api/tickets/')
+        // .then((response) => {
+        //     const data = response.data.json;
+        //     setTicket(data)
+        // })
+        .then((x) => setTicket(x.data));
+        // .catch((error) => {
+        //     console.log(error);
+        //   });
           
-    }
+    });
 
       
-    getUserInfo();
+    
     return(
       
     <View style= {styles.container}>
+      
       <Image style={styles.logo1} source={require('../assets/icon.jpg')} />
       
         <View>
@@ -153,7 +155,8 @@ const styles = StyleSheet.create({
 
        text2: {
         marginLeft: -170,
-        marginTop: -95
+        marginTop: -95,
+        color: "black"
        },
 
        text3: {
@@ -165,7 +168,8 @@ const styles = StyleSheet.create({
 
        text4: {
         marginLeft: 235,
-        marginTop: -95
+        marginTop: -95,
+        color: "black"
        },
 
        logo1: {
@@ -177,78 +181,91 @@ const styles = StyleSheet.create({
 
        date1: {
         marginLeft: -170,
-        marginTop: -150
+        marginTop: -150,
+        color: "black"
        },
 
        date2: {
         marginLeft: 280,
-        marginTop: -147
+        marginTop: -147,
+        color: "black"
        },
 
        departure: {
         fontSize: 20,
         marginLeft: -175,
-        marginTop: 50
+        marginTop: 50,
+        color: "black"
       },
 
        departTime: {
         fontSize: 20,
         fontWeight: "bold",
-        marginLeft: -175
+        marginLeft: -175,
+        color: "black"
       },
 
         arrive: {
           fontSize: 20,
           marginLeft: 260,
-          marginTop: -60
+          marginTop: -60,
+          color: "black"
         },
 
         arriveTime: {
           fontSize: 20,
           fontWeight: "bold",
           marginLeft: 260,
-          marginTop: -30
+          marginTop: -30,
+          color: "black"
         },
 
         passengers: {
           fontSize: 20,
           marginTop: 20,
-          marginLeft: -175
+          marginLeft: -175,
+          color: "black"
         },
 
         passengerCount: {
           fontSize: 20,
           marginLeft: -175,
-          fontWeight: 'bold'
+          fontWeight: 'bold',
+          color: "black"
         },
 
         seatType: {
           fontSize: 20,
           marginTop: -60,
-          marginLeft: 40
+          marginLeft: 40,
+          color: "black"
         },
 
         seatType2: {
           fontWeight: 'bold',
-          marginTop: -25
+          marginTop: -25,
+          color: "black"
         },
 
         seat: {
           fontSize: 20,
           marginLeft: 270,
-          marginTop: -60
+          marginTop: -60,
+          color: "black"
         },
 
         seat2: {
           fontWeight: 'bold',
           marginLeft: 270,
-          marginTop: -25
+          marginTop: -25,
+          color: "black"
         },
 
         boardingPass: {
           fontWeight: 'bold',
           fontSize: 20,
-          marginTop: 20
+          marginTop: 20,
+          color: "black"
         },
 
         

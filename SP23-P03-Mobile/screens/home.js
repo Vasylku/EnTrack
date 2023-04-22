@@ -9,7 +9,8 @@ import {Alert,
         } from 'react-native';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
-
+import axios from "axios";
+import { BaseUrl } from "../configuration";
 
 
 export default function Home( {navigation} ) {
@@ -44,7 +45,11 @@ export default function Home( {navigation} ) {
         const [mode, setMode] = useState("date");
         const [text, setText] = useState("");
         const [travelDate, setTravelDate] = useState("");
-        
+        const [ticketID, setTicketID] = useState();
+
+        function handleTicketID() {
+          axios.get(BaseUrl + "/api/tickets/id")
+        }
 
         const showDatePicker = (currentMode) => {
           setPicker(true);
@@ -77,8 +82,32 @@ export default function Home( {navigation} ) {
         
 
         return (          
-        <View  style={styles.backgroundColor}>          
-          <View style={styles.loginButton}>
+        <View  style={styles.backgroundColor}>    
+
+          <View style={styles.inputs}>
+          <TextInput
+                style={styles.input1}
+                mode="outlined"
+                placeholder="Enter Ticket ID"
+                value={ticketID}
+                onChangeText={setTicketID}
+                keyboardType="numeric"
+            
+            ></TextInput>
+
+            <View style={styles.loginButton}>
+            <Button
+              mode="contained"
+              buttonColor="#5F9FCA"
+              textColor="white"
+              onPress={() => navigation.navigate("Dashboard")}
+            >Search</Button>
+            </View>
+
+          </View>
+
+
+          {/* <View style={styles.loginButton}>
             <Button
             style={styles.button}
             mode="contained"
@@ -96,7 +125,7 @@ export default function Home( {navigation} ) {
             textColor="white"
             onPress={() => navigation.navigate("SignUp")}
             >Sign Up</Button>
-          </View>
+          </View> */}
             
           
             {/* <Text style={styles.heading}>Find a Train</Text>
@@ -211,7 +240,7 @@ const styles = StyleSheet.create({
     input1: {
       backgroundColor: "#E9ECEE",
       width: "70%",
-      
+      marginTop: 300
         
     },
 
@@ -239,7 +268,7 @@ const styles = StyleSheet.create({
       loginButton: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 280,
+        marginTop: 10,
       },
 
       datePicker: {
