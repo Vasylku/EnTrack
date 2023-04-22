@@ -47,22 +47,22 @@ export default function Home( {navigation} ) {
         // const [travelDate, setTravelDate] = useState("");
 
         // place to store ticket info
-        const [ticketID, setTicketID] = useState();
+        const [ticketID, setTicketID] = useState(0);
         const [ticket, setTicket] = useState([]);
 
         
 
         useEffect(() => { 
-          axios.get(BaseUrl + "/api/tickets/?mycode=${inputcode}")
+          axios.get(BaseUrl + `/api/tickets/?mycode=${ticketID}`)
           //.then((x) => {setTicket(x.data)} )
-          .then((response) => {
-            console.log(response);
+          .then((response) => { setTicket(response.data)
+            //console.log(ticket);
           })
           .catch(function (error) { 
             console.log(error)
             
         });
-      })
+      },  [ticketID])
       
 
         
@@ -117,7 +117,7 @@ export default function Home( {navigation} ) {
               mode="contained"
               buttonColor="#5F9FCA"
               textColor="white"
-              onPress={() => navigation.navigate("Dashboard")}
+              onPress={() => navigation.navigate("Dashboard", {ticket} )}
               //onPress={() => setTicket()}
             >Search</Button>
             </View>
