@@ -107,6 +107,8 @@ export default function Home( {navigation} ) {
                 value={ticketID}
                 onChangeText={setTicketID}
                 keyboardType="numeric"
+                outlineColor="black"
+                textColor="black"
             
             ></TextInput>
 
